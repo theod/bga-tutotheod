@@ -73,17 +73,16 @@
 .token[data-color="A8ADD7"] { background-position-x: 64px; }
 .token[data-color="F7BFD9"] { background-position-x: 96px; }
 .token[data-color="D1E2AD"] { background-position-x: 128px; }
+.token_separator {
+    width: 20px;
+    height: 20px;
+    display: block;
+}
 .token_wrapper {
     padding: 6px;
     margin: -6px;
 }
-.token_separator {
-    width: 12px;
-    height: 12px;
-    padding: 6px;
-    margin: -6px;
-    display: block;
-}
+
 
 /*
     Example of CSS sprites (a black token and a white token, 20x20px each, embedded in the same "tokens.png" 40x20px image):

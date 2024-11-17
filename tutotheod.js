@@ -198,7 +198,9 @@ function (dojo, declare) {
                     <div class="token" data-color="${color}">
                     </div>
                 </div>
-                <div class="token_separator id="token_${color}_separator""
+                <div class="token_wrapper" id="token_${color}_separator">
+                    <div class="token_separator"
+                    </div>
                 </div>
             `);
             
