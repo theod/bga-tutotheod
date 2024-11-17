@@ -183,7 +183,7 @@ function (dojo, declare) {
         
         */
 
-        addTokenOnBoard: function( x, y, player )
+        addTokenOnSquare: function( x, y, player )
         {
             var color = this.gamedatas.players[ player ].color;
             
