@@ -45,11 +45,18 @@
 
 /* Note: you must not use any @import directive */
 
-
 #player-tables {
    width: 384px;
    height: 384px;
    background-image: url('img/board.jpg');
+}
+
+.square {
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    background-color: red;
+    outline: 2px solid orange;
 }
 
 /*
