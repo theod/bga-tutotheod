@@ -266,9 +266,12 @@ function (dojo, declare) {
                 }
                 else {
 
+                    var index_color = colors[index-1];
+                    console.log( 'putPlayersOnSquare: index_color', index_color );
+
                     document.getElementById('square_'+x+'_'+y).insertAdjacentHTML('beforeend', `
-                        <div class="token_wrapper" id="token_${colors[index-1]}">
-                            <div class="token" data-color="${colors[index-1]} style="outline: 1px solid #${colors[index-1]};">
+                        <div class="token_wrapper" id="token_${index_color}">
+                            <div class="token" data-color="${index_color} style="outline: 1px solid #${index_color};">
                             </div>
                         </div>
                     `);
