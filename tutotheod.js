@@ -78,9 +78,10 @@ function (dojo, declare) {
                     const left = x * size;
                     const top = y * size;
                     // we use afterbegin to make sure squares are placed before discs
-                    board.insertAdjacentHTML(`afterbegin`, 
-                        `<div id="square_${x}_${y}" class="square" style="left: ${left}px; top: ${top}px;">
-                        </div>`);
+                    board.insertAdjacentHTML(`afterbegin`, `
+                        <div id="square_${x}_${y}" class="square" style="left: ${left}px; top: ${top}px;">
+                        </div>
+                    `);
                 }
             }
 
