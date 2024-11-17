@@ -187,11 +187,19 @@ function (dojo, declare) {
 
         putPlayersOnSquare: function( x, y, players )
         {
-            colors = Object.values(players).map(function(player) { return player.color; });
+            //colors = Object.values(players).map(function(player) { return player.color; });
             
-            console.log( 'colors', colors );
+            colors = [
+                "D1E2AD", // vert
+                "F7BFD9", // rose
+                "FFF271", // jaune
+                "86D1F5", // bleu
+                "A8ADD7"  // violet
+            ];
 
-            // Tokens position depending on the number of players
+            console.log( 'putPlayersOnSquare: colors', colors );
+
+            // Tokens position depend on the number of players
             configurations = [
                 [
                     'separator','separator','separator',
