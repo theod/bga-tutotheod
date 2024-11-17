@@ -253,6 +253,8 @@ function (dojo, declare) {
 
             configurations[colors.length-1].forEach(index => {
 
+                console.log( 'putPlayersOnSquare: index', index );
+
                 if (index == 0) {
 
                     document.getElementById('square_'+x+'_'+y).insertAdjacentHTML('afterbegin', `
