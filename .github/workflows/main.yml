@@ -18,4 +18,4 @@ jobs:
         passphrase: ${{ secrets.SSH_AUTHENTIFICATION_PASSWORD }}
         localDir: '.'
         remoteDir: '/tutotheod'
-        exclude: '.git*,.DS_Store'
+        exclude: '.git/'
