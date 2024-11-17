@@ -86,7 +86,7 @@ function (dojo, declare) {
             });
             
             // Set up your game interface here, according to "gamedatas"
-            this.putPlayersOnSquare( 0, 5, gamedatas.players );
+            this.putPlayersOnSquare( 0, 5, Object.values(gamedatas.players) );
  
             // Setup game notifications to handle (see "setupNotifications" method below)
             this.setupNotifications();
