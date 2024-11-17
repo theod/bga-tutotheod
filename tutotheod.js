@@ -239,8 +239,8 @@ function (dojo, declare) {
                     var random_y = Math.floor(Math.random() * 8) - 5;
 
                     document.getElementById('square_'+x+'_'+y).insertAdjacentHTML('beforeend', `
-                        <div class="token_wrapper" id="token_${index_color}" style="left: ${random_x}px; top: ${random_x}px;">
-                            <div class="token" data-color="${index_color}" style="outline: 1px solid #${index_color};">
+                        <div class="token_wrapper" id="token_${index_color}">
+                            <div class="token" data-color="${index_color}" style="left: ${random_x}px; top: ${random_y}px; outline: 1px solid #${index_color};">
                             </div>
                         </div>
                     `);
