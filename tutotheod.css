@@ -55,7 +55,8 @@
     grid-template-rows: repeat(6, 60px);
     grid-gap: 5px;
     place-items: center;
-    /*outline: 4px solid red;*/
+    border: 50px solid;
+    border-color: #16255F;
 }
 
 .square {
