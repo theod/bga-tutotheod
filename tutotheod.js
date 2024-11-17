@@ -236,10 +236,10 @@ function (dojo, declare) {
 
                     var index_color = colors[index-1];
                     var random = Math.floor(Math.random() * 8) - 5;
-                    
+
                     document.getElementById('square_'+x+'_'+y).insertAdjacentHTML('beforeend', `
                         <div class="token_wrapper" id="token_${index_color}">
-                            <div class="token" data-color="${index_color}" style="background-position-y: ${random}px; outline: 1px solid #${index_color};">
+                            <div class="token" data-color="${index_color}" style="background-position-y: ${random}px;">
                             </div>
                         </div>
                     `);
