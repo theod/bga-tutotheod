@@ -15,3 +15,4 @@ jobs:
         ftp-server: sftp://1.studio.boardgamearena.com/tutotheod/
         ftp-username: theod
         ftp-password: ${{ secrets.BGA_SFTP_PASSWORD }}
+        git-ftp-args: --insecure
