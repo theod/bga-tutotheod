@@ -187,6 +187,9 @@ function (dojo, declare) {
 
         putPlayersOnSquare: function( x, y, players )
         {
+            console.log( 'players', players );
+            console.log( 'players[0]', players[0] );
+            console.log( 'players[0].color', players[0].color );
 
             //colors = players.map(function(player) { return player.color; });
             
