@@ -12,6 +12,6 @@ jobs:
     - name: FTP-Deploy-Action
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
-        server: sftp://1.studio.boardgamearena.com:2022/tutotheod/
+        server: sftp://1.studio.boardgamearena.com/tutotheod/
         username: theod
         password: ${{ secrets.BGA_SFTP_PASSWORD }}
