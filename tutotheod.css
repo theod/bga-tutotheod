@@ -60,7 +60,6 @@
 .token {
     width: 32px;
     height: 32px;
-    position: absolute;
     background-image: url('img/tokens.png');
     background-size: auto 100%;
 }
