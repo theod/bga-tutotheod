@@ -54,6 +54,7 @@
     grid-template-rows: repeat(6, 60px);
     grid-gap: 5px;
     outline: 4px solid red;
+    justify-items: center;
 }
 
 .square {
