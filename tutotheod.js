@@ -86,11 +86,7 @@ function (dojo, declare) {
             });
             
             // Set up your game interface here, according to "gamedatas"
-
-            Object.values(gamedatas.players).forEach(player => {
-                
-                this.addTokenOnSquare( 0, 5, player.id );
-            });
+            this.putPlayersOnSquare( 0, 5, gamedatas.players );
  
             // Setup game notifications to handle (see "setupNotifications" method below)
             this.setupNotifications();
@@ -189,20 +185,62 @@ function (dojo, declare) {
         
         */
 
-        addTokenOnSquare: function( x, y, player )
+        putPlayersOnSquare: function( x, y, players )
         {
-            var color = this.gamedatas.players[ player ].color;
+
+            colors = players.map(function(player){ return player.color; });
             
-            document.getElementById('square_'+x+'_'+y).insertAdjacentHTML('beforeend', `
-                <div class="token_wrapper" id="token_${color}">
-                    <div class="token" data-color="${color}">
-                    </div>
-                </div>
-                <div class="token_wrapper" id="token_${color}_separator">
-                    <div class="token_separator"
-                    </div>
-                </div>
-            `);
+            // Tokens position depending on the number of players
+            configurations = [
+                [
+                    'separator','separator','separator',
+                    'separator',colors[0],'separator',
+                    'separator','separator','separator'
+                ],
+                [
+                    colors[1],'separator','separator',
+                    'separator',colors[0],'separator',
+                    'separator','separator','separator'
+                ],
+                [
+                    colors[1],'separator',colors[2],
+                    'separator',colors[0],'separator',
+                    'separator','separator','separator'
+                ],
+                [
+                    colors[1],'separator',colors[2],
+                    'separator',colors[0],'separator',
+                    colors[3],'separator','separator'
+                ],
+                [
+                    colors[1],'separator',colors[2],
+                    'separator',colors[0],'separator',
+                    colors[3],'separator',colors[4]
+                ];
+
+
+            configurations[players.length].forEach(color => {
+
+                if (color == 'separator') {
+
+                    document.getElementById('square_'+x+'_'+y).insertAdjacentHTML('beforeend', `
+                        <div class="token_wrapper">
+                            <div class="token_separator"
+                            </div>
+                        </div>
+                    `);
+                }
+                else {
+
+                    document.getElementById('square_'+x+'_'+y).insertAdjacentHTML('beforeend', `
+                        <div class="token_wrapper" id="token_${color}">
+                            <div class="token" data-color="${color}">
+                            </div>
+                        </div>
+                    `);
+                }
+                
+            });
             
             //this.placeOnObject( `token_${color}`, 'square_'+x+'_'+y );
         },
