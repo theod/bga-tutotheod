@@ -55,6 +55,9 @@
     width: 64px;
     height: 64px;
     position: absolute;
+    display: grid;
+    grid-template-columns: 32px 32px;
+    grid-auto-rows: auto;
 }
 
 .token {
