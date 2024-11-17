@@ -12,7 +12,6 @@ jobs:
     - name: FTP-Deploy-Action
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
-        ftp-server: sftp://1.studio.boardgamearena.com:2022/tutotheod/
-        ftp-username: theod
-        ftp-password: ${{ secrets.BGA_SFTP_PASSWORD }}
-        git-ftp-args: --insecure
+        server: sftp://1.studio.boardgamearena.com:2022/tutotheod/
+        username: theod
+        password: ${{ secrets.BGA_SFTP_PASSWORD }}
