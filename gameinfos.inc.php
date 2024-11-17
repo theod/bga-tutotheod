@@ -23,7 +23,7 @@ $gameinfos = [
     'publisher_bgg_id' => 1234,
 
     // Board game geek ID of the game
-    'bgg_id' => 0,
+    'bgg_id' => 11609,
 
     // Players configuration that can be played
     'players' => [1, 2, 3, 4, 5],
