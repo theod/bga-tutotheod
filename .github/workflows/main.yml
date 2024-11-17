@@ -9,12 +9,12 @@ jobs:
       with:
         fetch-depth: 0
     - name: SFTP-SSH-Action
-      uses: milanmk/actions-file-deployer@master
+      uses: wangyucode/sftp-upload-action@v2.0.3
       with:
-        remote-protocol: "sftp"
-        remote-host: "1.studio.boardgamearena.com"
-        remote-port: "2022"
-        remote-user: "theod"
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-        remote-password: ${{ secrets.SSH_AUTHENTIFICATION_PASSWORD }}
-        remote-path: "./tutotheod/"
+        host: '1.studio.boardgamearena.com'
+        port: 2022
+        username: 'theod'
+        privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
+        passphrase: ${{ secrets.SSH_AUTHENTIFICATION_PASSWORD }}
+        localDir: '.'
+        remoteDir: "/tutotheod"
