@@ -55,7 +55,7 @@
     grid-template-rows: repeat(6, 60px);
     grid-gap: 5px;
     place-items: center;
-    border: 50px solid;
+    border: 72px solid;
     border-color: #16255F;
 }
 
