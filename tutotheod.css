@@ -64,6 +64,7 @@
     grid-template-columns: repeat(3, 18px);
     grid-template-rows: repeat(3, 18px);
     grid-gap: 1px;
+    overflow: hidden;
     place-items: center;
     outline: 2px solid orange;
 }
