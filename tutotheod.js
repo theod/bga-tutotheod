@@ -86,7 +86,40 @@ function (dojo, declare) {
             });
             
             // Set up your game interface here, according to "gamedatas"
-            this.putPlayersOnSquare( 0, 5, gamedatas.players );
+
+            //colors = Object.values(players).map(function(player) { return player.color; });
+ 
+            one_color = [
+                "D1E2AD" // vert
+            ];
+
+            two_colors = [
+                "D1E2AD", // vert
+                "F7BFD9" // rose
+            ];
+
+            three_colors = [
+                "D1E2AD", // vert
+                "F7BFD9", // rose
+                "FFF271" // jaune
+            ];
+
+            four_colors = [
+                "D1E2AD", // vert
+                "F7BFD9", // rose
+                "FFF271", // jaune
+                "86D1F5" // bleu
+            ];
+
+            five_colors = [
+                "D1E2AD", // vert
+                "F7BFD9", // rose
+                "FFF271", // jaune
+                "86D1F5", // bleu
+                "A8ADD7"  // violet
+            ];
+
+            this.putTokensOnSquare( 0, 5, one_color );
  
             // Setup game notifications to handle (see "setupNotifications" method below)
             this.setupNotifications();
@@ -185,18 +218,8 @@ function (dojo, declare) {
         
         */
 
-        putPlayersOnSquare: function( x, y, players )
+        putTokensOnSquare: function( x, y, colors )
         {
-            //colors = Object.values(players).map(function(player) { return player.color; });
-            
-            colors = [
-                "D1E2AD", // vert
-                "F7BFD9", // rose
-                "FFF271", // jaune
-                "86D1F5", // bleu
-                "A8ADD7"  // violet
-            ];
-
             console.log( 'putPlayersOnSquare: colors', colors );
 
             // Tokens position depend on the number of players
