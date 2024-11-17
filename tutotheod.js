@@ -87,39 +87,9 @@ function (dojo, declare) {
             
             // Set up your game interface here, according to "gamedatas"
 
-            //colors = Object.values(players).map(function(player) { return player.color; });
- 
-            one_color = [
-                "D1E2AD" // vert
-            ];
+            colors = Object.values(players).map(function(player) { return player.color; });
 
-            two_colors = [
-                "D1E2AD", // vert
-                "F7BFD9" // rose
-            ];
-
-            three_colors = [
-                "D1E2AD", // vert
-                "F7BFD9", // rose
-                "FFF271" // jaune
-            ];
-
-            four_colors = [
-                "D1E2AD", // vert
-                "F7BFD9", // rose
-                "FFF271", // jaune
-                "86D1F5" // bleu
-            ];
-
-            five_colors = [
-                "D1E2AD", // vert
-                "F7BFD9", // rose
-                "FFF271", // jaune
-                "86D1F5", // bleu
-                "A8ADD7"  // violet
-            ];
-
-            this.putTokensOnSquare( 0, 5, five_colors );
+            this.putTokensOnSquare( 0, 5, colors );
  
             // Setup game notifications to handle (see "setupNotifications" method below)
             this.setupNotifications();
@@ -253,8 +223,6 @@ function (dojo, declare) {
 
             configurations[colors.length-1].forEach(index => {
 
-                console.log( 'putPlayersOnSquare: index', index );
-
                 if (index == 0) {
 
                     document.getElementById('square_'+x+'_'+y).insertAdjacentHTML('beforeend', `
@@ -267,7 +235,6 @@ function (dojo, declare) {
                 else {
 
                     var index_color = colors[index-1];
-                    console.log( 'putPlayersOnSquare: index_color', index_color );
 
                     document.getElementById('square_'+x+'_'+y).insertAdjacentHTML('beforeend', `
                         <div class="token_wrapper" id="token_${index_color}">
