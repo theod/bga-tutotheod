@@ -75,7 +75,7 @@
     background-image: url('img/tokens.png');
     background-size: auto 100%;
 }
-.token[data-color="86D1F5"] { background-position-x: 0px; }
+.token[data-color="86D1F5"] { background-position-x: 16px; }
 .token[data-color="FFF271"] { background-position-x: 32px; }
 .token[data-color="A8ADD7"] { background-position-x: 64px; }
 .token[data-color="F7BFD9"] { background-position-x: 96px; }
