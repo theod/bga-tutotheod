@@ -196,7 +196,9 @@ function (dojo, declare) {
             document.getElementById('square_'+x+'_'+y).insertAdjacentHTML('beforeend', `
                 <div class="token_wrapper">
                     <div class="token" data-color="${color}" id="token_${color}">
-                    </div
+                    </div>
+                </div>
+                <div class="token_separator"
                 </div>
             `);
             

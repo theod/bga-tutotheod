@@ -73,10 +73,14 @@
 .token[data-color="A8ADD7"] { background-position-x: 64px; }
 .token[data-color="F7BFD9"] { background-position-x: 96px; }
 .token[data-color="D1E2AD"] { background-position-x: 128px; }
-
 .token_wrapper {
     padding: 6px;
     margin: -6px;
+}
+.token_separator {
+    width: 20;
+    height: 20;
+    display: block;
 }
 
 /*
