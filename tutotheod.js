@@ -87,7 +87,7 @@ function (dojo, declare) {
             
             // Set up your game interface here, according to "gamedatas"
 
-            colors = Object.values(players).map(function(player) { return player.color; });
+            colors = Object.values(gamedatas.players).map(function(player) { return player.color; });
 
             this.putTokensOnSquare( 0, 5, colors );
  
