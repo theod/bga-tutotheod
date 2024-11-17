@@ -216,7 +216,8 @@ function (dojo, declare) {
                     colors[1],'separator',colors[2],
                     'separator',colors[0],'separator',
                     colors[3],'separator',colors[4]
-                ];
+                ]
+            ];
 
 
             configurations[players.length-1].forEach(color => {
