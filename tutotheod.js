@@ -50,7 +50,7 @@ function (dojo, declare) {
 
             // Example to add a div on the game area
             document.getElementById('game_play_area').insertAdjacentHTML('beforeend', `
-                <div id="player-tables"></div>
+                <div id="board"></div>
             `);
             
             // Setting up player boards
@@ -61,8 +61,8 @@ function (dojo, declare) {
                 `);
 
                 // example of adding a div for each player
-                document.getElementById('player-tables').insertAdjacentHTML('beforeend', `
-                    <div id="player-table-${player.id}">
+                document.getElementById('board').insertAdjacentHTML('beforeend', `
+                    <div id="board-${player.id}">
                         <strong>${player.name}</strong>
                         <div>Player zone content goes here</div>
                     </div>
@@ -70,7 +70,7 @@ function (dojo, declare) {
             });
             
             // Set up your game interface here, according to "gamedatas"
-            const board = document.getElementById('player-tables');
+            const board = document.getElementById('board');
             const size = 64;
             for (let x=0; x<6; x++) {
                 for (let y=0; y<6; y++) {
