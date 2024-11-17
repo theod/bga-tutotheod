@@ -84,7 +84,10 @@ function (dojo, declare) {
                 }
             }
 
-            this.addTokenOnSquare( 0, 5, this.player_id );
+            Object.values(gamedatas.players).forEach(player => {
+                
+                this.addTokenOnSquare( 0, 5, player.id );
+            });
  
             // Setup game notifications to handle (see "setupNotifications" method below)
             this.setupNotifications();
