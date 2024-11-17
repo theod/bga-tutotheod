@@ -48,11 +48,26 @@ function (dojo, declare) {
         {
             console.log( "Starting game setup" );
 
-            // Example to add a div on the game area
+            // Create board
             document.getElementById('game_play_area').insertAdjacentHTML('beforeend', `
                 <div id="board">
                 </div>
             `);
+
+            // Create squares
+            const board = document.getElementById('board');
+            const size = 64;
+            for (let x=0; x<6; x++) {
+                for (let y=0; y<6; y++) {
+                    const left = x * size;
+                    const top = y * size;
+                    // we use afterbegin to make sure squares are placed before discs
+                    board.insertAdjacentHTML(`afterbegin`, `
+                        <div id="square_${x}_${y}" class="square" style="left: ${left}px; top: ${top}px;">
+                        </div>
+                    `);
+                }
+            }
             
             // Setting up player boards
             Object.values(gamedatas.players).forEach(player => {
@@ -71,19 +86,6 @@ function (dojo, declare) {
             });
             
             // Set up your game interface here, according to "gamedatas"
-            const board = document.getElementById('board');
-            const size = 64;
-            for (let x=0; x<6; x++) {
-                for (let y=0; y<6; y++) {
-                    const left = x * size;
-                    const top = y * size;
-                    // we use afterbegin to make sure squares are placed before discs
-                    board.insertAdjacentHTML(`afterbegin`, `
-                        <div id="square_${x}_${y}" class="square" style="left: ${left}px; top: ${top}px;">
-                        </div>
-                    `);
-                }
-            }
 
             Object.values(gamedatas.players).forEach(player => {
                 
