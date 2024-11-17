@@ -219,7 +219,7 @@ function (dojo, declare) {
                 ];
 
 
-            configurations[players.length].forEach(color => {
+            configurations[players.length-1].forEach(color => {
 
                 if (color == 'separator') {
 
