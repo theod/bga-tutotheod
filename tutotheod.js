@@ -119,7 +119,7 @@ function (dojo, declare) {
                 "A8ADD7"  // violet
             ];
 
-            this.putTokensOnSquare( 0, 5, one_color );
+            this.putTokensOnSquare( 0, 5, five_colors );
  
             // Setup game notifications to handle (see "setupNotifications" method below)
             this.setupNotifications();
@@ -223,37 +223,37 @@ function (dojo, declare) {
             console.log( 'putPlayersOnSquare: colors', colors );
 
             // Tokens position depend on the number of players
-            configurations = [
+            const configurations = [
                 [
-                    'separator','separator','separator',
-                    'separator',colors[0],'separator',
-                    'separator','separator','separator'
+                    0,0,0,
+                    0,1,0,
+                    0,0,0
                 ],
                 [
-                    colors[1],'separator','separator',
-                    'separator',colors[0],'separator',
-                    'separator','separator','separator'
+                    2,0,0,
+                    0,1,0,
+                    0,0,0
                 ],
                 [
-                    colors[1],'separator',colors[2],
-                    'separator',colors[0],'separator',
-                    'separator','separator','separator'
+                    2,0,3,
+                    0,1,0,
+                    0,0,0
                 ],
                 [
-                    colors[1],'separator',colors[2],
-                    'separator',colors[0],'separator',
-                    colors[3],'separator','separator'
+                    2,0,3,
+                    0,1,0,
+                    4,0,0
                 ],
                 [
-                    colors[1],'separator',colors[2],
-                    'separator',colors[0],'separator',
-                    colors[3],'separator',colors[4]
+                    2,0,3,
+                    0,1,0,
+                    4,0,5
                 ]
             ];
 
-            configurations[colors.length-1].forEach(color => {
+            configurations[colors.length-1].forEach(index => {
 
-                if (color == 'separator') {
+                if (index == 0) {
 
                     document.getElementById('square_'+x+'_'+y).insertAdjacentHTML('beforeend', `
                         <div class="token_wrapper">
@@ -265,8 +265,8 @@ function (dojo, declare) {
                 else {
 
                     document.getElementById('square_'+x+'_'+y).insertAdjacentHTML('beforeend', `
-                        <div class="token_wrapper" id="token_${color}">
-                            <div class="token" data-color="${color}">
+                        <div class="token_wrapper" id="token_${colors[index-1]}">
+                            <div class="token" data-color="${colors[index-1]}">
                             </div>
                         </div>
                     `);
