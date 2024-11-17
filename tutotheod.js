@@ -255,7 +255,7 @@ function (dojo, declare) {
 
                 if (index == 0) {
 
-                    document.getElementById('square_'+x+'_'+y).insertAdjacentHTML('beforeend', `
+                    document.getElementById('square_'+x+'_'+y).insertAdjacentHTML('afterbegin', `
                         <div class="token_wrapper">
                             <div class="token_separator"
                             </div>
@@ -264,7 +264,7 @@ function (dojo, declare) {
                 }
                 else {
 
-                    document.getElementById('square_'+x+'_'+y).insertAdjacentHTML('beforeend', `
+                    document.getElementById('square_'+x+'_'+y).insertAdjacentHTML('afterbegin', `
                         <div class="token_wrapper" id="token_${colors[index-1]}">
                             <div class="token" data-color="${colors[index-1]}">
                             </div>
