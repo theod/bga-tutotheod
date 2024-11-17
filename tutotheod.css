@@ -61,7 +61,6 @@
     width: 60px;
     height: 60px;
     padding: 2px;
-    position: absolute;
     display: grid;
     grid-template-columns: repeat(3, 18px);
     grid-template-rows: repeat(3, 18px);
