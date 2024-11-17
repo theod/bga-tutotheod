@@ -16,4 +16,3 @@ jobs:
         password: ${{ secrets.SSH_AUTHENTIFICATION_PASSWORD }}
         local_path: './'
         remote_path: './tutotheod/'
-        sftp_only: true
