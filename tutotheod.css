@@ -53,6 +53,7 @@
     grid-template-columns: repeat(6, 60px);
     grid-template-rows: repeat(6, 60px);
     grid-gap: 5px;
+    place-items: center;
     outline: 4px solid red;
 }
 
