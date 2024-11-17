@@ -48,7 +48,6 @@
 #board {
     width: 384px;
     height: 384px;
-    padding: 5px;
     background-image: url('img/board.jpg');
     display: grid;
     grid-template-columns: repeat(6, 60px);
