@@ -46,7 +46,7 @@
 /* Note: you must not use any @import directive */
 
 
-#board {
+#player-tables {
    width: 384px;
    height: 384px;
    background-image: url('img/board.jpg');
