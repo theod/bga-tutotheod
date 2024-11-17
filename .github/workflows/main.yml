@@ -5,12 +5,12 @@ jobs:
     name: FTP-Deploy-Action
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2.1.0
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 2
 
     - name: FTP-Deploy-Action
-      uses: SamKirkland/FTP-Deploy-Action@3.1.1
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
         ftp-server: sftp://1.studio.boardgamearena.com:2022/tutotheod/
         ftp-username: theod
