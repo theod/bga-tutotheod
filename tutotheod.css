@@ -46,21 +46,28 @@
 /* Note: you must not use any @import directive */
 
 #board {
-   width: 384px;
-   height: 384px;
-   background-image: url('img/board.jpg');
+    width: 384px;
+    height: 384px;
+    padding: 5px;
+    background-image: url('img/board.jpg');
+    display: grid;
+    grid-template-columns: repeat(6, 60px);
+    grid-template-rows: repeat(6, 60px);
+    grid-gap: 5px;
+    outline: 4px solid red;
 }
 
 .square {
-    width: 64px;
-    height: 64px;
-    padding: 2px 2px, 0px, 0px;
-    margin: -2px -2px, 0px, 0px;
+    width: 60px;
+    height: 60px;
+    padding: 2px;
     position: absolute;
     display: grid;
-    grid-template-columns: 20px 20px 20px;
-    grid-template-rows: 20px 20px 20px;
+    grid-template-columns: repeat(3, 18px);
+    grid-template-rows: repeat(3, 18px);
+    grid-gap: 1px;
     justify-items: center;
+    outline: 2px solid orange;
 }
 
 .token {
@@ -68,6 +75,7 @@
     height: 32px;
     background-image: url('img/tokens.png');
     background-size: auto 100%;
+    outline: 1px solid skyblue;
 }
 .token[data-color="86D1F5"] { background-position-x: 0px; }
 .token[data-color="FFF271"] { background-position-x: 32px; }
@@ -75,12 +83,12 @@
 .token[data-color="F7BFD9"] { background-position-x: 96px; }
 .token[data-color="D1E2AD"] { background-position-x: 128px; }
 .token_separator {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     display: block;
 }
 .token_wrapper {
-    margin: -6px;
+    margin: -7px;
 }
 
 
