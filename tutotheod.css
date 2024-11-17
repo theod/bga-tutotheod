@@ -53,8 +53,8 @@
     grid-template-columns: repeat(6, 60px);
     grid-template-rows: repeat(6, 60px);
     grid-gap: 5px;
+    place-items: center;
     outline: 4px solid red;
-    justify-items: center;
 }
 
 .square {
@@ -64,7 +64,7 @@
     grid-template-columns: repeat(3, 18px);
     grid-template-rows: repeat(3, 18px);
     grid-gap: 1px;
-    justify-items: center;
+    place-items: center;
     outline: 2px solid orange;
 }
 
