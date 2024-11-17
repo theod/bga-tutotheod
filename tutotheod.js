@@ -194,11 +194,11 @@ function (dojo, declare) {
             var color = this.gamedatas.players[ player ].color;
             
             document.getElementById('square_'+x+'_'+y).insertAdjacentHTML('beforeend', `
-                <div class="token_wrapper">
-                    <div class="token" data-color="${color}" id="token_${color}">
+                <div class="token_wrapper" id="token_${color}">
+                    <div class="token" data-color="${color}">
                     </div>
                 </div>
-                <div class="token_separator"
+                <div class="token_separator id="token_${color}_separator""
                 </div>
             `);
             
