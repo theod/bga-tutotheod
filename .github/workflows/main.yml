@@ -17,4 +17,5 @@ jobs:
         privateKey: ${{ secrets.SSH_PRIVATE_KEY }}
         passphrase: ${{ secrets.SSH_AUTHENTIFICATION_PASSWORD }}
         localDir: '.'
-        remoteDir: "/tutotheod"
+        remoteDir: '/tutotheod'
+        exclude: '.git/,.github/,.gitignore,readme.md'
