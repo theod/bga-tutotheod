@@ -50,7 +50,10 @@ function (dojo, declare) {
 
             // Example to add a div on the game area
             document.getElementById('game_play_area').insertAdjacentHTML('beforeend', `
-                <div id="board"></div>
+                <div id="board">
+                    <div id="tokens">
+                    </div>
+                </div>
             `);
             
             // Setting up player boards
@@ -80,6 +83,8 @@ function (dojo, declare) {
                     board.insertAdjacentHTML(`afterbegin`, `<div id="square_${x}_${y}" class="square" style="left: ${left}px; top: ${top}px;"></div>`);
                 }
             }
+
+            this.addTokenOnBoard( 0, 5, this.player_id );
  
             // Setup game notifications to handle (see "setupNotifications" method below)
             this.setupNotifications();
@@ -177,6 +182,15 @@ function (dojo, declare) {
             script.
         
         */
+
+        addTokenOnBoard: function( x, y, player )
+        {
+            var color = this.gamedatas.players[ player ].color;
+            
+            document.getElementById('tokens').insertAdjacentHTML('beforeend', `<div class="token" data-color="${color}" id="token_${color}"></div>`);
+            
+            this.placeOnObject( `token_${color}`, 'square_'+x+'_'+y );
+        },
 
 
         ///////////////////////////////////////////////////
