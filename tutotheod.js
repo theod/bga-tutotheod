@@ -86,7 +86,7 @@ function (dojo, declare) {
             });
             
             // Set up your game interface here, according to "gamedatas"
-            this.putPlayersOnSquare( 0, 5, Object.values(gamedatas.players) );
+            this.putPlayersOnSquare( 0, 5, gamedatas.players );
  
             // Setup game notifications to handle (see "setupNotifications" method below)
             this.setupNotifications();
@@ -187,42 +187,40 @@ function (dojo, declare) {
 
         putPlayersOnSquare: function( x, y, players )
         {
-            console.log( 'players', players );
-            console.log( 'players[0]', players[0] );
-            console.log( 'players[0].color', players[0].color );
-
-            //colors = players.map(function(player) { return player.color; });
+            colors = Object.values(players).map(function(player) { return player.color; });
             
+            console.log( 'colors', colors );
+
             // Tokens position depending on the number of players
             configurations = [
                 [
                     'separator','separator','separator',
-                    'separator',players[0].color,'separator',
+                    'separator',colors[0],'separator',
                     'separator','separator','separator'
                 ],
                 [
-                    players[1].color,'separator','separator',
-                    'separator',players[0].color,'separator',
+                    colors[1],'separator','separator',
+                    'separator',colors[0],'separator',
                     'separator','separator','separator'
                 ],
                 [
-                    players[1].color,'separator',players[2].color,
-                    'separator',players[0].color,'separator',
+                    colors[1],'separator',colors[2],
+                    'separator',colors[0],'separator',
                     'separator','separator','separator'
                 ],
                 [
-                    players[1].color,'separator',players[2].color,
-                    'separator',players[0].color,'separator',
-                    players[3].color,'separator','separator'
+                    colors[1],'separator',colors[2],
+                    'separator',colors[0],'separator',
+                    colors[3],'separator','separator'
                 ],
                 [
-                    players[1].color,'separator',players[2].color,
-                    'separator',players[0].color,'separator',
-                    players[3].color,'separator',players[4].color
+                    colors[1],'separator',colors[2],
+                    'separator',colors[0],'separator',
+                    colors[3],'separator',colors[4]
                 ]
             ];
 
-            configurations[players.length-1].forEach(color => {
+            configurations[colors.length-1].forEach(color => {
 
                 if (color == 'separator') {
 
