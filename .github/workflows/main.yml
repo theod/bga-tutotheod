@@ -1,21 +1,18 @@
 on: push
-name: Publish Website over SFTP
+name: Synchronize BGA server
 jobs:
-  FTP-Deploy-Action:
-    name: FTP-Deploy-Action
+  SFTP-Sync-Action:
+    name: SFTP-Sync-Action
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - name: SFTP-Sync-Action
+      uses: Creepios/sftp-action@v1.0.5
       with:
-        fetch-depth: 2
-
-    - name: FTP-Deploy-Action
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-      with:
-        server: 1.studio.boardgamearena.com
-        username: theod
-        password: ${{ secrets.SSH_AUTHENTIFICATION_PASSWORD }}
+        host: 1.studio.boardgamearena.com
         port: 2022
-        protocol: sftp
-        local-dir: ./tutotheod/
+        username: theod
+        localPath: ./
+        remotePath: ./tutotheod/
+        privateKey: ${{ secrets.SSH_AUTHENTIFICATION_PASSWORD }}
 
