@@ -108,7 +108,8 @@ function (dojo, declare) {
             };
 
             // DEBUG
-            //console.log( Object.values(gamedatas.tokens) );
+            console.log( "gamedatas.tokens", Object.values(gamedatas.tokens) );
+
             /*
             Object.values(gamedatas.tokens).forEach(token => {
 
@@ -230,7 +231,7 @@ function (dojo, declare) {
 
         putTokensOnSquare: function( colors, id )
         {
-            console.log( 'putPlayersOnSquare: colors', colors );
+            console.log( 'putTokensOnSquare: colors', colors );
 
             // Tokens position depend on the number of players
             const configurations = [
