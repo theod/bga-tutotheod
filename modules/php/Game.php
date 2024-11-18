@@ -282,7 +282,7 @@ class Game extends \Table
         // Setup the initial game situation here.
 
         // Init the tokens
-        $sql = "INSERT INTO tokens (token_color,square_id) VALUES ";
+        $sql = "INSERT INTO tokens (token_color, square_id) VALUES ";
         $sql_values = array();
         $players_color = array_keys( $players, "player_color" );
 
