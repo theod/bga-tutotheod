@@ -293,7 +293,7 @@ class Game extends \Table
         }
 
         $sql .= implode( ',', $sql_values );
-        //$this->DbQuery( $sql );
+        $this->DbQuery( $sql );
 
         // Activate first player once everything has been initialized and ready.
         $this->activeNextPlayer();
