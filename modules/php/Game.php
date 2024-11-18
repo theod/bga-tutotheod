@@ -292,7 +292,7 @@ class Game extends \Table
             $sql_values[] = "('$players_color[i]',0)";
         }
 
-        //$sql .= implode( ',', $sql_values );
+        $sql .= implode( ',', $sql_values );
         //$this->DbQuery( $sql );
 
         // Activate first player once everything has been initialized and ready.
