@@ -289,7 +289,7 @@ class Game extends \Table
         for( $i=0; $i<count($players_color); $i++ )
         {
             // TODO: Check if a player is the last President
-            $sql_values[] = "('$players_color[i]',0)";
+            $sql_values[] = "('$players_color[$i]',0)";
         }
 
         $sql .= implode( ',', $sql_values );
