@@ -296,7 +296,7 @@ class Game extends \Table
         //$this->DbQuery( $sql );
 
         // Activate first player once everything has been initialized and ready.
-        //$this->activeNextPlayer();
+        $this->activeNextPlayer();
     }
 
     /**
