@@ -57,13 +57,25 @@ function (dojo, declare) {
             // Create squares
             const board = document.getElementById('board');
             const size = 64;
+            const ids = [
+                    [ 0,  1,  2,  3,  4,  5],    // x = 0
+                    [19, 20, 21, 22, 23,  6],    // x = 1
+                    [18, 31, 32, 33, 24,  7],    // x = 2
+                    [17, 30, 35, 34, 25,  8],    // x = 3
+                    [16, 29, 28, 27, 26,  9],    // x = 4
+                    [15, 14, 13, 12, 11, 10],    // x = 5
+            ]; // y = 0,  1,  2,  3,  4,  5
+
             for (let x=0; x<6; x++) {
+
                 for (let y=0; y<6; y++) {
+
                     const left = x * size;
                     const top = y * size;
+
                     // we use afterbegin to make sure squares are placed before discs
                     board.insertAdjacentHTML(`afterbegin`, `
-                        <div id="square_${x}_${y}" class="square">
+                        <div id="square_${ids[x][y]}" class="square">
                         </div>
                     `);
                 }
@@ -89,7 +101,7 @@ function (dojo, declare) {
 
             colors = Object.values(gamedatas.players).map(function(player) { return player.color; });
 
-            this.putTokensOnSquare( 0, 5, colors );
+            this.putTokensOnSquare( colors, 0 );
  
             // Setup game notifications to handle (see "setupNotifications" method below)
             this.setupNotifications();
@@ -188,7 +200,7 @@ function (dojo, declare) {
         
         */
 
-        putTokensOnSquare: function( x, y, colors )
+        putTokensOnSquare: function( colors, id )
         {
             console.log( 'putPlayersOnSquare: colors', colors );
 
@@ -225,7 +237,7 @@ function (dojo, declare) {
 
                 if (index == 0) {
 
-                    document.getElementById('square_'+x+'_'+y).insertAdjacentHTML('beforeend', `
+                    document.getElementById('square_'+id).insertAdjacentHTML('beforeend', `
                         <div class="token_wrapper">
                             <div class="token_separator"
                             </div>
@@ -237,7 +249,7 @@ function (dojo, declare) {
                     var index_color = colors[index-1];
                     var random = Math.floor(Math.random() * 8) - 5;
 
-                    document.getElementById('square_'+x+'_'+y).insertAdjacentHTML('beforeend', `
+                    document.getElementById('square_'+id).insertAdjacentHTML('beforeend', `
                         <div class="token_wrapper" id="token_${index_color}">
                             <div class="token" data-color="${index_color}" style="background-position-y: ${random}px;">
                             </div>
@@ -246,8 +258,7 @@ function (dojo, declare) {
                 }
                 
             });
-            
-            //this.placeOnObject( `token_${color}`, 'square_'+x+'_'+y );
+
         },
 
 
