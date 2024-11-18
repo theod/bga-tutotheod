@@ -37,5 +37,5 @@ CREATE TABLE IF NOT EXISTS `tokens` (
   `token_color` varchar(7) DEFAULT NULL,
   `square_id` smallint(5) unsigned NOT NULL,
   
-  PRIMARY KEY (`player_id`)
+  PRIMARY KEY (`token_color`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
