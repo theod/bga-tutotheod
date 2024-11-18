@@ -104,7 +104,7 @@ function (dojo, declare) {
 
             // TEST
             var squares_with_tokens = {
-                0: ["86D1F5", "FFF271" , "A8ADD7", "F7BFD9", "D1E2AD"]
+                0: ["86D1F5", "FFF271", "A8ADD7", "F7BFD9", "D1E2AD"]
             };
 
             // DEBUG
@@ -127,7 +127,7 @@ function (dojo, declare) {
 
             for (const [square, colors] of Object.entries(squares_with_tokens)) {
 
-                console.log(key, value);
+                console.log(square, colors);
                 this.putTokensOnSquare( colors, square );
             }
 

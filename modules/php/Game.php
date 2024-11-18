@@ -240,7 +240,7 @@ class Game extends \Table
         // Set the colors of the players with HTML color code. The default below is red/green/blue/orange/brown. The
         // number of colors defined here must correspond to the maximum number of players allowed for the games.
         $gameinfos = $this->getGameinfos();
-        $default_colors = array( "86D1F5", "FFF271" , "A8ADD7", "F7BFD9", "D1E2AD");
+        $default_colors = array( "86D1F5", "FFF271", "A8ADD7", "F7BFD9", "D1E2AD");
 
         foreach ($players as $player_id => $player) {
             // Now you can access both $player_id and $player array
