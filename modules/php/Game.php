@@ -206,12 +206,17 @@ class Game extends \Table
         $current_player_id = (int) $this->getCurrentPlayerId();
 
         // Get information about players.
-        // NOTE: you can retrieve some extra field you added for "player" table in `dbmodel.sql` if you need it.
+        // NOTE: you can retrieve some extra field you added for "player" table if you need it.
         $result["players"] = $this->getCollectionFromDb(
-            "SELECT `player_id` `id`, `player_score` `score` FROM `player`"
+            "SELECT `player_id` `id`, `player_score` `score`, `player_color` `color` FROM `player`"
         );
 
-        // TODO: Gather all information about current game situation (visible by player $current_player_id).
+        // Gather all information about current game situation (visible by player $current_player_id).
+
+        // Get players position
+        $result['tokens'] = $this->getCollectionFromDb(
+            "SELECT `token_color` `color`, `square_id` `square` FROM `tokens`"
+        );
 
         return $result;
     }
@@ -233,7 +238,7 @@ class Game extends \Table
     protected function setupNewGame($players, $options = [])
     {
         // Set the colors of the players with HTML color code. The default below is red/green/blue/orange/brown. The
-        // number of colors defined here must correspond to the maximum number of players allowed for the gams.
+        // number of colors defined here must correspond to the maximum number of players allowed for the games.
         $gameinfos = $this->getGameinfos();
         $default_colors = array( "86D1F5", "FFF271" , "A8ADD7", "F7BFD9", "D1E2AD");
 
@@ -274,7 +279,21 @@ class Game extends \Table
         // $this->initStat("table", "table_teststat1", 0);
         // $this->initStat("player", "player_teststat1", 0);
 
-        // TODO: Setup the initial game situation here.
+        // Setup the initial game situation here.
+
+        // Init the tokens
+        $sql = "INSERT INTO tokens (token_color,square_id) VALUES ";
+        $sql_values = array();
+        $players_color = array_keys( $players, "player_color" );
+
+        for( $i=0; $i<count($players_color); $i++ )
+        {
+            // TODO: Check if a player is the last President
+            $sql_values[] = "('$players_color[i]',0)";
+        }
+
+        $sql .= implode( ',', $sql_values );
+        $this->DbQuery( $sql );
 
         // Activate first player once everything has been initialized and ready.
         $this->activeNextPlayer();

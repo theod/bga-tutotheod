@@ -82,6 +82,7 @@ function (dojo, declare) {
             
             // Setting up player boards
             Object.values(gamedatas.players).forEach(player => {
+
                 // example of setting up players boards
                 this.getPlayerPanelElement(player.id).insertAdjacentHTML('beforeend', `
                     <div id="player-counter-${player.id}">A player counter</div>
@@ -98,10 +99,32 @@ function (dojo, declare) {
             
             // Set up your game interface here, according to "gamedatas"
 
-            colors = Object.values(gamedatas.players).map(function(player) { return player.color; });
+            // Setting up players token
+            var squares_with_tokens = {};
 
-            this.putTokensOnSquare( colors, 0 );
- 
+            // DEBUG
+            console.log( Object.values(gamedatas.tokens) );
+
+            Object.values(gamedatas.tokens).forEach(token => {
+
+                if !(token.square in squares_with_tokens) {
+                    squares_with_tokens[position.square] = [token.color]
+                }
+                else {
+                    squares_with_tokens[position.square].push(token.color)
+                }
+
+            });
+
+            // DEBUG
+            console.log( squares_with_tokens );
+
+            for (const [square, colors] of Object.entries(squares_with_tokens)) {
+
+                console.log(key, value);
+                this.putTokensOnSquare( colors, square );
+            }
+
             // Setup game notifications to handle (see "setupNotifications" method below)
             this.setupNotifications();
 
