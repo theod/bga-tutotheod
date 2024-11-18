@@ -294,7 +294,10 @@ class Game extends \Table
 
         $sql .= implode( ',', $sql_values );
 
-        $this->debug($sql)
+        # DEBUG
+        $value = var_export($sql, true);
+        throw new BgaUserException('I am here: '.$value);
+
         #$this->DbQuery( $sql );
 
         // Activate first player once everything has been initialized and ready.
