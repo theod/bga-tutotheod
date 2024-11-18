@@ -286,11 +286,11 @@ class Game extends \Table
         $sql_values = array();
         $players_color = array_keys( $players, "player_color" );
 
-        /*for( $i=0; $i<count($players_color); $i++ )
+        for( $i=0; $i<count($players_color); $i++ )
         {
             // TODO: Check if a player is the last President
             $sql_values[] = "('$players_color[i]',0)";
-        }*/
+        }
 
         //$sql .= implode( ',', $sql_values );
         //$this->DbQuery( $sql );
