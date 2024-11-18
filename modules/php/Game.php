@@ -282,15 +282,15 @@ class Game extends \Table
         // Setup the initial game situation here.
 
         // Init the tokens
-        $sql = "INSERT INTO tokens (token_color, square_id) VALUES ";
+        $sql = "INSERT INTO tokens (token_color,square_id) VALUES ";
         $sql_values = array();
         $players_color = array_keys( $players, "player_color" );
 
-        for( $i=0; $i<count($players_color); $i++ )
+        /*for( $i=0; $i<count($players_color); $i++ )
         {
             // TODO: Check if a player is the last President
             $sql_values[] = "('$players_color[i]',0)";
-        }
+        }*/
 
         $sql .= implode( ',', $sql_values );
         $this->DbQuery( $sql );
