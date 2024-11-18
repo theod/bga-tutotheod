@@ -34,7 +34,7 @@
 -- ALTER TABLE `player` ADD `player_my_custom_field` INT UNSIGNED NOT NULL DEFAULT '0';
 
 CREATE TABLE IF NOT EXISTS `tokens` (
-  `token_color` varchar(7) DEFAULT NULL,
+  `token_color` varchar(6) NOT NULL,
   `square_id` smallint(5) unsigned NOT NULL,
   
   PRIMARY KEY (`token_color`)
