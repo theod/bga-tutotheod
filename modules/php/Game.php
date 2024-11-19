@@ -264,7 +264,8 @@ class Game extends \Table
             )
         );
 
-        $this->reloadPlayersBasicInfos();
+        //$this->reloadPlayersBasicInfos();
+        $players = $this->loadPlayersBasicInfos();
 
         // Init global values with their initial values.
 
@@ -310,9 +311,6 @@ class Game extends \Table
 
         // Activate first player once everything has been initialized and ready.
         $this->activeNextPlayer();
-
-        // DEBUG: Call to a testing function where errors at thsi step can be logged
-        //$this->initMyTables();
     }
 
     function initMyTables() {
