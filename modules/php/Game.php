@@ -295,7 +295,7 @@ class Game extends \Table
         $sql .= implode( ',', $sql_values );
 
         # DEBUG
-        $value = var_export($sql, true);
+        $value = json_encode($sql, JSON_PRETTY_PRINT);
         throw new BgaUserException('I am here: '.$value);
 
         #$this->DbQuery( $sql );
