@@ -294,14 +294,48 @@ class Game extends \Table
 
         $sql .= implode( ',', $sql_values );
 
-        # DEBUG
-        $value = json_encode($sql, JSON_PRETTY_PRINT);
-        throw new BgaUserException('I am here: '.$value);
-
         #$this->DbQuery( $sql );
 
         // Activate first player once everything has been initialized and ready.
         $this->activeNextPlayer();
+
+        // DEBUG: Call to a testing function where errors at thsi step can be logged
+        $this->initMyTables();
+    }
+
+    function initMyTables() {
+
+        try {
+
+            $players = $this->loadPlayersBasicInfos();
+
+            /*** CODE TO DEBUG ***/
+
+            // Init the tokens
+            $sql = "INSERT INTO tokens (token_color,square_id) VALUES ";
+            $sql_values = array();
+            $players_color = array_keys( $players, "player_color" );
+
+            for( $i=0; $i<count($players_color); $i++ )
+            {
+                // TODO: Check if a player is the last President
+                $sql_values[] = "('$players_color[$i]',0)";
+            }
+
+            $sql .= implode( ',', $sql_values );
+
+            $this->DbQuery( $sql );
+
+            /*********************/
+
+        } catch ( Exception $e ) {
+
+            // logging does not actually work in game init :(
+            // but if you calling from php chat it will work
+            $this->error("Fatal error while creating game");
+            $this->dump('err', $e);
+
+        }
     }
 
     /**
