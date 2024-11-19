@@ -100,17 +100,11 @@ function (dojo, declare) {
             // Set up your game interface here, according to "gamedatas"
 
             // Setting up players token
-            //var squares_with_tokens = {};
-
-            // TEST
-            var squares_with_tokens = {
-                0: ["86D1F5", "FFF271", "A8ADD7", "F7BFD9", "D1E2AD"]
-            };
+            var squares_with_tokens = {};
 
             // DEBUG
             console.log( "gamedatas.tokens", Object.values(gamedatas.tokens) );
 
-            /*
             Object.values(gamedatas.tokens).forEach(token => {
 
                 if (!(token.square in squares_with_tokens)) {
@@ -121,7 +115,6 @@ function (dojo, declare) {
                 }
 
             });
-            */
 
             // DEBUG
             console.log( squares_with_tokens );
