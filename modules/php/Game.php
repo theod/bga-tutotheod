@@ -285,6 +285,17 @@ class Game extends \Table
         $sql = "INSERT INTO tokens (token_color,square_id) VALUES ";
         $sql_values = array();
 
+        $players_id = array_keys($players);
+
+        for( $i=0; $i<count($players_id); $i++ )
+        {
+            $player_color = $players[$players_id[$i]]["player_color"];
+
+            // TODO: Check if a player is the last President
+            $sql_values[] = "('$player_color',0)";
+        }
+
+        /*
         foreach ($players as $player_id => $player_info) {
             
             $player_color = $player_info["player_color"];
@@ -292,12 +303,16 @@ class Game extends \Table
             // TODO: Check if a player is the last President
             $sql_values[] = "('$player_color',0)";
         }
+        */
 
         $sql .= implode( ',', $sql_values );
         $this->DbQuery( $sql );
 
         // Activate first player once everything has been initialized and ready.
         $this->activeNextPlayer();
+
+        // DEBUG: Call to a testing function where errors at thsi step can be logged
+        //$this->initMyTables();
     }
 
     function initMyTables() {
