@@ -320,7 +320,7 @@ class Game extends \Table
             // Init the tokens
             $sql = "INSERT INTO tokens (token_color,square_id) VALUES ";
             $sql_values = array();
-            $players_color = $players["player_color"];
+            $players_color = $players[1];
 
             $this->dump('PLAYERS_COLOR', $players_color);
 
