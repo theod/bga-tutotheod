@@ -323,10 +323,12 @@ class Game extends \Table
             $sql = "INSERT INTO tokens (token_color,square_id) VALUES ";
             $sql_values = array();
 
-            foreach ($players as $player_id => $player_info) {
+            for( $i=0; $i<count($players); $i++ )
+            {
+                $player_color = $players[$i]["player_color"]
 
-                $player_color = $player_info["players_color"]
-
+                $this->dump('PLAYER_COLOR', $player_color);
+                
                 // TODO: Check if a player is the last President
                 $sql_values[] = "('$player_color',0)";
             }
