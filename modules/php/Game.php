@@ -325,7 +325,7 @@ class Game extends \Table
 
             for( $i=0; $i<count($players); $i++ )
             {
-                $player_color = $players[$i]["player_color"]
+                $player_color = $players[$i]["player_color"];
 
                 //$this->dump('PLAYER_COLOR', $player_color);
                 
