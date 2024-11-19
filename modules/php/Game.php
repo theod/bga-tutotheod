@@ -281,6 +281,7 @@ class Game extends \Table
 
         // Setup the initial game situation here.
 
+        /*
         // Init the tokens
         $sql = "INSERT INTO tokens (token_color,square_id) VALUES ";
         $sql_values = array();
@@ -294,16 +295,19 @@ class Game extends \Table
 
         $sql .= implode( ',', $sql_values );
 
-        #$this->DbQuery( $sql );
+        $this->DbQuery( $sql );
+        */
 
         // Activate first player once everything has been initialized and ready.
         $this->activeNextPlayer();
 
         // DEBUG: Call to a testing function where errors at thsi step can be logged
-        $this->initMyTables();
+        //$this->initMyTables();
     }
 
     function initMyTables() {
+        // Testing function to test non working code in setupNewGame as nothing can be log.
+        // Use the game chat to call it with 'initMyTables()' without quotes.
 
         try {
 
