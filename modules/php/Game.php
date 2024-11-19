@@ -308,6 +308,8 @@ class Game extends \Table
     function initMyTables() {
         // Testing function to test non working code in setupNewGame as nothing can be log.
         // Use the game chat to call it with 'initMyTables()' without quotes.
+        // Then go to the log page at (change the table number) : 
+        // https://studio.boardgamearena.com/1/tutotheod/tutotheod/logaccess.html?table=649157
 
         try {
 
@@ -320,6 +322,8 @@ class Game extends \Table
             $sql_values = array();
             $players_color = array_keys( $players, "player_color" );
 
+            $this->dump('PLAYERS_COLOR', $players_color);
+
             for( $i=0; $i<count($players_color); $i++ )
             {
                 // TODO: Check if a player is the last President
@@ -328,7 +332,7 @@ class Game extends \Table
 
             $sql .= implode( ',', $sql_values );
 
-            $this->dump('sql', $sql);
+            $this->dump('MY_QUERY', $sql);
 
             #$this->DbQuery( $sql );
 
