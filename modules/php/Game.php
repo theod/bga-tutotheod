@@ -264,8 +264,7 @@ class Game extends \Table
             )
         );
 
-        //$this->reloadPlayersBasicInfos();
-        $players = $this->loadPlayersBasicInfos();
+        $this->reloadPlayersBasicInfos();
 
         // Init global values with their initial values.
 
@@ -281,41 +280,15 @@ class Game extends \Table
         // $this->initStat("player", "player_teststat1", 0);
 
         // Setup the initial game situation here.
-
-        // Init the tokens
-        $sql = "INSERT INTO tokens (token_color,square_id) VALUES ";
-        $sql_values = array();
-
-        $players_id = array_keys($players);
-
-        for( $i=0; $i<count($players_id); $i++ )
-        {
-            $player_color = $players[$players_id[$i]]["player_color"];
-
-            // TODO: Check if a player is the last President
-            $sql_values[] = "('$player_color',0)";
-        }
-
-        /*
-        foreach ($players as $player_id => $player_info) {
-            
-            $player_color = $player_info["player_color"];
-
-            // TODO: Check if a player is the last President
-            $sql_values[] = "('$player_color',0)";
-        }
-        */
-
-        $sql .= implode( ',', $sql_values );
-        $this->DbQuery( $sql );
+        $this->initMyTables();
 
         // Activate first player once everything has been initialized and ready.
         $this->activeNextPlayer();
     }
 
     function initMyTables() {
-        // Testing function to test non working code in setupNewGame as nothing can be log.
-        // Use the game chat to call it with 'initMyTables()' without quotes.
+        // Load tables outside setupNewGame as nothing can be log from it.
+        // NOTE: use the game chat to call it with 'initMyTables()' without quotes.
         // Then go to the log page at (change the table number) : 
         // https://studio.boardgamearena.com/1/tutotheod/tutotheod/logaccess.html?table=649157
 
@@ -325,6 +298,33 @@ class Game extends \Table
             //$this->dump('PLAYERS', $players);
 
             /*** PASTE CODE TO DEBUG BELOW ***/
+
+            // Init the tokens
+            $sql = "INSERT INTO tokens (token_color,square_id) VALUES ";
+            $sql_values = array();
+
+            $players_id = array_keys($players);
+
+            for( $i=0; $i<count($players_id); $i++ )
+            {
+                $player_color = $players[$players_id[$i]]["player_color"];
+
+                // TODO: Check if a player is the last President
+                $sql_values[] = "('$player_color',0)";
+            }
+
+            /*
+            foreach ($players as $player_id => $player_info) {
+                
+                $player_color = $player_info["player_color"];
+
+                // TODO: Check if a player is the last President
+                $sql_values[] = "('$player_color',0)";
+            }
+            */
+
+            $sql .= implode( ',', $sql_values );
+            $this->DbQuery( $sql );
 
         } catch ( Exception $e ) {
 
