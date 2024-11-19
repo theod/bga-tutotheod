@@ -327,8 +327,6 @@ class Game extends \Table
 
                 $player_color = $player_info["players_color"]
 
-                $this->dump('PLAYER_COLOR', $player_id, $player_color);
-                
                 // TODO: Check if a player is the last President
                 $sql_values[] = "('$player_color',0)";
             }
