@@ -326,8 +326,12 @@ class Game extends \Table
 
             for( $i=0; $i<count($players_id); $i++ )
             {
-                $player_color = $players[$i]["player_color"];
+                $player_id = $players_id[$i];
+                $player = $players[$player_id];
+                $player_color = $player["player_color"];
 
+                $this->dump('PLAYER_ID', $player_id);
+                $this->dump('PLAYER', $player);
                 $this->dump('PLAYER_COLOR', $player_color);
                 
                 // TODO: Check if a player is the last President
