@@ -317,10 +317,12 @@ class Game extends \Table
 
             /*** CODE TO DEBUG ***/
 
+            $this->dump('PLAYERS', $players);
+
             // Init the tokens
             $sql = "INSERT INTO tokens (token_color,square_id) VALUES ";
             $sql_values = array();
-            $players_color = $players[1];
+            $players_color = array_values($players);
 
             $this->dump('PLAYERS_COLOR', $players_color);
 
