@@ -328,7 +328,9 @@ class Game extends \Table
 
             $sql .= implode( ',', $sql_values );
 
-            $this->DbQuery( $sql );
+            $this->dump('sql', $sql);
+
+            #$this->DbQuery( $sql );
 
             /*********************/
 
