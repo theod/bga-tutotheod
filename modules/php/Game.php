@@ -281,28 +281,23 @@ class Game extends \Table
 
         // Setup the initial game situation here.
 
-        /*
         // Init the tokens
         $sql = "INSERT INTO tokens (token_color,square_id) VALUES ";
         $sql_values = array();
-        $players_color = array_keys( $players, "player_color" );
 
-        for( $i=0; $i<count($players_color); $i++ )
-        {
+        foreach ($players as $player_id => $player_info) {
+            
+            $player_color = $player_info["player_color"];
+
             // TODO: Check if a player is the last President
-            $sql_values[] = "('$players_color[$i]',0)";
+            $sql_values[] = "('$player_color',0)";
         }
 
         $sql .= implode( ',', $sql_values );
-
         $this->DbQuery( $sql );
-        */
 
         // Activate first player once everything has been initialized and ready.
         $this->activeNextPlayer();
-
-        // DEBUG: Call to a testing function where errors at thsi step can be logged
-        //$this->initMyTables();
     }
 
     function initMyTables() {
@@ -314,42 +309,9 @@ class Game extends \Table
         try {
 
             $players = $this->loadPlayersBasicInfos();
-
-            /*** CODE TO DEBUG ***/
-
             //$this->dump('PLAYERS', $players);
 
-            // Init the tokens
-            $sql = "INSERT INTO tokens (token_color,square_id) VALUES ";
-            $sql_values = array();
-
-            foreach ($players as $player_id => $player_info) {
-                
-                $player_color = $player_info["player_color"];
-
-                // TODO: Check if a player is the last President
-                $sql_values[] = "('$player_color',0)";
-            }
-
-            /*
-            $players_id = array_keys($players);
-
-            for( $i=0; $i<count($players_id); $i++ )
-            {
-                $player_color = $players[$players_id[$i]]["player_color"];
-
-                // TODO: Check if a player is the last President
-                $sql_values[] = "('$player_color',0)";
-            }
-            */
-
-            $sql .= implode( ',', $sql_values );
-
-            $this->dump('MY_QUERY', $sql);
-
-            $this->DbQuery( $sql );
-
-            /*********************/
+            /*** PASTE CODE TO DEBUG BELOW ***/
 
         } catch ( Exception $e ) {
 
