@@ -221,7 +221,7 @@ function (dojo, declare) {
         getActivePlayerColor: function()
         {
             return this.gamedatas.players[this.getActivePlayerId()].color;
-        }
+        },
 
         putTokensOnSquare: function( colors, id )
         {
