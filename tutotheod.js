@@ -79,6 +79,17 @@ function (dojo, declare) {
                     `);
                 }
             }
+
+            // Create dice
+            var dice_value = Math.floor(Math.random() * 6) + 1;
+
+            // DEBUG
+            console.log( "random dice value", dice_value );
+
+            document.getElementById('board').insertAdjacentHTML('beforeend', `
+                <div class="dice" data-value=${dice_value} style="top=-36px; left=192px">
+                </div>
+            `);
             
             // Setting up player boards
             Object.values(gamedatas.players).forEach(player => {

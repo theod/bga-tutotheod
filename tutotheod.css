@@ -1,7 +1,7 @@
 /**
  *------
  * BGA framework: Gregory Isabelli & Emmanuel Colin & BoardGameArena
- * TutoTheod implementation : © <Your name here> <Your email address here>
+ * TutoTheod implementation : © <Théo de la Hogue> <dev@theod.fr>
  *
  * This code has been produced on the BGA studio platform for use on http://boardgamearena.com.
  * See http://en.boardgamearena.com/#!doc/Studio for more information.
@@ -91,25 +91,15 @@
     margin: -7px;
 }
 
-
-/*
-    Example of CSS sprites (a black token and a white token, 20x20px each, embedded in the same "tokens.png" 40x20px image):
-
-    .white_token {
-        background-image: url('img/tokens.png');
-        background-position: 0px 0px;
-    }
-    .black_token {
-        background-image: url('img/tokens.png');
-        background-position: -20px 0px;
-    }
-    .token {
-        width: 20px;
-        height: 20px;
-        background-repeat: none;
-    }
-*/
-
-
-
-
+.dice {
+    width: 38px;
+    height: 38px;
+    background-image: url('img/dice.png');
+    background-size: auto 100%;
+}
+.dice[data-value=1] { background-position-x: 0px; }
+.dice[data-value=2] { background-position-x: -38px; }
+.dice[data-value=3] { background-position-x: -76px; }
+.dice[data-value=4] { background-position-x: -114px; }
+.dice[data-value=5] { background-position-x: -152px; }
+.dice[data-value=6] { background-position-x: -190px; }
