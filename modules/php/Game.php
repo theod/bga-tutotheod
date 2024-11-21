@@ -106,6 +106,8 @@ class Game extends \Table
             "SELECT `token_color` `color`, `square_id` `square` FROM `tokens`"
         );
 
+        $this->dump('TEST', $test);
+
         //$this->getCollectionFromDb(
         //    "SELECT token_color, square_id FROM tokens WHERE token_color == '$player_color' "
         //);
