@@ -163,7 +163,8 @@ function (dojo, declare) {
             switch( stateName )
             {
             case 'playerTurn':
-                this.updateActivePlayerToken( args.args.activePlayerColor );
+
+                this.updateActivePlayerToken();
                 break;
             }
         },
