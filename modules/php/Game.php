@@ -92,6 +92,25 @@ class Game extends \Table
         $this->gamestate->nextState("playCard");
     }
 
+    public function actThrowDice(): void
+    {
+        // Retrieve the active player ID.
+        $player_id = (int)$this->getActivePlayerId();
+
+        // Get safe random value
+        $dice_value = $this->getRandomValue([1, 2, 3, 4, 5, 6])
+
+        // Notify all players about the dice value
+        $this->notifyAllPlayers("diceValue", clienttranslate('${player_name} did ${dice_value}'), [
+            "player_id" => $player_id,
+            "player_name" => $this->getActivePlayerName(),
+            "dice_value" => $dice_value
+        ]);
+
+        // at the end of the action, move to the next state
+        $this->gamestate->nextState("moveToken");
+    }
+
     public function actPass(): void
     {
         // Retrieve the active player ID.
@@ -139,6 +158,25 @@ class Game extends \Table
         // TODO: compute and return the game progression
 
         return 0;
+    }
+
+    /**
+     * Game state action.
+     *
+     * The action method of state `moveToken` is called everytime the current game state is set to `moveToken`.
+     */
+    public function stMoveToken(): void {
+
+        // Retrieve the active player color.
+        $player_color = $this->getActivePlayerColor();
+
+        // TODO
+        //$sql = "UPDATE tokens SET $player_color='$new_square' ";
+        //$this->DbQuery( $sql );
+
+        // Go to another gamestate
+        // Here, we would detect if the game is over, and in this case use "endGame" transition instead 
+        $this->gamestate->nextState("nextPlayer");
     }
 
     /**
@@ -386,5 +424,19 @@ class Game extends \Table
         }
 
         throw new \feException("Zombie mode not supported at this game state: \"{$state_name}\".");
+    }
+
+    private function getRandomValue(array $array)
+    {
+        $size = count($array);
+        if ($size == 0) {
+            trigger_error("getRandomValue(): Array is empty", E_USER_WARNING);
+            return null;
+        }
+        $rand = random_int(0, $size - 1);
+        $slice = array_slice($array, $rand, 1, true);
+        foreach ($slice as $key => $value) {
+            return $value;
+        }
     }
 }

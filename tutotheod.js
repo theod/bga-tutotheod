@@ -94,7 +94,7 @@ function (dojo, declare) {
                 </div>
             `);
 
-            //document.getElementById('dice').addEventListener('click', e => this.onThrowDice(e));
+            document.getElementById('dice').addEventListener('click', event => this.onThrowDice(event));
             
             // Setting up player boards
             /*
@@ -317,19 +317,19 @@ function (dojo, declare) {
             _ make a call to the game server
         
         */
-        
-        // Example:
-        
-        onCardClick: function( card_id )
-        {
-            console.log( 'onCardClick', card_id );
 
-            this.bgaPerformAction("actPlayCard", { 
-                card_id,
-            }).then(() =>  {                
+        onThrowDice: function( event )
+        {
+            console.log( 'onThrowDice', event );
+
+            // Stop this event propagation
+            event.preventDefault();
+            event.stopPropagation();
+
+            this.bgaPerformAction("actThrowDice").then(() => {                
                 // What to do after the server call if it succeeded
                 // (most of the time, nothing, as the game will react to notifs / change of state instead)
-            });        
+            });
         },    
 
         
