@@ -48,8 +48,10 @@ function (dojo, declare) {
         {
             console.log( "Starting game setup" );
 
+            game_play_area = document.getElementById('game_play_area')
+
             // Create board
-            document.getElementById('game_play_area').insertAdjacentHTML('beforeend', `
+            game_play_area.insertAdjacentHTML('beforeend', `
                 <div id="board">
                 </div>
             `);
@@ -82,12 +84,21 @@ function (dojo, declare) {
 
             // Create dice
             var dice_value = Math.floor(Math.random() * 6) + 1;
+            //var dice_x = Math.floor(Math.random() * 6) + 1;
+
+            const game_play_area_rect = game_play_area.getBoundingClientRect();
+            const board_rect = board.getBoundingClientRect();
+
+            console.log("GPA width: " + board_rect.width + "px");
+            console.log("GPA height: " + board_rect.height + "px");
+            console.log("Board width: " + board_rect.width + "px");
+            console.log("Board height: " + board_rect.height + "px");
 
             // DEBUG
             console.log( "random dice value", dice_value );
 
-            document.getElementById('game_play_area').insertAdjacentHTML('beforeend', `
-                <div class="dice" data-value="${dice_value}" style="top: -36px; left: 192px;">
+            game_play_area.insertAdjacentHTML('beforeend', `
+                <div class="dice" data-value="${dice_value}" style="top: 17px; left: 192px;">
                 </div>
             `);
             
