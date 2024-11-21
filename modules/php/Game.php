@@ -103,14 +103,10 @@ class Game extends \Table
 
         // Get active player square
         $test = $this->getUniqueValueFromDB(
-            "SELECT square_id FROM tokens WHERE token_color = $player_color"
+            "SELECT square_id FROM tokens WHERE token_color = '$player_color'"
         );
 
         $this->dump('TEST', $test);
-
-        //$this->getCollectionFromDb(
-        //    "SELECT token_color, square_id FROM tokens WHERE token_color == '$player_color' "
-        //);
 
         //$sql = "UPDATE token_color SET square_id=$new_square_id";
         //self::DbQuery( $sql );
