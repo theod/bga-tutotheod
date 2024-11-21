@@ -96,7 +96,7 @@
     height: 38px;
     background-image: url('img/dice.png');
     background-size: auto 100%;
-    position: relative;
+    position: absolute;
 }
 .dice[data-value=1] { background-position-x: 0px; }
 .dice[data-value=2] { background-position-x: -38px; }
