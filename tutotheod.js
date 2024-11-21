@@ -276,8 +276,6 @@ function (dojo, declare) {
                     var index_color = colors[index-1];
                     var random = Math.floor(Math.random() * 8) - 5;
 
-                    console.log( 'putTokensOnSquare: index_color', index_color );
-
                     document.getElementById('square_'+id).insertAdjacentHTML('beforeend', `
                         <div class="token_wrapper" id="token_${index_color}">
                             <div class="token" data-color="${index_color}" style="background-position-y: ${random}px;">
@@ -298,15 +296,9 @@ function (dojo, declare) {
             document.querySelectorAll('.movable').forEach(div => div.classList.remove('movable'));
 
             // Add new movable tokens
-            for( var color in movableTokens )
-            {
-                console.log( 'updateMovableTokens: color', color );
+            movableTokens.forEach(color => {
 
-                const token = document.getElementById('token_'+color);
-
-                console.log( 'token:', token );
-
-                //token.classList.add('movable');         
+                const token = document.getElementById('token_'+color).classList.add('movable');        
             }
                         
             this.addTooltipToClass( 'movableTokens', '', _('Those tokens are movable.') );
