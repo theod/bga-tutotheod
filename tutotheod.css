@@ -98,9 +98,9 @@
     background-size: auto 100%;
     position: absolute;
 }
-.dice[data-value=1] { background-position-x: 0px; }
-.dice[data-value=2] { background-position-x: -38px; }
-.dice[data-value=3] { background-position-x: -76px; }
-.dice[data-value=4] { background-position-x: -114px; }
-.dice[data-value=5] { background-position-x: -152px; }
-.dice[data-value=6] { background-position-x: -190px; }
+.dice[data-value="1"] { background-position-x: 0px; }
+.dice[data-value="2"] { background-position-x: -38px; }
+.dice[data-value="3"] { background-position-x: -76px; }
+.dice[data-value="4"] { background-position-x: -114px; }
+.dice[data-value="5"] { background-position-x: -152px; }
+.dice[data-value="6"] { background-position-x: -190px; }

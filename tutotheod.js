@@ -87,7 +87,7 @@ function (dojo, declare) {
             console.log( "random dice value", dice_value );
 
             document.getElementById('game_play_area').insertAdjacentHTML('beforeend', `
-                <div class="dice" data-value=${dice_value} style="top=-36px; left=192px">
+                <div class="dice" data-value="${dice_value}" style="top=-36px; left=192px">
                 </div>
             `);
             
