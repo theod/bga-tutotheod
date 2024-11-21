@@ -60,12 +60,12 @@ function (dojo, declare) {
             const board = document.getElementById('board');
             const size = 64;
             const ids = [
-                    [ 5,  6,  7,  8,  9, 10],    // y = 0
-                    [ 4, 23, 24, 25, 26, 11],    // y = 1
-                    [ 3, 22, 33, 34, 27, 12],    // y = 2
-                    [ 2, 21, 32, 35, 28, 13],    // y = 3
-                    [ 1, 20, 31, 30, 29, 14],    // y = 4
-                    [ 0, 19, 18, 17, 16, 15],    // y = 5
+                    [ 5,  6,  7,  8,  9, 10], // y = 0
+                    [ 4, 23, 24, 25, 26, 11], // y = 1
+                    [ 3, 22, 33, 34, 27, 12], // y = 2
+                    [ 2, 21, 32, 35, 28, 13], // y = 3
+                    [ 1, 20, 31, 30, 29, 14], // y = 4
+                    [ 0, 19, 18, 17, 16, 15], // y = 5
             ]; // x = 0,  1,  2,  3,  4,  5
 
             for (let x=0; x<6; x++) {
@@ -95,21 +95,23 @@ function (dojo, declare) {
             `);
             
             // Setting up player boards
+            /*
             Object.values(gamedatas.players).forEach(player => {
 
-                // example of setting up players boards
+                // Example of setting up players boards
                 this.getPlayerPanelElement(player.id).insertAdjacentHTML('beforeend', `
                     <div id="player-counter-${player.id}">A player counter</div>
                 `);
 
-                // example of adding a div for each player
-                document.getElementById('board').insertAdjacentHTML('beforeend', `
+                // Example of adding a div for each player
+                board.insertAdjacentHTML('beforeend', `
                     <div id="board-${player.id}">
                         <strong>${player.name}</strong>
                         <div>Player zone content goes here</div>
                     </div>
                 `);
             });
+            */
             
             // Set up your game interface here, according to "gamedatas"
 
