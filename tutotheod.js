@@ -94,7 +94,7 @@ function (dojo, declare) {
                 </div>
             `);
 
-            document.getElementById('dice').addEventListener('click', event => this.onThrowDice(event));
+            document.getElementById('dice').addEventListener('click', event => this.onClickDice(event));
             
             // Setting up player boards
             /*
@@ -313,9 +313,9 @@ function (dojo, declare) {
         
         */
 
-        onThrowDice: function( event )
+        onClickDice: function( event )
         {
-            console.log( 'onThrowDice', event );
+            console.log( 'onClickDice', event );
 
             // Stop this event propagation
             event.preventDefault();
