@@ -120,7 +120,8 @@ class Game extends \Table
         // Get some values from the current game situation from the database.
 
         return [
-            "playableCardsIds" => [1, 2],
+            // TODO: Check which players are movable. For now it is always ourself.
+            "movableTokens" => [ $this->getActivePlayerColor() ]
         ];
     }
 
@@ -335,6 +336,17 @@ class Game extends \Table
 
         }
     }
+
+    function getActivePlayerColor() {
+
+       $player_id = $this->getActivePlayerId();
+       $players = $this->loadPlayersBasicInfos();
+
+       if (isset($players[$player_id]))
+           return $players[$player_id]['player_color'];
+       else
+           return null;
+   }
 
     /**
      * This method is called each time it is the turn of a player who has quit the game (= "zombie" player).

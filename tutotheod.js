@@ -160,19 +160,8 @@ function (dojo, declare) {
             
             switch( stateName )
             {
-            
-            /* Example:
-            
-            case 'myGameState':
-            
-                // Show some HTML block at this game state
-                dojo.style( 'my_html_block_id', 'display', 'block' );
-                
-                break;
-           */
-           
-           
-            case 'dummy':
+            case 'playerTurn':
+                this.updateMovableTokens( args.args.movableTokens );
                 break;
             }
         },
@@ -297,6 +286,21 @@ function (dojo, declare) {
                 
             });
 
+        },
+
+        updateMovableTokens: function( movableTokens )
+        {
+            console.log( 'updateMovableTokens:', movableTokens );
+
+            // Remove current movable tokens
+            document.querySelectorAll('.movable').forEach(div => div.classList.remove('movable'));
+
+            for( var color in movableTokens )
+            {
+                document.getElementById(`token_${color}`).classList.add('movable');         
+            }
+                        
+            this.addTooltipToClass( 'movableTokens', '', _('Those tokens are movable.') );
         },
 
 
