@@ -98,7 +98,7 @@ class Game extends \Table
         $player_id = (int)$this->getActivePlayerId();
 
         // Get safe random value
-        $dice_value = $this->getRandomValue([1, 2, 3, 4, 5, 6])
+        $dice_value = $this->getRandomValue([1, 2, 3, 4, 5, 6]);
 
         // Notify all players about the dice value
         $this->notifyAllPlayers("diceValue", clienttranslate('${player_name} did ${dice_value}'), [
