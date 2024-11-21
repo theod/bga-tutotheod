@@ -96,15 +96,18 @@ class Game extends \Table
     {
         // Retrieve the active player ID.
         $player_id = (int)$this->getActivePlayerId();
+        $player_color = $this->getActivePlayerColor();
 
         // Get safe random value
         $dice_value = $this->getRandomValue([1, 2, 3, 4, 5, 6]);
 
-        // DEBUG
-        $this->dump('DICE_VALUE', $dice_value);
+        // Get active player square
+        $test = $this->getCollectionFromDb(
+            "SELECT `token_color`, `square_id` FROM `tokens` WHERE `token_color` == '$player_color' "
+        );
 
         // Notify all players about the dice value
-        $this->notifyAllPlayers("diceValue", clienttranslate('${player_name} did ${dice_value}'), [
+        $this->notifyAllPlayers("diceValue", clienttranslate('${player_name} did ${dice_value} {$test}'), [
             "player_id" => $player_id,
             "player_name" => $this->getActivePlayerName(),
             "dice_value" => $dice_value
