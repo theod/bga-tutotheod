@@ -57,6 +57,7 @@
     place-items: center;
     border: 72px solid;
     border-color: #16255F;
+    position: relative;
 }
 
 .square {
