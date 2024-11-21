@@ -300,7 +300,9 @@ function (dojo, declare) {
             // Add new movable tokens
             for( var color in movableTokens )
             {
-                const token = document.getElementById(`token_${color}`);
+                console.log( 'updateMovableTokens: color', color );
+
+                const token = document.getElementById('token_'+color);
 
                 console.log( 'token:', token );
 
