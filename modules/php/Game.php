@@ -103,7 +103,7 @@ class Game extends \Table
 
         // Get active player square
         $test = $this->getCollectionFromDb(
-            "SELECT `token_color`, `square_id` FROM `tokens` WHERE `token_color` == '$player_color' "
+            "SELECT token_color, square_id FROM tokens WHERE token_color == '$player_color' "
         );
 
         // Notify all players about the dice value
