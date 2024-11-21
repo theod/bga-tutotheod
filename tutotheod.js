@@ -326,10 +326,7 @@ function (dojo, declare) {
             event.preventDefault();
             event.stopPropagation();
 
-            this.bgaPerformAction("actThrowDice").then(() => {                
-                // What to do after the server call if it succeeded
-                // (most of the time, nothing, as the game will react to notifs / change of state instead)
-            });
+            this.bgaPerformAction("actThrowDice");
         },    
 
         
