@@ -298,8 +298,8 @@ function (dojo, declare) {
             // Add new movable tokens
             movableTokens.forEach(color => {
 
-                const token = document.getElementById('token_'+color).classList.add('movable');        
-            }
+                document.getElementById('token_'+color).classList.add('movable');        
+            });
                         
             this.addTooltipToClass( 'movableTokens', '', _('Those tokens are movable.') );
         },
