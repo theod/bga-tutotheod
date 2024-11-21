@@ -293,12 +293,12 @@ function (dojo, declare) {
             console.log( 'updateMovableTokens:', movableTokens );
 
             // Clear former movable tokens
-            document.querySelectorAll('.movable').forEach(div => div.classList.remove('movable'));
+            document.querySelectorAll('.movable').forEach(div => div.firstElementChild.classList.remove('movable'));
 
             // Add new movable tokens
             movableTokens.forEach(color => {
 
-                document.getElementById('token_'+color).classList.add('movable');        
+                document.getElementById('token_'+color).firstElementChild.classList.add('movable');        
             });
                         
             this.addTooltipToClass( 'movableTokens', '', _('Those tokens are movable.') );
