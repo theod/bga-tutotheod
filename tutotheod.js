@@ -289,7 +289,7 @@ function (dojo, declare) {
             console.log( 'updateActivePlayerToken:', activePlayerColor );
 
             // Clear former active token
-            document.querySelectorAll('.active').forEach(div => div.firstElementChild.classList.remove('active'));
+            document.querySelectorAll('.active').forEach(token_color => token_color.classList.remove('active'));
 
             // Add new active token
             document.getElementById('token_'+activePlayerColor).firstElementChild.classList.add('active');        
