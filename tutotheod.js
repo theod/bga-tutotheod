@@ -164,7 +164,7 @@ function (dojo, declare) {
             {
             case 'playerTurn':
 
-                this.updateActivePlayerToken()
+                this.updateActivePlayerToken();
                 break;
             }
         },
