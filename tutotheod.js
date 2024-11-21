@@ -126,10 +126,10 @@ function (dojo, declare) {
             Object.values(gamedatas.tokens).forEach(token => {
 
                 if (!(token.square in squares_with_tokens)) {
-                    squares_with_tokens[token.square] = [token.color]
+                    squares_with_tokens[token.square] = [token.color];
                 }
                 else {
-                    squares_with_tokens[token.square].push(token.color)
+                    squares_with_tokens[token.square].push(token.color);
                 }
 
             });
