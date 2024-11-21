@@ -111,19 +111,19 @@ class Game extends \Table
         $this->gamestate->nextState("moveToken");
     }
 
-    public function actPass(): void
+    public function actEndTurn(): void
     {
         // Retrieve the active player ID.
         $player_id = (int)$this->getActivePlayerId();
 
-        // Notify all players about the choice to pass.
-        $this->notifyAllPlayers("cardPlayed", clienttranslate('${player_name} passes'), [
+        // Notify all players about the choice to end turn.
+        $this->notifyAllPlayers("endTurn", clienttranslate('${player_name} ends turn'), [
             "player_id" => $player_id,
             "player_name" => $this->getActivePlayerName(),
         ]);
 
-        // at the end of the action, move to the next state
-        $this->gamestate->nextState("pass");
+        // At the end of the action, move to the next state
+        $this->gamestate->nextState("nextPlayer");
     }
 
     /**
