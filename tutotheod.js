@@ -89,8 +89,8 @@ function (dojo, declare) {
             const game_play_area_rect = game_play_area.getBoundingClientRect();
             const board_rect = board.getBoundingClientRect();
 
-            console.log("GPA width: " + board_rect.width + "px");
-            console.log("GPA height: " + board_rect.height + "px");
+            console.log("GPA width: " + game_play_area_rect.width + "px");
+            console.log("GPA height: " + game_play_area_rect.height + "px");
             console.log("Board width: " + board_rect.width + "px");
             console.log("Board height: " + board_rect.height + "px");
 
