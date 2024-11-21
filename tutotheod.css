@@ -92,6 +92,13 @@
     margin: -7px;
 }
 
+.movable {
+    border: 10px solid;
+    border-color: whitesmoke;
+    opacity: 0.5; 
+    cursor: pointer;
+}
+
 .dice {
     width: 38px;
     height: 38px;
