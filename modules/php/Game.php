@@ -109,7 +109,7 @@ class Game extends \Table
         $this->dump('SQUARE_ID', $square_id);
 
         // Add dice value to get new square where to move
-        $new_square_id = $square_id + $dice_value
+        $new_square_id = $square_id + $dice_value;
 
         $this->dump('NEW_SQUARE_ID', $new_square_id);
 
