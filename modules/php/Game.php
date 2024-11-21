@@ -64,6 +64,7 @@ class Game extends \Table
      *
      * @throws BgaUserException
      */
+    /*
     public function actPlayCard(int $card_id): void
     {
         // Retrieve the active player ID.
@@ -91,6 +92,7 @@ class Game extends \Table
         // at the end of the action, move to the next state
         $this->gamestate->nextState("playCard");
     }
+    */
 
     public function actThrowDice(): void
     {
@@ -101,33 +103,17 @@ class Game extends \Table
         // Get safe random value
         $dice_value = $this->getRandomValue([1, 2, 3, 4, 5, 6]);
 
-        $this->dump('DICE_VALUE', $dice_value);
+        // Move player token
+        $this->moveToken($player_color, $dice_value);
 
-        // Get active player square
-        $square_id = (int)$this->getUniqueValueFromDB(
-            "SELECT square_id FROM tokens WHERE token_color = '$player_color'"
-        );
-
-        $this->dump('SQUARE_ID', $square_id);
-
-        // Add dice value to get new square where to move
-        $new_square_id = $square_id + $dice_value;
-
-        $this->dump('NEW_SQUARE_ID', $new_square_id);
-
-        // Update active player square
-        $this->DbQuery( 
-            "UPDATE tokens SET square_id = $new_square_id WHERE token_color = '$player_color'"
-        );
-
-        // Notify all players about the dice value
-        $this->notifyAllPlayers("diceValue", clienttranslate('${player_name} did ${dice_value}'), [
+        // Notify all players about the move
+        $this->notifyAllPlayers("moveToken", clienttranslate('${player_name} moves his token ${dice_value} squares'), [
             "player_id" => $player_id,
             "player_name" => $this->getActivePlayerName(),
             "dice_value" => $dice_value
         ]);
 
-        // at the end of the action, move to the next state
+        // Go to the next state
         $this->gamestate->nextState("moveToken");
     }
 
@@ -403,6 +389,35 @@ class Game extends \Table
            return $players[$player_id]['player_color'];
        else
            return null;
+   }
+
+    function moveToken( $token_color, $squares_number ) {
+
+        // Get active player square
+        $square_id = (int)$this->getUniqueValueFromDB(
+            "SELECT square_id FROM tokens WHERE token_color = '$token_color'"
+        );
+
+        // Add squares number to get new square where to go
+        $new_square_id = $square_id + $squares_number;
+
+        // Constrain square id above 0
+        if ($new_square_id < 0) {
+
+            $new_square_id = 0;
+        }
+
+        // Move token back when it goes too far
+        // TODO: Notify about this
+        elseif ($new_square_id > 32) {
+
+            $new_square_id = 32 - ($new_square_id - 32);
+        }
+
+        // Update active player square
+        $this->DbQuery( 
+            "UPDATE tokens SET square_id = $new_square_id WHERE token_color = '$player_color'"
+        );
    }
 
     /**
