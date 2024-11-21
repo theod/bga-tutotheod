@@ -90,7 +90,7 @@ function (dojo, declare) {
             console.log( "random dice value", dice_value );
 
             board.insertAdjacentHTML('beforeend', `
-                <div class="dice" data-value="${dice_value}" style="top: -17px; left: -17px;">
+                <div class="dice" data-value="${dice_value}" style="top: -50px; left: -50px;">
                 </div>
             `);
             
