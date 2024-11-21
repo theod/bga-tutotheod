@@ -100,6 +100,9 @@ class Game extends \Table
         // Get safe random value
         $dice_value = $this->getRandomValue([1, 2, 3, 4, 5, 6]);
 
+        // DEBUG
+        $this->dump('DICE_VALUE', $dice_value);
+
         // Notify all players about the dice value
         $this->notifyAllPlayers("diceValue", clienttranslate('${player_name} did ${dice_value}'), [
             "player_id" => $player_id,
@@ -127,7 +130,7 @@ class Game extends \Table
     }
 
     /**
-     * Game state arguments, example content.
+     * Game state arguments.
      *
      * This method returns some additional information that is very specific to the `playerTurn` game state.
      *
