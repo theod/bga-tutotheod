@@ -102,17 +102,23 @@ class Game extends \Table
         $dice_value = $this->getRandomValue([1, 2, 3, 4, 5, 6]);
 
         // Get active player square
-        $test = $this->getUniqueValueFromDB(
+        $square_id = $this->getUniqueValueFromDB(
             "SELECT square_id FROM tokens WHERE token_color = '$player_color'"
         );
 
-        $this->dump('TEST', $test);
+        $this->dump('SQUARE_ID', $square_id);
 
-        //$sql = "UPDATE token_color SET square_id=$new_square_id";
-        //self::DbQuery( $sql );
+        // Add dice value to get new square where to move
+        $new_square_id = $square_id + $dice_value
+
+        $this->dump('NEW_SQUARE_ID', $new_square_id);
+
+        // Update active player square
+        $sql = "UPDATE tokens SET square_id = $new_square_id WHERE token_color = '$player_color'";
+        ths->DbQuery( $sql );
 
         // Notify all players about the dice value
-        $this->notifyAllPlayers("diceValue", clienttranslate('${player_name} did ${dice_value} ${test}'), [
+        $this->notifyAllPlayers("diceValue", clienttranslate('${player_name} did ${dice_value}'), [
             "player_id" => $player_id,
             "player_name" => $this->getActivePlayerName(),
             "dice_value" => $dice_value
