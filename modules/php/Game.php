@@ -113,7 +113,7 @@ class Game extends \Table
         //);
 
         // Notify all players about the dice value
-        $this->notifyAllPlayers("diceValue", clienttranslate('${player_name} did ${dice_value} {$test}'), [
+        $this->notifyAllPlayers("diceValue", clienttranslate('${player_name} did ${dice_value} ${test}'), [
             "player_id" => $player_id,
             "player_name" => $this->getActivePlayerName(),
             "dice_value" => $dice_value
