@@ -93,6 +93,8 @@ function (dojo, declare) {
                 <div class="dice" data-value="${dice_value}" style="top: -50px; left: -50px;">
                 </div>
             `);
+
+            //document.getElementById('dice').addEventListener('click', e => this.onThrowDice(e));
             
             // Setting up player boards
             /*
@@ -161,7 +163,7 @@ function (dojo, declare) {
             switch( stateName )
             {
             case 'playerTurn':
-                this.updateMovableTokens( args.args.movableTokens );
+                this.updateActivePlayerToken( args.args.activePlayerColor );
                 break;
             }
         },
@@ -288,20 +290,17 @@ function (dojo, declare) {
 
         },
 
-        updateMovableTokens: function( movableTokens )
+        updateActivePlayerToken: function( activePlayerColor )
         {
-            console.log( 'updateMovableTokens:', movableTokens );
+            console.log( 'updateActivePlayerToken:', activePlayerColor );
 
-            // Clear former movable tokens
-            document.querySelectorAll('.movable').forEach(div => div.firstElementChild.classList.remove('movable'));
+            // Clear former active token
+            document.querySelectorAll('.active').forEach(div => div.firstElementChild.classList.remove('active'));
 
-            // Add new movable tokens
-            movableTokens.forEach(color => {
-
-                document.getElementById('token_'+color).firstElementChild.classList.add('movable');        
-            });
+            // Add new active token
+            document.getElementById('token_'+activePlayerColor).firstElementChild.classList.add('active');        
                         
-            this.addTooltipToClass( 'movableTokens', '', _('Those tokens are movable.') );
+            this.addTooltipToClass( 'activePlayerToken', '', _('This is the active player token.') );
         },
 
 

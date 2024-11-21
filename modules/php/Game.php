@@ -120,8 +120,7 @@ class Game extends \Table
         // Get some values from the current game situation from the database.
 
         return [
-            // TODO: Check which players are movable. For now it is always ourself.
-            "movableTokens" => [ $this->getActivePlayerColor() ]
+            "activePlayerColor" => $this->getActivePlayerColor()
         ];
     }
 
