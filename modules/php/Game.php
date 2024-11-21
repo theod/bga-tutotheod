@@ -101,8 +101,10 @@ class Game extends \Table
         // Get safe random value
         $dice_value = $this->getRandomValue([1, 2, 3, 4, 5, 6]);
 
+        $this->dump('DICE_VALUE', $dice_value);
+
         // Get active player square
-        $square_id = $this->getUniqueValueFromDB(
+        $square_id = (int)$this->getUniqueValueFromDB(
             "SELECT square_id FROM tokens WHERE token_color = '$player_color'"
         );
 
