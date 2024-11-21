@@ -116,8 +116,9 @@ class Game extends \Table
         $this->dump('NEW_SQUARE_ID', $new_square_id);
 
         // Update active player square
-        $sql = "UPDATE tokens SET square_id = $new_square_id WHERE token_color = '$player_color'";
-        ths->DbQuery( $sql );
+        $this->DbQuery( 
+            "UPDATE tokens SET square_id = $new_square_id WHERE token_color = '$player_color'"
+        );
 
         // Notify all players about the dice value
         $this->notifyAllPlayers("diceValue", clienttranslate('${player_name} did ${dice_value}'), [
