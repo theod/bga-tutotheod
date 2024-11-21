@@ -83,26 +83,14 @@ function (dojo, declare) {
             }
 
             // Create dice
-            
-            const game_play_area_rect = game_play_area.getBoundingClientRect();
-            const board_rect = board.getBoundingClientRect();
-
-            //var game_play_area_border = Math.floor((game_play_area_rect.width - board_rect.width) / 2)
-
             //var dice_x = Math.floor(Math.random() * 6) + 1;
-
-            console.log("GPA width: " + game_play_area_rect.width + "px");
-            console.log("GPA height: " + game_play_area_rect.height + "px");
-            console.log("Board width: " + board_rect.width + "px");
-            console.log("Board height: " + board_rect.height + "px");
-
             var dice_value = Math.floor(Math.random() * 6) + 1;
 
             // DEBUG
             console.log( "random dice value", dice_value );
 
             board.insertAdjacentHTML('beforeend', `
-                <div class="dice" data-value="${dice_value}" style="top: 17px; left: 192px;">
+                <div class="dice" data-value="${dice_value}" style="top: 0px; left: 0px;">
                 </div>
             `);
             
