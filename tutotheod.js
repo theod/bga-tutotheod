@@ -207,6 +207,7 @@ function (dojo, declare) {
                 {
                  case 'playerTurn':    
 
+                    this.addActionButton('actThrowDice-btn', _('Throw dice'), () => this.bgaPerformAction("actThrowDice"), null, null, 'gray'); 
                     this.addActionButton('actEndTurn-btn', _('End turn'), () => this.bgaPerformAction("actEndTurn"), null, null, 'gray'); 
                     break;
                 }
@@ -289,7 +290,7 @@ function (dojo, declare) {
             console.log( 'updateActivePlayerToken:', activePlayerColor );
 
             // Clear former active token
-            document.querySelectorAll('.active').forEach(token_color => token_color.classList.remove('active'));
+            document.querySelectorAll('.active').forEach(token => token.classList.remove('active'));
 
             // Add new active token
             document.getElementById('token_'+activePlayerColor).firstElementChild.classList.add('active');        
