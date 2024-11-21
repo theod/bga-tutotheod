@@ -164,7 +164,7 @@ function (dojo, declare) {
             {
             case 'playerTurn':
 
-                this.updateActivePlayerToken();
+                this.updateActivePlayerToken()
                 break;
             }
         },
@@ -218,12 +218,10 @@ function (dojo, declare) {
         ///////////////////////////////////////////////////
         //// Utility methods
         
-        /*
-        
-            Here, you can defines some utility methods that you can use everywhere in your javascript
-            script.
-        
-        */
+        getActivePlayerColor: function()
+        {
+            return this.gamedatas.players[this.getActivePlayerId()].color;
+        }
 
         putTokensOnSquare: function( colors, id )
         {
@@ -286,8 +284,9 @@ function (dojo, declare) {
 
         },
 
-        updateActivePlayerToken: function( activePlayerColor )
+        updateActivePlayerToken: function()
         {
+            var activePlayerColor = this.getActivePlayerColor();
             console.log( 'updateActivePlayerToken:', activePlayerColor );
 
             // Clear former active token
