@@ -69,7 +69,7 @@
     grid-template-columns: repeat(3, 18px);
     grid-template-rows: repeat(3, 18px);
     grid-gap: 1px;
-    position: relative;
+    place-items: center;
     /*outline: 2px solid orange;*/
 }
 
@@ -96,8 +96,6 @@
 .movable {
     width: 48px;
     height: 48px;
-    top: -8px;
-    left: -8px;
     cursor: pointer;
 }
 
