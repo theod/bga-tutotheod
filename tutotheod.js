@@ -1,7 +1,7 @@
 /**
  *------
  * BGA framework: Gregory Isabelli & Emmanuel Colin & BoardGameArena
- * TutoTheod implementation : © <Your name here> <Your email address here>
+ * TutoTheod implementation : © <Théo de la Hogue> <dev@theod.fr>
  *
  * This code has been produced on the BGA studio platform for use on http://boardgamearena.com.
  * See http://en.boardgamearena.com/#!doc/Studio for more information.
