@@ -169,7 +169,13 @@ function (dojo, declare) {
 
                 case 'newSquare':
 
-                    // TODO: move tokens that aren't not at the place
+                    // TODO: move tokens that aren't not at the rigth place
+                    args.tokens.forEach(token => {
+
+                        console.log( 'Token '+token.color+' should be at '+token.square+' square' );
+
+                        //document.getElementById('token_'+token.color)
+                    });
                     break;
             }
         },
