@@ -60,12 +60,12 @@ $machinestates = [
         "description" => clienttranslate("Game setup"),
         "type" => "manager",
         "action" => "stGameSetup",
-        "transitions" => ["" => ST_PLAYER_THROW_DICE]
+        "transitions" => ["" => ST_PLAYER_TURN]
     ),
 
     // Note: ID=2 => your first state
 
-    ST_PLAYER_THROW_DICE => [
+    ST_PLAYER_TURN => [
         "name" => "playerTurn",
         "description" => clienttranslate('${actplayer} must throw the dice'),
         "descriptionmyturn" => clienttranslate('${you} must throw the dice'),
@@ -76,15 +76,16 @@ $machinestates = [
             "actThrowDice",
             "actEndTurn"
         ],
-        "transitions" => ["moveToken" => ST_PLAYER_MOVE_TOKEN, "endTurn" => ST_NEXT_PLAYER]
+        "transitions" => ["newSquare" => ST_NEW_SQUARE, "endTurn" => ST_NEXT_PLAYER]
     ],
 
-    ST_PLAYER_MOVE_TOKEN => [
-        "name" => "moveToken",
-        "description" => clienttranslate('${actplayer} is moving'),
-        "descriptionmyturn" => clienttranslate('${you} are moving'),
+    ST_NEW_SQUARE => [
+        "name" => "newSquare",
+        "description" => clienttranslate('${actplayer} is on a new square'),
+        "descriptionmyturn" => clienttranslate('${you} are on a new square'),
         "type" => "game",
-        "action" => "stMoveToken",
+        "args" => "argNewSquare",
+        "action" => "stNewSquare",
         "transitions" => ["nextPlayer" => ST_NEXT_PLAYER]
     ],
 
@@ -94,7 +95,7 @@ $machinestates = [
         "type" => "game",
         "action" => "stNextPlayer",
         "updateGameProgression" => true,
-        "transitions" => ["endGame" => ST_END_GAME, "nextPlayer" => ST_PLAYER_THROW_DICE]
+        "transitions" => ["endGame" => ST_END_GAME, "nextPlayer" => ST_PLAYER_TURN]
     ],
 
     // Final state.

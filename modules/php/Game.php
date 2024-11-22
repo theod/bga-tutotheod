@@ -106,8 +106,16 @@ class Game extends \Table
         // Move player token
         $this->moveToken($player_color, $dice_value);
 
+        // Adapt notification message
+        if ($dice_value > 1) {
+            $message = '${player_name} moves his token ${dice_value} square'
+        }
+        else {
+            $message = '${player_name} moves his token ${dice_value} squares'
+        }
+
         // Notify all players about the move
-        $this->notifyAllPlayers("moveToken", clienttranslate('${player_name} moves his token ${dice_value} squares'), [
+        $this->notifyAllPlayers("moveToken", clienttranslate($message), [
             "player_id" => $player_id,
             "player_name" => $this->getActivePlayerName(),
             "dice_value" => $dice_value
@@ -135,17 +143,27 @@ class Game extends \Table
     /**
      * Game state arguments.
      *
-     * This method returns some additional information that is very specific to the `playerTurn` game state.
+     * This method returns some additional information that is very specific to specific game state.
      *
      * @return array
      * @see ./states.inc.php
      */
     public function argPlayerTurn(): array
     {
-        // Get some values from the current game situation from the database.
+        // Share some values of the current game situation from the database.
 
         return [
-            "activePlayerColor" => $this->getActivePlayerColor()
+            //"someValue" => $this->getSomeValue()
+        ];
+    }
+
+    public function argNewSquare(): array
+    {
+        // Share tokens positions
+        return [
+            "tokens" => $this->getCollectionFromDb(
+                            "SELECT `token_color` `color`, `square_id` `square` FROM `tokens`"
+                        )
         ];
     }
 
@@ -169,9 +187,9 @@ class Game extends \Table
     /**
      * Game state action.
      *
-     * The action method of state `moveToken` is called everytime the current game state is set to `moveToken`.
+     * The action method of state `newSquare` is called everytime the current game state is set to `newSquare`.
      */
-    public function stMoveToken(): void {
+    public function stNewSquare(): void {
 
         // Go to another gamestate
         // Here, we would detect if the game is over, and in this case use "endGame" transition instead 
@@ -383,7 +401,16 @@ class Game extends \Table
        else
            return null;
    }
+   /*
+   function getActivePlayerSquareId() {
 
+        $token_color = $this->getActivePlayerColor();
+
+        return (int)$this->getUniqueValueFromDB(
+            "SELECT square_id FROM tokens WHERE token_color = '$token_color'"
+        );
+   }
+    */
     function moveToken( $token_color, $squares_number ) {
 
         // Get active player square

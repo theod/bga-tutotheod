@@ -162,10 +162,15 @@ function (dojo, declare) {
             
             switch( stateName )
             {
-            case 'playerTurn':
+                case 'playerTurn':
 
-                this.updateActivePlayerToken();
-                break;
+                    this.highligthActivePlayerToken();
+                    break;
+
+                case 'newSquare':
+
+                    // TODO: move tokens that aren't not at the place
+                    break;
             }
         },
 
@@ -284,10 +289,10 @@ function (dojo, declare) {
 
         },
 
-        updateActivePlayerToken: function()
+        highligthActivePlayerToken: function()
         {
             var activePlayerColor = this.getActivePlayerColor();
-            console.log( 'updateActivePlayerToken:', activePlayerColor );
+            console.log( 'highligthActivePlayerToken:', activePlayerColor );
 
             // Clear former active token
             document.querySelectorAll('.active').forEach(token => token.classList.remove('active'));
