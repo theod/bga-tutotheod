@@ -59,7 +59,6 @@
     border-color: #16255F;
     position: relative;
 }
-
 .square {
     top: 2px;
     left: 2px;
@@ -72,7 +71,11 @@
     place-items: center;
     /*outline: 2px solid orange;*/
 }
-
+.slot {
+    width: 32px;
+    height: 32px;
+    display: block;
+}
 .token {
     width: 32px;
     height: 32px;
@@ -84,20 +87,13 @@
 .token[data-color="A8ADD7"] { background-position-x: -64px; }
 .token[data-color="F7BFD9"] { background-position-x: -96px; }
 .token[data-color="D1E2AD"] { background-position-x: -128px; }
-.token_separator {
-    width: 18px;
-    height: 18px;
-    display: block;
-}
 .token_wrapper {
     margin: -7px;
 }
-
 .active {
     width: 38px;
     height: 38px;
 }
-
 .dice {
     width: 38px;
     height: 38px;

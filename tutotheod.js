@@ -77,6 +77,15 @@ function (dojo, declare) {
 
                     board.insertAdjacentHTML(`beforeend`, `
                         <div id="square_${ids[x][y]}" class="square">
+                            <div id="slot_1" class="slot"></div>
+                            <div id="slot_2" class="slot"></div>
+                            <div id="slot_3" class="slot"></div>
+                            <div id="slot_4" class="slot"></div>
+                            <div id="slot_5" class="slot"></div>
+                            <div id="slot_6" class="slot"></div>
+                            <div id="slot_7" class="slot"></div>
+                            <div id="slot_8" class="slot"></div>
+                            <div id="slot_9" class="slot"></div>
                         </div>
                     `);
                 }
@@ -117,31 +126,15 @@ function (dojo, declare) {
             
             // Set up your game interface here, according to "gamedatas"
 
-            // Setting up players token
-            var squares_with_tokens = {};
 
             // DEBUG
             console.log( "gamedatas.tokens", Object.values(gamedatas.tokens) );
 
             Object.values(gamedatas.tokens).forEach(token => {
 
-                if (!(token.square in squares_with_tokens)) {
-                    squares_with_tokens[token.square] = [token.color];
-                }
-                else {
-                    squares_with_tokens[token.square].push(token.color);
-                }
+                this.putTokenOnSquare( token.color, token.square );
 
             });
-
-            // DEBUG
-            console.log( squares_with_tokens );
-
-            for (const [square, colors] of Object.entries(squares_with_tokens)) {
-
-                console.log(square, colors);
-                this.putTokensOnSquare( colors, square );
-            }
 
             // Setup game notifications to handle (see "setupNotifications" method below)
             this.setupNotifications();
@@ -176,7 +169,10 @@ function (dojo, declare) {
                         old_square_div = token_div.parentNode;
                         new_square_div = document.getElementById('square_'+token.square);
 
-                        console.log( 'Token '+token_div.id+' moves from '+old_square_div.id+' to '+ new_square_div.id );
+                        if (new_square_div.id != old_square_div.id) {
+
+                            console.log( 'Token '+token_div.id+' moves from '+old_square_div.id+' to '+ new_square_div.id );
+                        }
                     }
 
                     break;
@@ -237,65 +233,39 @@ function (dojo, declare) {
             return this.gamedatas.players[this.getActivePlayerId()].color;
         },
 
-        putTokensOnSquare: function( colors, id )
+        putTokenOnSquare: function( color, square )
         {
-            console.log( 'putTokensOnSquare: colors', colors );
+            /* Considering slots in square are ordered like this:
+                
+                     1 2 3
+                     4 5 6
+                     7 8 9
+                
+                The first arriving token is always stored on central slot (5) 
+                while others are stored around starting from the upper left slot (1).
+            */
+            console.log( 'putTokenOnSquare:', color, square );
 
-            // Tokens position depend on the number of players
-            const configurations = [
-                [
-                    0,0,0,
-                    0,1,0,
-                    0,0,0
-                ],
-                [
-                    2,0,0,
-                    0,1,0,
-                    0,0,0
-                ],
-                [
-                    2,0,3,
-                    0,1,0,
-                    0,0,0
-                ],
-                [
-                    2,0,3,
-                    0,1,0,
-                    4,0,0
-                ],
-                [
-                    2,0,3,
-                    0,1,0,
-                    4,0,5
-                ]
-            ];
+            store_order = [5, 1, 3, 7, 9];
 
-            configurations[colors.length-1].forEach(index => {
+            for (let i = 0; i < 4; i++) {
 
-                if (index == 0) {
+                slot = document.getElementById('square_'+store_order[i]);
 
-                    document.getElementById('square_'+id).insertAdjacentHTML('beforeend', `
-                        <div class="token_wrapper">
-                            <div class="token_separator"
-                            </div>
-                        </div>
-                    `);
-                }
-                else {
+                if (slot.childNodes.length == 0) {
 
-                    var index_color = colors[index-1];
                     var random = Math.floor(Math.random() * 8) - 5;
 
-                    document.getElementById('square_'+id).insertAdjacentHTML('beforeend', `
-                        <div class="token_wrapper" id="token_${index_color}">
-                            <div class="token" data-color="${index_color}" style="background-position-y: ${random}px;">
+                    slot.insertAdjacentHTML('beforeend', `
+                        <div class="token_wrapper" id="token_${color}">
+                            <div class="token" data-color="${color}" style="background-position-y: ${random}px;">
                             </div>
                         </div>
                     `);
-                }
-                
-            });
 
+                    break;
+                }
+            }
         },
 
         highligthActivePlayerToken: function()
