@@ -72,9 +72,9 @@
     /*outline: 2px solid orange;*/
 }
 .slot {
-    width: 32px;
-    height: 32px;
-    display: block;
+    width: 18px;
+    height: 18px;
+    display: contents;
 }
 .token {
     width: 32px;
