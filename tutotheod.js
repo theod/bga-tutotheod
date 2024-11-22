@@ -170,11 +170,11 @@ function (dojo, declare) {
                 case 'newSquare':
 
                     // TODO: move tokens that aren't not at the rigth place
-                    for (const [color, square] of Object.entries(args.args.tokens)) {
+                    for (const [color, square] of Object.values(args.args.tokens)) {
 
-                        console.log( 'Token '+color+' should be at '+square+' square' );
+                        token = document.getElementById('token_'+color);
 
-                        //document.getElementById('token_'+token.color)
+                        console.log( 'Token '+color+' should be at '+square+' square:', token );
                     }
 
                     break;
