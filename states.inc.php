@@ -76,7 +76,7 @@ $machinestates = [
             "actThrowDice",
             "actEndTurn"
         ],
-        "transitions" => ["newSquare" => ST_NEW_SQUARE, "endTurn" => ST_NEXT_PLAYER]
+        "transitions" => ["newSquare" => ST_NEW_SQUARE, "nextPlayer" => ST_NEXT_PLAYER]
     ],
 
     ST_NEW_SQUARE => [
