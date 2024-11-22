@@ -173,13 +173,6 @@ class Game extends \Table
      */
     public function stMoveToken(): void {
 
-        // Retrieve the active player color.
-        $player_color = $this->getActivePlayerColor();
-
-        // TODO
-        //$sql = "UPDATE tokens SET $player_color='$new_square' ";
-        //$this->DbQuery( $sql );
-
         // Go to another gamestate
         // Here, we would detect if the game is over, and in this case use "endGame" transition instead 
         $this->gamestate->nextState("nextPlayer");
@@ -416,7 +409,7 @@ class Game extends \Table
 
         // Update active player square
         $this->DbQuery( 
-            "UPDATE tokens SET square_id = $new_square_id WHERE token_color = '$player_color'"
+            "UPDATE tokens SET square_id = $new_square_id WHERE token_color = '$token_color'"
         );
    }
 
