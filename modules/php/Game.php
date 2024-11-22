@@ -122,7 +122,7 @@ class Game extends \Table
         ]);
 
         // Go to the next state
-        $this->gamestate->nextState("moveToken");
+        $this->gamestate->nextState("newSquare");
     }
 
     public function actEndTurn(): void
