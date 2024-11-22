@@ -157,7 +157,7 @@ function (dojo, declare) {
             {
                 case 'playerTurn':
 
-                    this.highligthActivePlayerToken();
+                    //this.highligthActivePlayerToken();
                     break;
 
                 case 'newSquare':
