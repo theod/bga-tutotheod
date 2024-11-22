@@ -108,10 +108,10 @@ class Game extends \Table
 
         // Adapt notification message
         if ($dice_value > 1) {
-            $message = '${player_name} moves his token ${dice_value} square'
+            $message = '${player_name} moves his token ${dice_value} square';
         }
         else {
-            $message = '${player_name} moves his token ${dice_value} squares'
+            $message = '${player_name} moves his token ${dice_value} squares';
         }
 
         // Notify all players about the move
@@ -189,8 +189,8 @@ class Game extends \Table
      *
      * The action method of state `newSquare` is called everytime the current game state is set to `newSquare`.
      */
-    public function stNewSquare(): void {
-
+    public function stNewSquare(): void 
+    {
         // Go to another gamestate
         // Here, we would detect if the game is over, and in this case use "endGame" transition instead 
         $this->gamestate->nextState("nextPlayer");
@@ -201,7 +201,8 @@ class Game extends \Table
      *
      * The action method of state `nextPlayer` is called everytime the current game state is set to `nextPlayer`.
      */
-    public function stNextPlayer(): void {
+    public function stNextPlayer(): void 
+    {
         // Retrieve the active player ID.
         $player_id = (int)$this->getActivePlayerId();
 
