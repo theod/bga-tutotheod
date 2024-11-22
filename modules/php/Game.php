@@ -121,6 +121,9 @@ class Game extends \Table
             "dice_value" => $dice_value
         ]);
 
+        // Wait 5s
+        sleep(5);
+
         // Go to the next state
         $this->gamestate->nextState("newSquare");
     }
