@@ -151,9 +151,6 @@ class Game extends \Table
 
     public function argRoundSetup(): array
     {
-        // DEBUG
-        $this->dump('DEBUG: argRoundSetup', 1);
-
         // Share tokens positions
         return [
             "tokens" => $this->getCollectionFromDb(
@@ -164,9 +161,6 @@ class Game extends \Table
 
     public function argNewSquare(): array
     {
-        // DEBUG
-        $this->dump('DEBUG: argNewSquare', 1);
-
         // Share tokens positions
         return [
             "tokens" => $this->getCollectionFromDb(
@@ -202,8 +196,12 @@ class Game extends \Table
 
     public function stRoundSetup(): void 
     {
-        // DEBUG
-        $this->dump('DEBUG: stRoundSetup', 1);
+        // BUG? This first state seems to never 'onEnteringState' of interface.
+
+        // TEST: Simulate player wins the last round => he starts on square 5
+        $this->DbQuery( 
+            "UPDATE tokens SET square_id = 5, slot_id = 5 WHERE token_color = '86D1F5'"
+        );
 
         $this->gamestate->nextState("returnDie");
     }
