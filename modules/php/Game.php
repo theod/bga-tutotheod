@@ -162,7 +162,7 @@ class Game extends \Table
         // Share tokens positions
         return [
             "tokens" => $this->getCollectionFromDb(
-                            "SELECT `token_color` `color`, `square_id` `square` FROM `tokens`"
+                            "SELECT `token_color` `color`, `square_id` `square`, `slot_id` `slot` FROM `tokens`"
                         )
         ];
     }
@@ -271,7 +271,7 @@ class Game extends \Table
 
         // Get players position
         $result['tokens'] = $this->getCollectionFromDb(
-            "SELECT `token_color` `color`, `square_id` `square` FROM `tokens`"
+            "SELECT `token_color` `color`, `square_id` `square`, `slot_id` `slot` FROM `tokens`"
         );
 
         return $result;
@@ -356,28 +356,20 @@ class Game extends \Table
             /*** PASTE CODE TO DEBUG BELOW ***/
 
             // Init the tokens
-            $sql = "INSERT INTO tokens (token_color,square_id) VALUES ";
+            $sql = "INSERT INTO tokens (token_color,square_id,slot_id) VALUES ";
             $sql_values = array();
 
             $players_id = array_keys($players);
+            $square_slots_id = [5, 1, 3, 7, 9]; // Cf comment into "moveToken" function below
 
             for( $i=0; $i<count($players_id); $i++ )
             {
                 $player_color = $players[$players_id[$i]]["player_color"];
+                $slot_id = $square_slots_id[$i];
 
                 // TODO: Check if a player is the last President
-                $sql_values[] = "('$player_color',0)";
+                $sql_values[] = "('$player_color',0,'$slot_id')";
             }
-
-            /*
-            foreach ($players as $player_id => $player_info) {
-                
-                $player_color = $player_info["player_color"];
-
-                // TODO: Check if a player is the last President
-                $sql_values[] = "('$player_color',0)";
-            }
-            */
 
             $sql .= implode( ',', $sql_values );
             $this->DbQuery( $sql );
@@ -414,7 +406,7 @@ class Game extends \Table
     */
     function moveToken( $token_color, $squares_number ) {
 
-        // Get active player square
+        // Get square where the token is
         $square_id = (int)$this->getUniqueValueFromDB(
             "SELECT square_id FROM tokens WHERE token_color = '$token_color'"
         );
@@ -435,9 +427,28 @@ class Game extends \Table
             $new_square_id = 32 - ($new_square_id - 32);
         }
 
-        // Update active player square
+        /* Tokens are placed over square's slots like this:
+                
+                            1 2 3      2 0 3
+                            4 5 6  ->  0 1 0
+                            7 8 9      4 0 5
+                            slots      tokens
+
+            The first arriving token is always stored on central slot (5) 
+            while others are stored around starting from the upper left slot (1).
+        */
+        $square_slots_id = [5, 1, 3, 7, 9];
+
+        // How many tokens are already in the new square
+        $tokens_count = (int)$this->getUniqueValueFromDB(
+            "SELECT COUNT token_color FROM tokens WHERE square_id = '$new_square_id'"
+        );
+
+        $new_slot_id = $square_slots_id[ $tokens_count ];
+
+        // Update token's square and slot
         $this->DbQuery( 
-            "UPDATE tokens SET square_id = $new_square_id WHERE token_color = '$token_color'"
+            "UPDATE tokens SET square_id = '$new_square_id', slot_id = '$new_slot_id' WHERE token_color = '$token_color'"
         );
    }
 

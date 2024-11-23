@@ -77,15 +77,15 @@ function (dojo, declare) {
 
                     board.insertAdjacentHTML(`beforeend`, `
                         <div id="square_${ids[x][y]}" class="square">
-                            <div id="slot_1" class="slot"></div>
-                            <div id="slot_2" class="slot"></div>
-                            <div id="slot_3" class="slot"></div>
-                            <div id="slot_4" class="slot"></div>
-                            <div id="slot_5" class="slot"></div>
-                            <div id="slot_6" class="slot"></div>
-                            <div id="slot_7" class="slot"></div>
-                            <div id="slot_8" class="slot"></div>
-                            <div id="slot_9" class="slot"></div>
+                            <div class="slot"></div>
+                            <div class="slot"></div>
+                            <div class="slot"></div>
+                            <div class="slot"></div>
+                            <div class="slot"></div>
+                            <div class="slot"></div>
+                            <div class="slot"></div>
+                            <div class="slot"></div>
+                            <div class="slot"></div>
                         </div>
                     `);
                 }
@@ -132,8 +132,17 @@ function (dojo, declare) {
 
             Object.values(gamedatas.tokens).forEach(token => {
 
-                this.putTokenOnSquare( token.color, token.square );
+                // Create token
+                board.insertAdjacentHTML('beforeend', `
+                    <div class="token_wrapper" id="token_${token.color}">
+                        <div class="token" data-color="${token.color}"">
+                        </div>
+                    </div>
+                `);
 
+                // Animate token from player board to a square slot
+                this.placeOnObject( `token_${token.color}`, 'overall_player_board_'+player );
+                this.placeTokenOnSquareSlot( token.color, token.square, token.slot );
             });
 
             // Setup game notifications to handle (see "setupNotifications" method below)
@@ -165,14 +174,7 @@ function (dojo, declare) {
                     // Update tokens position
                     for (const [key, token] of Object.entries(args.args.tokens)) {
 
-                        token_div = document.getElementById('token_'+token.color);
-                        old_square_div = token_div.parentNode;
-                        new_square_div = document.getElementById('square_'+token.square);
-
-                        if (new_square_div.id != old_square_div.id) {
-
-                            console.log( 'Token '+token_div.id+' moves from '+old_square_div.id+' to '+ new_square_div.id );
-                        }
+                        this.placeTokenOnSquareSlot( token.color, token.square, token.slot );
                     }
 
                     break;
@@ -233,39 +235,24 @@ function (dojo, declare) {
             return this.gamedatas.players[this.getActivePlayerId()].color;
         },
 
-        putTokenOnSquare: function( color, square )
+        placeTokenOnSquareSlot: function( color, square, slot )
         {
-            /* Considering slots in square are ordered like this:
+            /* Tokens are placed over square's slots like this:
                 
-                     1 2 3
-                     4 5 6
-                     7 8 9
-                
+                            1 2 3      2 0 3
+                            4 5 6  ->  0 1 0
+                            7 8 9      4 0 5
+                            slots      tokens
+
                 The first arriving token is always stored on central slot (5) 
                 while others are stored around starting from the upper left slot (1).
             */
             console.log( 'putTokenOnSquare:', color, square );
 
-            store_order = [5, 1, 3, 7, 9];
+            var token = document.getElementById('token_'+color);
+            var square_slot = document.getElementById('square_'+square).children[slot];
 
-            for (let i = 0; i < 4; i++) {
-
-                slot = document.getElementById('square_'+store_order[i]);
-
-                if (slot.childNodes.length == 0) {
-
-                    var random = Math.floor(Math.random() * 8) - 5;
-
-                    slot.insertAdjacentHTML('beforeend', `
-                        <div class="token_wrapper" id="token_${color}">
-                            <div class="token" data-color="${color}" style="background-position-y: ${random}px;">
-                            </div>
-                        </div>
-                    `);
-
-                    break;
-                }
-            }
+            this.slideToObject( token, square_slot ).play();
         },
 
         highligthActivePlayerToken: function()
