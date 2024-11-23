@@ -52,11 +52,10 @@ function (dojo, declare) {
 
             // Create board
             game_play_area.insertAdjacentHTML('beforeend', `
-                <div id="board">
-                </div>
+                <div id="board"></div>
             `);
 
-            // Create squares
+            // Create squares with a 9 slots grid inside
             const board = document.getElementById('board');
             const size = 64;
             const ids = [
@@ -76,18 +75,17 @@ function (dojo, declare) {
                     const top = y * size;
 
                     board.insertAdjacentHTML(`beforeend`, `
-                        <div id="square_${ids[x][y]}" class="square">
-                            <div id="square_${ids[x][y]}_slot_1" class="slot"></div>
-                            <div id="square_${ids[x][y]}_slot_2" class="slot"></div>
-                            <div id="square_${ids[x][y]}_slot_3" class="slot"></div>
-                            <div id="square_${ids[x][y]}_slot_4" class="slot"></div>
-                            <div id="square_${ids[x][y]}_slot_5" class="slot"></div>
-                            <div id="square_${ids[x][y]}_slot_6" class="slot"></div>
-                            <div id="square_${ids[x][y]}_slot_7" class="slot"></div>
-                            <div id="square_${ids[x][y]}_slot_8" class="slot"></div>
-                            <div id="square_${ids[x][y]}_slot_9" class="slot"></div>
-                        </div>
+                        <div id="square_${ids[x][y]}" class="square"></div>
                     `);
+
+                    const square = document.getElementById(`square_${ids[x][y]}`);
+
+                    for (let s=0; s<9; s++) {
+
+                        square.insertAdjacentHTML(`beforeend`, `
+                            <div id="square_${ids[x][y]}_slot_${s}" class="slot"></div>
+                        `);
+                    }
                 }
             }
 
@@ -99,8 +97,7 @@ function (dojo, declare) {
             console.log( "random dice value", dice_value );
 
             board.insertAdjacentHTML('beforeend', `
-                <div class="dice" id="dice" data-value="${dice_value}" style="top: -50px; left: -50px;">
-                </div>
+                <div class="dice" id="dice" data-value="${dice_value}" style="top: -50px; left: -50px;"></div>
             `);
 
             document.getElementById('dice').addEventListener('click', event => this.onClickDice(event));
@@ -135,8 +132,7 @@ function (dojo, declare) {
                 // Create token
                 board.insertAdjacentHTML('beforeend', `
                     <div class="token_wrapper" id="token_${token.color}">
-                        <div class="token" data-color="${token.color}"">
-                        </div>
+                        <div class="token" data-color="${token.color}""></div>
                     </div>
                 `);
             });
