@@ -75,6 +75,7 @@
     width: 18px;
     height: 18px;
     display: block;
+    /*outline: 1px solid orange;*/
 }
 .token {
     width: 32px;

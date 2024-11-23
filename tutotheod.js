@@ -126,10 +126,10 @@ function (dojo, declare) {
             
             // Set up your game interface here, according to "gamedatas"
 
-
             // DEBUG
             console.log( "gamedatas.tokens", Object.values(gamedatas.tokens) );
 
+            // Create tokens
             Object.values(gamedatas.tokens).forEach(token => {
 
                 // Create token
@@ -139,6 +139,10 @@ function (dojo, declare) {
                         </div>
                     </div>
                 `);
+            });
+
+            // Place tokens
+            Object.values(gamedatas.tokens).forEach(token => {
 
                 // Animate token from player board to a square slot
                 this.placeOnObject( `token_${token.color}`, 'overall_player_board_'+this.player_id );
