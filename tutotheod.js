@@ -77,15 +77,15 @@ function (dojo, declare) {
 
                     board.insertAdjacentHTML(`beforeend`, `
                         <div id="square_${ids[x][y]}" class="square">
-                            <div class="slot"></div>
-                            <div class="slot"></div>
-                            <div class="slot"></div>
-                            <div class="slot"></div>
-                            <div class="slot"></div>
-                            <div class="slot"></div>
-                            <div class="slot"></div>
-                            <div class="slot"></div>
-                            <div class="slot"></div>
+                            <div id="square_${ids[x][y]}_slot_1" class="slot"></div>
+                            <div id="square_${ids[x][y]}_slot_2" class="slot"></div>
+                            <div id="square_${ids[x][y]}_slot_3" class="slot"></div>
+                            <div id="square_${ids[x][y]}_slot_4" class="slot"></div>
+                            <div id="square_${ids[x][y]}_slot_5" class="slot"></div>
+                            <div id="square_${ids[x][y]}_slot_6" class="slot"></div>
+                            <div id="square_${ids[x][y]}_slot_7" class="slot"></div>
+                            <div id="square_${ids[x][y]}_slot_8" class="slot"></div>
+                            <div id="square_${ids[x][y]}_slot_9" class="slot"></div>
                         </div>
                     `);
                 }
@@ -141,8 +141,8 @@ function (dojo, declare) {
                 `);
 
                 // Animate token from player board to a square slot
-                this.placeOnObject( `token_${token.color}`, 'overall_player_board_'+player );
-                this.placeTokenOnSquareSlot( token.color, token.square, token.slot );
+                this.placeOnObject( `token_${token.color}`, 'overall_player_board_'+this.player_id );
+                this.slideTokenToSquareSlot( token.color, token.square, token.slot );
             });
 
             // Setup game notifications to handle (see "setupNotifications" method below)
@@ -174,7 +174,7 @@ function (dojo, declare) {
                     // Update tokens position
                     for (const [key, token] of Object.entries(args.args.tokens)) {
 
-                        this.placeTokenOnSquareSlot( token.color, token.square, token.slot );
+                        this.slideTokenToSquareSlot( token.color, token.square, token.slot );
                     }
 
                     break;
@@ -235,7 +235,7 @@ function (dojo, declare) {
             return this.gamedatas.players[this.getActivePlayerId()].color;
         },
 
-        placeTokenOnSquareSlot: function( color, square, slot )
+        slideTokenToSquareSlot: function( color, square, slot )
         {
             /* Tokens are placed over square's slots like this:
                 
@@ -247,12 +247,7 @@ function (dojo, declare) {
                 The first arriving token is always stored on central slot (5) 
                 while others are stored around starting from the upper left slot (1).
             */
-            console.log( 'putTokenOnSquare:', color, square );
-
-            var token = document.getElementById('token_'+color);
-            var square_slot = document.getElementById('square_'+square).children[slot];
-
-            this.slideToObject( token, square_slot ).play();
+            this.slideToObject( `token_${color}`, `square_${square}_slot${slot}` ).play();
         },
 
         highligthActivePlayerToken: function()
