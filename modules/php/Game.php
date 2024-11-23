@@ -200,10 +200,10 @@ class Game extends \Table
      * @see ./states.inc.php
      */
 
-    public function stReturnDie(): void 
+    public function stRoundSetup(): void 
     {
         // DEBUG
-        $this->dump('DEBUG: stReturnDie', 1);
+        $this->dump('DEBUG: stRoundSetup', 1);
 
         $this->gamestate->nextState("playerTurn");
     }
