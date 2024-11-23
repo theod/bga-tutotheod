@@ -196,7 +196,7 @@ class Game extends \Table
 
     public function stReturnDie(): void 
     {
-        $this->gamestate->nextState("returnDie");
+        $this->gamestate->nextState("playerTurn");
     }
 
     public function stNewSquare(): void 

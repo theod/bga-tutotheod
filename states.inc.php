@@ -64,7 +64,7 @@ $machinestates = [
         "description" => clienttranslate("Game setup"),
         "type" => "manager",
         "action" => "stGameSetup",
-        "transitions" => ["newRound" => ST_ROUND_SETUP]
+        "transitions" => ["" => ST_ROUND_SETUP]
     ),
 
     // Note: ID=2 => your first state
@@ -76,7 +76,7 @@ $machinestates = [
         "type" => "game",
         "args" => "argRoundSetup",
         "action" => "stReturnDie",
-        "transitions" => ["returnDie" => ST_PLAYER_TURN]
+        "transitions" => ["playerTurn" => ST_PLAYER_TURN]
     ],
 
     ST_PLAYER_TURN => [
