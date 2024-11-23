@@ -251,6 +251,7 @@ function (dojo, declare) {
                 The first arriving token is always stored on central slot (5) 
                 while others are stored around starting from the upper left slot (1).
             */
+            console.log( 'slideTokenToSquareSlot:', color, square, slot);
             this.slideToObject( `token_${color}`, `square_${square}_slot_${slot}` ).play();
         },
 
