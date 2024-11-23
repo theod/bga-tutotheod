@@ -76,7 +76,7 @@ $machinestates = [
         "type" => "game",
         "args" => "argRoundSetup",
         "action" => "stReturnDie",
-        "transitions" => ["newSquare" => ST_NEW_SQUARE] // <- TEST, this is what is expected: ["playerTurn" => ST_PLAYER_TURN]
+        "transitions" => ["playerTurn" => ST_PLAYER_TURN]
     ],
 
     ST_PLAYER_TURN => [

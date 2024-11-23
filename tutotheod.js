@@ -230,6 +230,9 @@ function (dojo, declare) {
                 {
                  case 'playerTurn':    
 
+                    // TEST
+                    this.addActionButton('actRoudSetup-btn', _('Setup round'), () => this.bgaPerformAction("stReturnDie"), null, null, 'gray'); 
+                    
                     this.addActionButton('actThrowDie-btn', _('Throw die'), () => this.bgaPerformAction("actThrowDie"), null, null, 'gray'); 
                     this.addActionButton('actEndTurn-btn', _('End turn'), () => this.bgaPerformAction("actEndTurn"), null, null, 'gray'); 
                     break;
