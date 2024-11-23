@@ -205,7 +205,9 @@ class Game extends \Table
         // DEBUG
         $this->dump('DEBUG: stReturnDie', 1);
 
-        $this->gamestate->nextState("playerTurn");
+        // TEST
+        $this->gamestate->nextState("newSquare");
+        //$this->gamestate->nextState("playerTurn");
     }
 
     public function stNewSquare(): void 
