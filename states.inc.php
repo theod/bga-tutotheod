@@ -75,8 +75,8 @@ $machinestates = [
         "descriptionmyturn" => clienttranslate('All players put their token on Candidature square.'),
         "type" => "game",
         "args" => "argRoundSetup",
-        "action" => "stReturnDie",
-        "transitions" => ["playerTurn" => ST_PLAYER_TURN]
+        "action" => "stRoundSetup",
+        "transitions" => ["returnDie" => ST_PLAYER_TURN]
     ],
 
     ST_PLAYER_TURN => [
