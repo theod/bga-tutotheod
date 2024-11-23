@@ -74,7 +74,7 @@
 .slot {
     width: 18px;
     height: 18px;
-    display: contents;
+    display: block;
 }
 .token {
     width: 32px;
