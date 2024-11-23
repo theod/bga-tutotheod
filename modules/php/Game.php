@@ -151,6 +151,9 @@ class Game extends \Table
 
     public function argRoundSetup(): array
     {
+        // DEBUG
+        $this->dump('DEBUG: argRoundSetup');
+
         // Share tokens positions
         return [
             "tokens" => $this->getCollectionFromDb(
@@ -161,6 +164,9 @@ class Game extends \Table
 
     public function argNewSquare(): array
     {
+        // DEBUG
+        $this->dump('DEBUG: argNewSquare');
+        
         // Share tokens positions
         return [
             "tokens" => $this->getCollectionFromDb(
@@ -196,6 +202,9 @@ class Game extends \Table
 
     public function stReturnDie(): void 
     {
+        // DEBUG
+        $this->dump('DEBUG: stReturnDie');
+
         $this->gamestate->nextState("playerTurn");
     }
 
