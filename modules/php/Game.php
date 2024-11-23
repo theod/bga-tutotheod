@@ -94,31 +94,31 @@ class Game extends \Table
     }
     */
 
-    public function actThrowDice(): void
+    public function actThrowDie(): void
     {
         // Retrieve the active player ID.
         $player_id = (int)$this->getActivePlayerId();
         $player_color = $this->getActivePlayerColor();
 
         // Get safe random value
-        $dice_value = $this->getRandomValue([1, 2, 3, 4, 5, 6]);
+        $die_value = $this->getRandomValue([1, 2, 3, 4, 5, 6]);
 
         // Move player token
-        $this->moveToken($player_color, $dice_value);
+        $this->moveToken($player_color, $die_value);
 
         // Adapt notification message
-        if ($dice_value > 1) {
-            $message = '${player_name} moves his token ${dice_value} square';
+        if ($die_value > 1) {
+            $message = '${player_name} moves his token ${die_value} square';
         }
         else {
-            $message = '${player_name} moves his token ${dice_value} squares';
+            $message = '${player_name} moves his token ${die_value} squares';
         }
 
         // Notify all players about the move
         $this->notifyAllPlayers("moveToken", clienttranslate($message), [
             "player_id" => $player_id,
             "player_name" => $this->getActivePlayerName(),
-            "dice_value" => $dice_value
+            "die_value" => $die_value
         ]);
 
         // Go to the next state
@@ -143,17 +143,19 @@ class Game extends \Table
     /**
      * Game state arguments.
      *
-     * This method returns some additional information that is very specific to specific game state.
+     * Those methods return some additional information that is very specific to specific game state.
      *
      * @return array
      * @see ./states.inc.php
      */
-    public function argPlayerTurn(): array
-    {
-        // Share some values of the current game situation from the database.
 
+    public function argRoundSetup(): array
+    {
+        // Share tokens positions
         return [
-            //"someValue" => $this->getSomeValue()
+            "tokens" => $this->getCollectionFromDb(
+                            "SELECT `token_color` `color`, `square_id` `square`, `slot_id` `slot` FROM `tokens`"
+                        )
         ];
     }
 
@@ -185,35 +187,46 @@ class Game extends \Table
     }
 
     /**
-     * Game state action.
+     * Game state actions.
      *
-     * The action method of state `newSquare` is called everytime the current game state is set to `newSquare`.
+     * The action methods are called everytime the related game state is set.
+     * 
+     * @see ./states.inc.php
      */
+
+    public function stReturnDie(): void 
+    {
+        $this->gamestate->nextState("playerTurn");
+    }
+
     public function stNewSquare(): void 
     {
-        // Go to another gamestate
-        // Here, we would detect if the game is over, and in this case use "endGame" transition instead 
         $this->gamestate->nextState("nextPlayer");
     }
 
-    /**
-     * Game state action, example content.
-     *
-     * The action method of state `nextPlayer` is called everytime the current game state is set to `nextPlayer`.
-     */
     public function stNextPlayer(): void 
     {
         // Retrieve the active player ID.
         $player_id = (int)$this->getActivePlayerId();
 
-        // Give some extra time to the active player when he completed an action
-        $this->giveExtraTime($player_id);
-        
-        $this->activeNextPlayer();
+        // Does the player wins?
+        $square_id = (int)$this->getActivePlayerSquareId();
 
-        // Go to another gamestate
-        // Here, we would detect if the game is over, and in this case use "endGame" transition instead 
-        $this->gamestate->nextState("nextPlayer");
+        if ($square_id == 32) {
+
+            $this->gamestate->nextState("endGame");
+        }
+        else {
+
+            // Give some extra time to the active player when he completed an action
+            $this->giveExtraTime($player_id);
+            
+            $this->activeNextPlayer();
+
+            // Go to another gamestate
+            // Here, we would detect if the game is over, and in this case use "endGame" transition instead 
+            $this->gamestate->nextState("nextPlayer");
+        }
     }
 
     /**
@@ -394,8 +407,8 @@ class Game extends \Table
        else
            return null;
    }
-   /*
-   function getActivePlayerSquareId() {
+   
+    function getActivePlayerSquareId() {
 
         $token_color = $this->getActivePlayerColor();
 
@@ -403,7 +416,7 @@ class Game extends \Table
             "SELECT square_id FROM tokens WHERE token_color = '$token_color'"
         );
    }
-    */
+    
     function moveToken( $token_color, $squares_number ) {
 
         // Get square where the token is

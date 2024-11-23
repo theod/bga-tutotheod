@@ -55,7 +55,7 @@ function (dojo, declare) {
                 <div id="board"></div>
             `);
 
-            // Create squares with a 9 slots grid inside
+            // Create 36 squares with a 9 slots grid inside
             const board = document.getElementById('board');
             const size = 64;
             const ids = [
@@ -80,6 +80,12 @@ function (dojo, declare) {
 
                     const square = document.getElementById(`square_${ids[x][y]}`);
 
+                    /* Slots are ordered like this:
+                
+                            1 2 3
+                            4 5 6
+                            7 8 9
+                    */
                     for (let s=1; s<=9; s++) {
 
                         square.insertAdjacentHTML(`beforeend`, `
@@ -89,18 +95,18 @@ function (dojo, declare) {
                 }
             }
 
-            // Create dice
-            //var dice_x = Math.floor(Math.random() * 6) + 1;
-            var dice_value = Math.floor(Math.random() * 6) + 1;
+            // Create die
+            //var die_x = Math.floor(Math.random() * 6) + 1;
+            var die_value = Math.floor(Math.random() * 6) + 1;
 
             // DEBUG
-            console.log( "random dice value", dice_value );
+            console.log( "random die value", die_value );
 
             board.insertAdjacentHTML('beforeend', `
-                <div class="dice" id="dice" data-value="${dice_value}" style="top: -50px; left: -50px;"></div>
+                <div class="die" id="die" data-value="${die_value}" style="top: -50px; left: -50px;"></div>
             `);
 
-            document.getElementById('dice').addEventListener('click', event => this.onClickDice(event));
+            document.getElementById('die').addEventListener('click', event => this.onClickDie(event));
             
             // Setting up player boards
             /*
@@ -135,14 +141,9 @@ function (dojo, declare) {
                         <div class="token" data-color="${token.color}""></div>
                     </div>
                 `);
-            });
 
-            // Place tokens
-            Object.values(gamedatas.tokens).forEach(token => {
-
-                // Animate token from player board to a square slot
+                // Place token on player board
                 this.placeOnObject( `token_${token.color}`, 'overall_player_board_'+this.player_id );
-                this.slideTokenToSquareSlot( token.color, token.square, token.slot );
             });
 
             // Setup game notifications to handle (see "setupNotifications" method below)
@@ -164,6 +165,15 @@ function (dojo, declare) {
             
             switch( stateName )
             {
+                case 'roundSetup':
+
+                    // Update tokens position
+                    for (const [key, token] of Object.entries(args.args.tokens)) {
+
+                        this.slideTokenToSquareSlot( token.color, token.square, token.slot );
+                    }
+                    break;
+
                 case 'playerTurn':
 
                     //this.highligthActivePlayerToken();
@@ -220,7 +230,7 @@ function (dojo, declare) {
                 {
                  case 'playerTurn':    
 
-                    this.addActionButton('actThrowDice-btn', _('Throw dice'), () => this.bgaPerformAction("actThrowDice"), null, null, 'gray'); 
+                    this.addActionButton('actThrowDie-btn', _('Throw die'), () => this.bgaPerformAction("actThrowDie"), null, null, 'gray'); 
                     this.addActionButton('actEndTurn-btn', _('End turn'), () => this.bgaPerformAction("actEndTurn"), null, null, 'gray'); 
                     break;
                 }
@@ -280,15 +290,15 @@ function (dojo, declare) {
         
         */
 
-        onClickDice: function( event )
+        onClickDie: function( event )
         {
-            console.log( 'onClickDice', event );
+            console.log( 'onClickDie', event );
 
             // Stop this event propagation
             event.preventDefault();
             event.stopPropagation();
 
-            this.bgaPerformAction("actThrowDice");
+            this.bgaPerformAction("actThrowDie");
         },    
 
         
