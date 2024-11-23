@@ -196,12 +196,13 @@ class Game extends \Table
 
     public function stRoundSetup(): void 
     {
-        // BUG? This first state seems to never 'onEnteringState' of interface.
+        // BUG? This first state is called before JS interface 'setup' function 
+        // and so the 'onEnteringState' function is never called.
 
-        // TEST: Simulate player wins the last round => he starts on square 5
-        $this->DbQuery( 
-            "UPDATE tokens SET square_id = 5, slot_id = 5 WHERE token_color = '86D1F5'"
-        );
+        // TODO: if a player wins the last round => he starts on square 5
+        // $this->DbQuery( 
+        //     "UPDATE tokens SET square_id = 5, slot_id = 5 WHERE token_color = '$winner_id'"
+        // );
 
         $this->gamestate->nextState("returnDie");
     }
