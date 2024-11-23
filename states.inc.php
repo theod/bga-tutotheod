@@ -72,9 +72,7 @@ $machinestates = [
     ST_ROUND_SETUP => [
         "name" => "roundSetup",
         "description" => clienttranslate('All players put their token on Candidature square.'),
-        "descriptionmyturn" => clienttranslate('All players put their token on Candidature square.'),
         "type" => "game",
-        "args" => "argRoundSetup",
         "action" => "stRoundSetup",
         "transitions" => ["returnDie" => ST_PLAYER_TURN]
     ],
@@ -84,6 +82,7 @@ $machinestates = [
         "description" => clienttranslate('${actplayer} must throw the die'),
         "descriptionmyturn" => clienttranslate('${you} must throw the die'),
         "type" => "activeplayer",
+        "args" => "argPlayerTurn",
         "possibleactions" => [
             "actThrowDie",
             "actEndTurn"
@@ -94,7 +93,6 @@ $machinestates = [
     ST_NEW_SQUARE => [
         "name" => "newSquare",
         "description" => clienttranslate('${actplayer} is on a new square'),
-        "descriptionmyturn" => clienttranslate('${you} are on a new square'),
         "type" => "game",
         "args" => "argNewSquare",
         "action" => "stNewSquare",

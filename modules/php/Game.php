@@ -149,7 +149,7 @@ class Game extends \Table
      * @see ./states.inc.php
      */
 
-    public function argRoundSetup(): array
+    public function argPlayerTurn(): array
     {
         // Share tokens positions
         return [

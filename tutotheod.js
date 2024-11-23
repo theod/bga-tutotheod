@@ -165,7 +165,7 @@ function (dojo, declare) {
             
             switch( stateName )
             {
-                case 'roundSetup':
+                case 'playerTurn':
 
                     // Update tokens position
                     for (const [key, token] of Object.entries(args.args.tokens)) {
@@ -173,8 +173,6 @@ function (dojo, declare) {
                         this.slideTokenToSquareSlot( token.color, token.square, token.slot );
                     }
                     break;
-
-                case 'playerTurn':
 
                     //this.highligthActivePlayerToken();
                     break;
