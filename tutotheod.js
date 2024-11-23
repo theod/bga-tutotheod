@@ -143,7 +143,7 @@ function (dojo, declare) {
                 `);
 
                 // Place token on player board
-                //this.placeOnObject( `token_${token.color}`, 'overall_player_board_'+this.player_id );
+                this.placeOnObject( `token_${token.color}`, 'overall_player_board_'+this.player_id );
             });
 
             // Setup game notifications to handle (see "setupNotifications" method below)
