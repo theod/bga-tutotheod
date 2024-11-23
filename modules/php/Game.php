@@ -441,7 +441,7 @@ class Game extends \Table
 
         // How many tokens are already in the new square
         $tokens_count = (int)$this->getUniqueValueFromDB(
-            "SELECT COUNT token_color FROM tokens WHERE square_id = '$new_square_id'"
+            "SELECT COUNT(token_color) FROM tokens WHERE square_id = '$new_square_id'"
         );
 
         $new_slot_id = $square_slots_id[ $tokens_count ];
