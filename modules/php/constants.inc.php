@@ -5,7 +5,8 @@
  */
 const ST_BGA_GAME_SETUP = 1;
 
-const ST_ROUND_SETUP = 9;
+const ST_ROUND_SETUP = 2;
+
 const ST_PLAYER_TURN = 10;
 const ST_NEW_SQUARE = 11;
 const ST_NEXT_PLAYER = 12;
