@@ -223,9 +223,6 @@ function (dojo, declare) {
         onUpdateActionButtons: function( stateName, args )
         {
             console.log( 'onUpdateActionButtons: '+stateName, args );
-                      
-            //Crash to get trace
-            var i = k;
 
             if( this.isCurrentPlayerActive() )
             {            
