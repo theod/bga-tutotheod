@@ -80,7 +80,7 @@ function (dojo, declare) {
 
                     const square = document.getElementById(`square_${ids[x][y]}`);
 
-                    for (let s=0; s<9; s++) {
+                    for (let s=1; s<=9; s++) {
 
                         square.insertAdjacentHTML(`beforeend`, `
                             <div id="square_${ids[x][y]}_slot_${s}" class="slot"></div>
