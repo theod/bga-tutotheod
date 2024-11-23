@@ -154,7 +154,7 @@ function (dojo, declare) {
        
 
         ///////////////////////////////////////////////////
-        //// Game & client states
+        //// Game & client states 
         
         // onEnteringState: this method is called each time we are entering into a new game state.
         //                  You can use this method to perform some user interface changes at this moment.
