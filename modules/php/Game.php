@@ -216,7 +216,7 @@ class Game extends \Table
         $player_color = $this->getActivePlayerColor();
         $square_id = (int)$this->getActivePlayerSquareId();
         
-        // Should the token move back one square?
+        // Does the token move back one square?
         $move_back_one_square_ids = array(9, 30, 29);
 
         if (in_array($square_id, $move_back_one_square_ids)) {
@@ -232,7 +232,7 @@ class Game extends \Table
 
             $this->gamestate->nextState("moveTokenBack");
         }
-        // Should the token move back two square?
+        // Does the token move back two square?
         elseif ($square_id == 25) {
 
             // Move player token
@@ -246,7 +246,7 @@ class Game extends \Table
 
             $this->gamestate->nextState("moveTokenBack");
         }
-        // Should the token goes to far?
+        // Does the token has moved too far?
         elseif ($square_id > 32){
 
             // Move player token
@@ -256,11 +256,13 @@ class Game extends \Table
             $this->updateTokenPosition($player_color, $move_back);
 
             // Notify all players about the move
-            $this->notifyAllPlayers("moveBackTwoSquare", clienttranslate('${player_name} token have to move back ${move_back} squares'), [
+            $this->notifyAllPlayers("moveBackNSquare", clienttranslate('${player_name} token have to move back ${move_back} squares'), [
                 "player_id" => $player_id,
                 "player_name" => $this->getActivePlayerName(),
                 "move_back" => $move_back
             ]);
+
+            $this->gamestate->nextState("moveTokenBack");
         }
         else {
 
