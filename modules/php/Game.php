@@ -225,7 +225,7 @@ class Game extends \Table
             $this->updateTokenPosition($player_color, -1);
 
             // Notify all players about the move
-            $this->notifyAllPlayers("moveBackOneSquare", clienttranslate('${player_name} token have to move back one square'), [
+            $this->notifyAllPlayers("moveBackOneSquare", clienttranslate('${player_name} token have to move back 2 square'), [
                 "player_id" => $player_id,
                 "player_name" => $this->getActivePlayerName()
             ]);
@@ -239,12 +239,28 @@ class Game extends \Table
             $this->updateTokenPosition($player_color, -2);
 
             // Notify all players about the move
-            $this->notifyAllPlayers("moveBackTwoSquare", clienttranslate('${player_name} token have to move back two squares'), [
+            $this->notifyAllPlayers("moveBackTwoSquare", clienttranslate('${player_name} token have to move back 2 squares'), [
                 "player_id" => $player_id,
                 "player_name" => $this->getActivePlayerName()
             ]);
 
             $this->gamestate->nextState("moveTokenBack");
+        }
+        // Should the token goes to far?
+        elseif ($new_square_id > 32){
+
+            // Move player token
+            $move_back = 32 - $new_square_id;
+
+            // Move player token
+            $this->updateTokenPosition($player_color, $move_back);
+
+            // Notify all players about the move
+            $this->notifyAllPlayers("moveBackTwoSquare", clienttranslate('${player_name} token have to move back ${move_back} squares'), [
+                "player_id" => $player_id,
+                "player_name" => $this->getActivePlayerName(),
+                "moveback" => $move_back
+            ]);
         }
         else {
 
@@ -436,7 +452,7 @@ class Game extends \Table
                 $slot_id = $square_slots_id[$i];
 
                 // TODO: Check if a player is the last President
-                $sql_values[] = "('$player_color',23,'$slot_id',99)"; // 23 for test. Set 0.
+                $sql_values[] = "('$player_color',28,'$slot_id',99)"; // 23 for test. Set 0.
             }
 
             $sql .= implode( ',', $sql_values );
@@ -483,16 +499,10 @@ class Game extends \Table
         $new_square_id = $last_square_id + $squares_number;
 
         // Constrain square id above 0
+        // NOTE: Don't constrain below 32 here. It is done during token movement.
         if ($new_square_id < 0) {
 
             $new_square_id = 0;
-        }
-
-        // Move token back when it goes too far
-        // TODO: Notify about this
-        elseif ($new_square_id > 32) {
-
-            $new_square_id = 32 - ($new_square_id - 32);
         }
 
         /* Tokens are placed over square's slots like this:
