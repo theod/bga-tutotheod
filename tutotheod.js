@@ -22,13 +22,17 @@ define([
 ],
 function (dojo, declare) {
     return declare("bgagame.tutotheod", ebg.core.gamegui, {
-        constructor: function(){
+
+        /*
+            constructor:
+            
+            Init global variables of user interface
+        */
+        constructor: function()
+        {
             console.log('tutotheod constructor');
               
-            // Here, you can init the global variables of your user interface
-            // Example:
-            // this.myGlobalValue = 0;
-
+            //this.myGlobalValue = 0;
         },
         
         /*
@@ -136,7 +140,7 @@ function (dojo, declare) {
             Object.values(gamedatas.tokens).forEach(token => {
 
                 // Create token
-                board.insertAdjacentHTML('beforeend', `
+                dojo.place(`
                     <div class="token_wrapper" id="token_${token.color}">
                         <div class="token" data-color="${token.color}""></div>
                     </div>
