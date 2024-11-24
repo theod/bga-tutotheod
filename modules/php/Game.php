@@ -164,7 +164,7 @@ class Game extends \Table
         // Share tokens positions
         return [
             "tokens" => $this->getCollectionFromDb(
-                            "SELECT `token_color` `color`, `square_id` `square`, `slot_id` `slot` FROM `tokens`"
+                            "SELECT `token_color` `color`, `square_id` `square`, `slot_id` `slot` FROM `tokens` WHERE square_id != last_square_id"
                         )
         ];
     }
@@ -335,7 +335,7 @@ class Game extends \Table
 
         // Get players position
         $result['tokens'] = $this->getCollectionFromDb(
-            "SELECT `token_color` `color`, `square_id` `square`, `slot_id` `slot` FROM `tokens`"
+            "SELECT `token_color` `color`, `square_id` `square`, `slot_id` `slot`, 'last_square_id' `last` FROM `tokens`"
         );
 
         return $result;
@@ -432,7 +432,7 @@ class Game extends \Table
                 $slot_id = $square_slots_id[$i];
 
                 // TODO: Check if a player is the last President
-                $sql_values[] = "('$player_color',23,'$slot_id')"; // 23 for test
+                $sql_values[] = "('$player_color',23,'$slot_id',23)"; // 23 for test. Set 0.
             }
 
             $sql .= implode( ',', $sql_values );
@@ -471,12 +471,12 @@ class Game extends \Table
     function updateTokenPosition( $token_color, $squares_number ) {
 
         // Get square where the token is
-        $square_id = (int)$this->getUniqueValueFromDB(
+        $last_square_id = (int)$this->getUniqueValueFromDB(
             "SELECT square_id FROM tokens WHERE token_color = '$token_color'"
         );
 
         // Add squares number to get new square where to go
-        $new_square_id = $square_id + $squares_number;
+        $new_square_id = $last_square_id + $squares_number;
 
         // Constrain square id above 0
         if ($new_square_id < 0) {
@@ -512,7 +512,7 @@ class Game extends \Table
 
         // Update token's square and slot
         $this->DbQuery( 
-            "UPDATE tokens SET square_id = '$new_square_id', slot_id = '$new_slot_id' WHERE token_color = '$token_color'"
+            "UPDATE tokens SET square_id = '$new_square_id', slot_id = '$new_slot_id', last_square_id = $last_square_id WHERE token_color = '$token_color'"
         );
    }
 
