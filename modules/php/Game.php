@@ -209,6 +209,9 @@ class Game extends \Table
 
     public function stNewSquare(): void 
     {
+        // Wait for interface to update
+        sleep(1);
+
         // Retrieve the active player ID, color and square
         $player_id = (int)$this->getActivePlayerId();
         $player_color = $this->getActivePlayerColor();
