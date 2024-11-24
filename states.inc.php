@@ -104,7 +104,7 @@ $machinestates = [
         "description" => clienttranslate('${actplayer} token movement is done'),
         "type" => "game",
         "action" => "stEndOfMove",
-        "transitions" => ["nextPlayer" => ST_NEXT_PLAYER]
+        "transitions" => ["playAgain" => ST_PLAYER_TURN]
     ],
 
     ST_NEXT_PLAYER => [
@@ -113,7 +113,20 @@ $machinestates = [
         "type" => "game",
         "action" => "stNextPlayer",
         "updateGameProgression" => true,
-        "transitions" => ["endGame" => ST_END_GAME, "nextPlayer" => ST_PLAYER_TURN]
+        "transitions" => ["playerWin" => ST_END_ROUND, "nextPlayer" => ST_PLAYER_TURN]
+    ],
+
+    ST_END_ROUND => [
+        "name" => "endRound",
+        "description" => clienttranslate('${actplayer} must decide to continue or end the game'),
+        "descriptionmyturn" => clienttranslate('${you} must decide to continue or end the game'),
+        "type" => "activeplayer",
+        "args" => "argEndRound",
+        "possibleactions" => [
+            "actContinue",
+            "actEndGame"
+        ],
+        "transitions" => ["newRound" => ST_ROUND_SETUP, "endGame" => ST_END_GAME]
     ],
 
     // Final state.

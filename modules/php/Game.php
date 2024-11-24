@@ -140,6 +140,36 @@ class Game extends \Table
         $this->gamestate->nextState("nextPlayer");
     }
 
+    public function actContinue(): void
+    {
+        // Retrieve the active player ID and color
+        $player_id = (int)$this->getActivePlayerId();
+
+        // Notify all players about the choice to end turn.
+        $this->notifyAllPlayers("newRound", clienttranslate('${player_name} decides to continue'), [
+            "player_id" => $player_id,
+            "player_name" => $this->getActivePlayerName(),
+        ]);
+
+        // At the end of the action, move to the next state
+        $this->gamestate->nextState("newRound");
+    }
+
+    public function actEndGame(): void
+    {
+        // Retrieve the active player ID and color
+        $player_id = (int)$this->getActivePlayerId();
+
+        // Notify all players about the choice to end turn.
+        $this->notifyAllPlayers("endGame", clienttranslate('${player_name} decides to end the game'), [
+            "player_id" => $player_id,
+            "player_name" => $this->getActivePlayerName(),
+        ]);
+
+        // At the end of the action, move to the next state
+        $this->gamestate->nextState("endGame");
+    }
+
     /**
      * Game state arguments.
      *
@@ -253,7 +283,7 @@ class Game extends \Table
 
         if ($square_id == 32) {
 
-            $this->gamestate->nextState("endGame");
+            $this->gamestate->nextState("playerWin");
         }
         else {
 

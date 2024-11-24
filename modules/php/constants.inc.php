@@ -12,6 +12,8 @@ const ST_MOVE_TOKEN = 11;
 const ST_END_OF_MOVE = 12;
 const ST_NEXT_PLAYER = 13;
 
+const ST_END_ROUND = 90
+
 const ST_END_GAME = 99;
 
 ?>

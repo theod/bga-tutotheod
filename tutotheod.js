@@ -246,6 +246,13 @@ function (dojo, declare, fx) {
                     this.addActionButton('actEndTurn-btn', _('End turn'), () => this.bgaPerformAction("actEndTurn"), null, null, 'gray'); 
                     break;
                 }
+
+            case 'endRound':    
+
+                    this.addActionButton('actContinue-btn', _('Continue'), () => this.bgaPerformAction("actContinue"), null, null, 'gray'); 
+                    this.addActionButton('actEndGame-btn', _('End game'), () => this.bgaPerformAction("actEndGame"), null, null, 'gray'); 
+                    break;
+                }
             }
         },        
 
