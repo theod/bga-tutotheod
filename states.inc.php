@@ -96,7 +96,15 @@ $machinestates = [
         "type" => "game",
         "args" => "argMoveToken",
         "action" => "stMoveToken",
-        "transitions" => ["moveTokenBack" => ST_MOVE_TOKEN, "nextPlayer" => ST_NEXT_PLAYER]
+        "transitions" => ["moveTokenBack" => ST_MOVE_TOKEN, "endOfMove" => ST_END_OF_MOVE]
+    ],
+
+    ST_END_OF_MOVE => [
+        "name" => "endOfMove",
+        "description" => clienttranslate('${actplayer} token movement is done'),
+        "type" => "game",
+        "action" => "stEndOfMove",
+        "transitions" => ["nextPlayer" => ST_NEXT_PLAYER]
     ],
 
     ST_NEXT_PLAYER => [

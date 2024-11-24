@@ -246,8 +246,13 @@ class Game extends \Table
         }
         else {
 
-            $this->gamestate->nextState("nextPlayer");
+            $this->gamestate->nextState("endOfMove");
         }
+    }
+
+    public function stMoveToken(): void 
+    {
+        $this->gamestate->nextState("nextPlayer");
     }
 
     public function stNextPlayer(): void 

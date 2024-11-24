@@ -186,6 +186,10 @@ function (dojo, declare) {
                     }
 
                     break;
+
+                case 'endOfMove':
+
+                    break;
             }
         },
 
