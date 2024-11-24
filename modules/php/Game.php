@@ -104,7 +104,7 @@ class Game extends \Table
         $die_value = $this->getRandomValue([1, 2, 3, 4, 5, 6]);
 
         // Move token in database
-        $this->updateMoveInDatabase($player_color, $die_value);
+        $this->validateMove($player_color, $die_value);
 
         // Adapt notification message
         if ($die_value > 1) {
@@ -410,7 +410,7 @@ class Game extends \Table
             $sql_values = array();
 
             $players_id = array_keys($players);
-            $square_slots_id = [5, 1, 3, 7, 9]; // Cf comment into "updateMoveInDatabase" function below
+            $square_slots_id = [5, 1, 3, 7, 9]; // Cf comment into "validateMove" function below
 
             for( $i=0; $i<count($players_id); $i++ )
             {
@@ -463,7 +463,7 @@ class Game extends \Table
         );
    }
     
-    function updateMoveInDatabase( $token_color, $squares_number ) {
+    function validateMove( $token_color, $squares_number ) {
 
         // Get square where the token is
         $last_square_id = (int)$this->getUniqueValueFromDB(
@@ -484,17 +484,17 @@ class Game extends \Table
         $move_back = 0;
 
         // Does the token move back one square?
-        if (in_array($square_id, $move_back_one_square_ids)) {
+        if (in_array($new_square_id, $move_back_one_square_ids)) {
 
             $move_back = -1;
         }
         // Does the token move back two square?
-        elseif ($square_id == 25) {
+        elseif ($new_square_id == 25) {
 
             $move_back = -2;
         }
         // Does the token has moved too far?
-        elseif ($square_id > 32){
+        elseif ($new_square_id > 32){
 
             $move_back = 32 - $new_square_id;
             $new_square_id = 32;
