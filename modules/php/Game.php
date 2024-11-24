@@ -259,7 +259,7 @@ class Game extends \Table
             $this->notifyAllPlayers("moveBackNSquare", clienttranslate('${player_name} token have to move back ${move_back} squares'), [
                 "player_id" => $player_id,
                 "player_name" => $this->getActivePlayerName(),
-                "move_back" => $move_back
+                "move_back" => $move_back / 2
             ]);
 
             $this->gamestate->nextState("moveTokenBack");
