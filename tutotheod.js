@@ -240,14 +240,13 @@ function (dojo, declare, fx) {
             {            
                 switch( stateName )
                 {
-                 case 'playerTurn':    
+                case 'playerTurn':    
 
                     this.addActionButton('actThrowDie-btn', _('Throw die'), () => this.bgaPerformAction("actThrowDie"), null, null, 'gray'); 
                     this.addActionButton('actEndTurn-btn', _('End turn'), () => this.bgaPerformAction("actEndTurn"), null, null, 'gray'); 
                     break;
-                }
-
-            case 'endRound':    
+ 
+                case 'endRound':
 
                     this.addActionButton('actContinue-btn', _('Continue'), () => this.bgaPerformAction("actContinue"), null, null, 'gray'); 
                     this.addActionButton('actEndGame-btn', _('End game'), () => this.bgaPerformAction("actEndGame"), null, null, 'gray'); 
