@@ -186,7 +186,9 @@ function (dojo, declare) {
                     // Update tokens position
                     for (const [key, token] of Object.entries(args.args.tokens)) {
 
-                        this.slideTokenToSquareSlot( token.color, token.square, token.slot );
+                        var a = this.slideTokenToSquareSlot( token.color, token.square, token.slot );
+                    
+                        console.log( token.color+' animation: ', a );
                     }
 
                     break;
