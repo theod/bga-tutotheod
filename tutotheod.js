@@ -194,15 +194,15 @@ function (dojo, declare, fx) {
                 case 'endOfMove':
 
                     console.log( 'Animation chain ('+this.animationChain.length+')', this.animationChain );
-                    var animationChainCopy = [];
-
-                    for (let a=0; a<this.animationChain.length; a++) {
-
-                        animationChainCopy.push( this.animationChain.pop() );
-                    }
-
+ 
                     // Play all token movements one by one
-                    fx.chain( this.animationChainCopy ).play();
+                    fx.chain( this.animationChain ).play();
+
+                    // Clear animation chain
+                    while (this.animationChain.length > 0) {
+
+                        this.animationChain.pop();
+                    }
 
                     break;
             }
