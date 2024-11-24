@@ -516,7 +516,7 @@ class Game extends \Table
 
         // Update token's square and slot
         $this->DbQuery( 
-            "UPDATE tokens SET square_id = '$new_square_id', slot_id = '$new_slot_id', last_square_id = $last_square_id WHERE token_color = '$token_color'"
+            "UPDATE tokens SET square_id = '$new_square_id', slot_id = '$new_slot_id', last_square_id = '$last_square_id' WHERE token_color = '$token_color'"
         );
    }
 
