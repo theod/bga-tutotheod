@@ -250,7 +250,7 @@ class Game extends \Table
         }
     }
 
-    public function stMoveToken(): void 
+    public function stEndOfMove(): void 
     {
         $this->gamestate->nextState("nextPlayer");
     }
