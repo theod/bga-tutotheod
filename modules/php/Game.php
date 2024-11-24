@@ -154,7 +154,7 @@ class Game extends \Table
         // Share only moved tokens
         return [
             "tokens" => $this->getCollectionFromDb(
-                            "SELECT `token_color` `color`, `square_id` `square`, `slot_id` `slot` FROM `tokens` WHERE square_id != last_square_id"
+                            "SELECT `token_color` `color`, `square_id` `square`, `slot_id` `slot`, `last_square_id` `last` FROM `tokens` WHERE square_id != last_square_id"
                         )
         ];
     }
@@ -164,7 +164,7 @@ class Game extends \Table
         // Share only moved tokens
         return [
             "tokens" => $this->getCollectionFromDb(
-                            "SELECT `token_color` `color`, `square_id` `square`, `slot_id` `slot` FROM `tokens` WHERE square_id != last_square_id"
+                            "SELECT `token_color` `color`, `square_id` `square`, `slot_id` `slot`, `last_square_id` `last` FROM `tokens` WHERE square_id != last_square_id"
                         )
         ];
     }
@@ -245,6 +245,8 @@ class Game extends \Table
             $this->gamestate->nextState("moveTokenBack");
         }
         else {
+
+            $this->updateTokenLastPosition($player_color);
 
             $this->gamestate->nextState("endOfMove");
         }
@@ -515,6 +517,19 @@ class Game extends \Table
             "UPDATE tokens SET square_id = '$new_square_id', slot_id = '$new_slot_id', last_square_id = $last_square_id WHERE token_color = '$token_color'"
         );
    }
+
+    function updateTokenLastPosition( $token_color ) {
+
+        // Get square
+        $square_id = (int)$this->getUniqueValueFromDB(
+            "SELECT square_id FROM tokens WHERE token_color = '$token_color'"
+        );
+
+        // Update last square with square
+        $this->DbQuery( 
+            "UPDATE tokens SET last_square_id = '$square_id' WHERE token_color = '$token_color'"
+        );
+    }
 
     /**
      * This method is called each time it is the turn of a player who has quit the game (= "zombie" player).
