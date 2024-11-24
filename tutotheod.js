@@ -177,7 +177,7 @@ function (dojo, declare) {
                     //this.highligthActivePlayerToken();
                     break;
 
-                case 'newSquare':
+                case 'moveToken':
 
                     // Update tokens position
                     for (const [key, token] of Object.entries(args.args.tokens)) {

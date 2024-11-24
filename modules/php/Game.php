@@ -103,8 +103,8 @@ class Game extends \Table
         // Get safe random value
         $die_value = $this->getRandomValue([1, 2, 3, 4, 5, 6]);
 
-        // Move player token
-        $this->moveToken($player_color, $die_value);
+        // Update token position in detabase
+        $this->updateTokenPosition($player_color, $die_value);
 
         // Adapt notification message
         if ($die_value > 1) {
@@ -122,7 +122,7 @@ class Game extends \Table
         ]);
 
         // Go to the next state
-        $this->gamestate->nextState("newSquare");
+        $this->gamestate->nextState("moveToken");
     }
 
     public function actEndTurn(): void
@@ -159,7 +159,7 @@ class Game extends \Table
         ];
     }
 
-    public function argNewSquare(): array
+    public function argMoveToken(): array
     {
         // Share tokens positions
         return [
@@ -207,7 +207,7 @@ class Game extends \Table
         $this->gamestate->nextState("returnDie");
     }
 
-    public function stNewSquare(): void 
+    public function stMoveToken(): void 
     {
         // Retrieve the active player ID, color and square
         $player_id = (int)$this->getActivePlayerId();
@@ -220,7 +220,7 @@ class Game extends \Table
         if (in_array($square_id, $move_back_one_square_ids)) {
 
             // Move player token
-            $this->moveToken($player_color, -1);
+            $this->updateTokenPosition($player_color, -1);
 
             // Notify all players about the move
             $this->notifyAllPlayers("moveBackOneSquare", clienttranslate('${player_name} token have to move back one square'), [
@@ -228,21 +228,21 @@ class Game extends \Table
                 "player_name" => $this->getActivePlayerName()
             ]);
 
-            $this->gamestate->nextState("moveBackSquare");
+            $this->gamestate->nextState("moveTokenBack");
         }
         // Should the token move back two square?
         elseif ($square_id == 25) {
 
             // Move player token
-            $this->moveToken($player_color, -2);
+            $this->updateTokenPosition($player_color, -2);
 
             // Notify all players about the move
-            $this->notifyAllPlayers("moveBackTwoSquare", clienttranslate('${player_name} token have to move back two square'), [
+            $this->notifyAllPlayers("moveBackTwoSquare", clienttranslate('${player_name} token have to move back two squares'), [
                 "player_id" => $player_id,
                 "player_name" => $this->getActivePlayerName()
             ]);
 
-            $this->gamestate->nextState("moveBackSquare");
+            $this->gamestate->nextState("moveTokenBack");
         }
         else {
 
@@ -419,7 +419,7 @@ class Game extends \Table
             $sql_values = array();
 
             $players_id = array_keys($players);
-            $square_slots_id = [5, 1, 3, 7, 9]; // Cf comment into "moveToken" function below
+            $square_slots_id = [5, 1, 3, 7, 9]; // Cf comment into "updateTokenPosition" function below
 
             for( $i=0; $i<count($players_id); $i++ )
             {
@@ -463,7 +463,7 @@ class Game extends \Table
         );
    }
     
-    function moveToken( $token_color, $squares_number ) {
+    function updateTokenPosition( $token_color, $squares_number ) {
 
         // Get square where the token is
         $square_id = (int)$this->getUniqueValueFromDB(

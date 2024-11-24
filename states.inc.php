@@ -87,16 +87,16 @@ $machinestates = [
             "actThrowDie",
             "actEndTurn"
         ],
-        "transitions" => ["newSquare" => ST_NEW_SQUARE, "nextPlayer" => ST_NEXT_PLAYER]
+        "transitions" => ["moveToken" => ST_MOVE_TOKEN, "nextPlayer" => ST_NEXT_PLAYER]
     ],
 
-    ST_NEW_SQUARE => [
-        "name" => "newSquare",
-        "description" => clienttranslate('${actplayer} is on a new square'),
+    ST_MOVE_TOKEN => [
+        "name" => "moveToken",
+        "description" => clienttranslate('${actplayer} token is moving'),
         "type" => "game",
-        "args" => "argNewSquare",
-        "action" => "stNewSquare",
-        "transitions" => ["moveBackSquare" => ST_NEW_SQUARE, "nextPlayer" => ST_NEXT_PLAYER]
+        "args" => "argMoveToken",
+        "action" => "stMoveToken",
+        "transitions" => ["moveTokenBack" => ST_MOVE_TOKEN, "nextPlayer" => ST_NEXT_PLAYER]
     ],
 
     ST_NEXT_PLAYER => [
