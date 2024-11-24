@@ -512,7 +512,7 @@ class Game extends \Table
         // Check move back
         $move_back_one_square_ids = array(9, 30, 29);
         $move_back = 0;
-
+/*
         // Does the token move back one square?
         if (in_array($new_square_id, $move_back_one_square_ids)) {
 
@@ -529,7 +529,7 @@ class Game extends \Table
             $move_back = $new_square_id - 32;
             $new_square_id = 32;
         }
-
+*/
         /* Tokens are placed over square's slots like this:
                 
                             1 2 3      2 0 3
