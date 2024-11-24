@@ -174,13 +174,10 @@ function (dojo, declare, fx) {
                 case 'playerTurn':
 
                     // Update all tokens position
-                    for (const [key, token] of Object.entries(args.args.tokens)) {
+                    //for (const [key, token] of Object.entries(args.args.tokens)) {
 
-                        this.slideTokenToSquareSlot( token.color, token.square, token.slot ).play();
-                    }
-
-                    // Reset animation chain
-                    this.animationChain = [];
+                    //    this.slideTokenToSquareSlot( token.color, token.square, token.slot ).play();
+                    //}
 
                     //this.highligthActivePlayerToken();
                     break;
@@ -200,6 +197,9 @@ function (dojo, declare, fx) {
 
                     // Play all token movements one by one
                     fx.chain( this.animationChain ).play();
+
+                    // Reset animation chain
+                    this.animationChain = [];
 
                     break;
             }
