@@ -246,12 +246,12 @@ class Game extends \Table
         // Retrieve the active player ID and move_back
         $player_id = (int)$this->getActivePlayerId();
         $player_color = (int)$this->getActivePlayerColor();
-        $move_back = (int)$this->getActivePlayerMoveBack();
+        $move_back = 0; //(int)$this->getActivePlayerMoveBack();
         
         if ($move_back > 0) {
 
             // Move token in database
-            $this->validateMove($player_color, 0); // TEST -$moveback
+            $this->validateMove($player_color, -$moveback);
 
             // Notify all players about the move
             $this->notifyAllPlayers("moveBack", clienttranslate('${player_name} token have to move back ${move_back} squares'), [
