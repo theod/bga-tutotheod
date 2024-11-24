@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `tokens` (
   `square_id` TINYINT(2) unsigned NOT NULL,
   `slot_id` TINYINT(1) unsigned NOT NULL,
   `last_square_id` TINYINT(2) unsigned NOT NULL,
-  `move_back` TINYINT(2) signed NOT NULL,
+  `move_back` TINYINT(2) unsigned NOT NULL,
   
   PRIMARY KEY (`token_color`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

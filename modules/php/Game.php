@@ -248,13 +248,16 @@ class Game extends \Table
         $player_color = (int)$this->getActivePlayerColor();
         $move_back = (int)$this->getActivePlayerMoveBack();
         
-        if ($move_back < 0) {
+        if ($move_back > 0) {
+
+            // Move token in database
+            $this->validateMove($player_color, -1 * $move_back);
 
             // Notify all players about the move
             $this->notifyAllPlayers("moveBack", clienttranslate('${player_name} token have to move back ${move_back} squares'), [
                 "player_id" => $player_id,
                 "player_name" => $this->getActivePlayerName(),
-                "move_back" => abs($move_back)
+                "move_back" => $move_back
             ]);
 
             $this->gamestate->nextState("moveTokenBack");
@@ -508,25 +511,25 @@ class Game extends \Table
 
         // Check move back
         $move_back_one_square_ids = array(9, 30, 29);
-        $move_back = -1; //TEST
-/*
+        $move_back = 0;
+
         // Does the token move back one square?
         if (in_array($new_square_id, $move_back_one_square_ids)) {
 
-            $move_back = -1;
+            $move_back = 1;
         }
         // Does the token move back two squares?
         elseif ($new_square_id == 25) {
 
-            $move_back = -2;
+            $move_back = 2;
         }
         // Does the token has moved too far?
         elseif ($new_square_id > 32){
 
-            $move_back = 32 - $new_square_id;
+            $move_back = $new_square_id - 32;
             $new_square_id = 32;
         }
-*/
+
         /* Tokens are placed over square's slots like this:
                 
                             1 2 3      2 0 3
