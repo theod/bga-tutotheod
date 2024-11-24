@@ -206,6 +206,8 @@ class Game extends \Table
         //     "UPDATE tokens SET square_id = 5, slot_id = 5 WHERE token_color = '$winner_id'"
         // );
 
+        $this->setupNewRound();
+
         $this->gamestate->nextState("returnDie");
     }
 
@@ -385,14 +387,11 @@ class Game extends \Table
         // $this->initStat("table", "table_teststat1", 0);
         // $this->initStat("player", "player_teststat1", 0);
 
-        // Setup the initial game situation here.
-        $this->initMyTables();
-
         // Activate first player once everything has been initialized and ready.
         $this->activeNextPlayer();
     }
 
-    function initMyTables() {
+    function setupNewRound() {
         // Load tables outside setupNewGame as nothing can be log from it.
         // NOTE: use the game chat to call it with 'initMyTables()' without quotes.
         // Then go to the log page at (change the table number) : 
