@@ -161,9 +161,9 @@ class Game extends \Table
 
     public function argMoveToken(): array
     {
-        // Share moved token position
+        // Share moved tokens position
         return [
-            "token" => $this->getUniqueValueFromDB(
+            "tokens" => $this->getCollectionFromDb(
                             "SELECT `token_color` `color`, `square_id` `square`, `slot_id` `slot` FROM `tokens` WHERE square_id != last_square_id"
                         )
         ];

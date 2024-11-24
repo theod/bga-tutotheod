@@ -176,19 +176,18 @@ function (dojo, declare) {
 
                         this.slideTokenToSquareSlot( token.color, token.square, token.slot );
                     }
-                    break;
 
                     //this.highligthActivePlayerToken();
                     break;
 
                 case 'moveToken':
 
-                    // Update moved token position
-                    token = args.args.token;
-                    var a = this.slideTokenToSquareSlot( token.color, token.square, token.slot );
-                    
-                    console.log( token.color+' animation: ', a );
+                    // Update moved tokens position
+                    for (const [key, token] of Object.entries(args.args.tokens)) {
 
+                        var a = this.slideTokenToSquareSlot( token.color, token.square, token.slot );
+                        console.log( token.color+' animation: ', a );
+                    }
                     break;
 
                 case 'endOfMove':
