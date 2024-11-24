@@ -209,9 +209,6 @@ class Game extends \Table
 
     public function stNewSquare(): void 
     {
-        // Wait for interface to update
-        sleep(1);
-
         // Retrieve the active player ID, color and square
         $player_id = (int)$this->getActivePlayerId();
         $player_color = $this->getActivePlayerColor();
@@ -232,6 +229,9 @@ class Game extends \Table
             ]);
 
             $this->gamestate->nextState("moveBackSquare");
+
+            // Wait for interface to update
+            sleep(1);
         }
         // Should the token move back two square?
         elseif ($square_id == 25) {
@@ -246,6 +246,9 @@ class Game extends \Table
             ]);
 
             $this->gamestate->nextState("moveBackSquare");
+
+            // Wait for interface to update
+            sleep(1);
         }
         else {
 
