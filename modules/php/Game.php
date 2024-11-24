@@ -252,7 +252,6 @@ class Game extends \Table
 
             // Move token in database
             $this->validateMove($player_color, -1 * $move_back);
-            $this->resetMoveBack($player_color);
 
             // Notify all players about the move
             $this->notifyAllPlayers("moveBack", clienttranslate('${player_name} token have to move back ${move_back} squares'), [
@@ -266,7 +265,6 @@ class Game extends \Table
         else {
 
             $this->updateTokenLastPosition($player_color);
-            $this->resetMoveBack($player_color);
 
             $this->gamestate->nextState("endOfMove");
         }
@@ -566,13 +564,6 @@ class Game extends \Table
         // Update last square with square
         $this->DbQuery( 
             "UPDATE tokens SET last_square_id = '$square_id' WHERE token_color = '$token_color'"
-        );
-    }
-
-    function resetMoveBack( $token_color ) {
-
-        $this->DbQuery( 
-            "UPDATE tokens SET move_back = 0 WHERE token_color = '$token_color'"
         );
     }
 
