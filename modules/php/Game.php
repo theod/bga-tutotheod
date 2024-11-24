@@ -339,7 +339,7 @@ class Game extends \Table
 
         // Get players position
         $result['tokens'] = $this->getCollectionFromDb(
-            "SELECT `token_color` `color`, `square_id` `square`, `slot_id` `slot`, 'last_square_id' `last` FROM `tokens`"
+            "SELECT `token_color` `color`, `square_id` `square`, `slot_id` `slot`, `last_square_id` `last` FROM `tokens`"
         );
 
         return $result;
