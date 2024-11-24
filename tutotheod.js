@@ -256,7 +256,7 @@ function (dojo, declare) {
                 while others are stored around starting from the upper left slot (1).
             */
             console.log( 'slideTokenToSquareSlot:', color, square, slot);
-            this.slideToObject( `token_${color}`, `square_${square}_slot_${slot}` ).play();
+            this.slideToObject( `token_${color}`, `square_${square}_slot_${slot}`, 1000 ).play();
         },
 
         highligthActivePlayerToken: function()
