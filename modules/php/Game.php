@@ -125,13 +125,13 @@ class Game extends \Table
         $this->gamestate->nextState("moveToken");
     }
 
-    public function actEndTurn(): void
+    public function actReturnDie(): void
     {
         // Retrieve the active player ID and color
         $player_id = (int)$this->getActivePlayerId();
 
         // Notify all players about the choice to end turn.
-        $this->notifyAllPlayers("endTurn", clienttranslate('${player_name} ends turn'), [
+        $this->notifyAllPlayers("returnDie", clienttranslate('${player_name} returns the die to the next player'), [
             "player_id" => $player_id,
             "player_name" => $this->getActivePlayerName(),
         ]);
