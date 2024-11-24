@@ -140,12 +140,11 @@ function (dojo, declare) {
             Object.values(gamedatas.tokens).forEach(token => {
 
                 // Create token
-                dojo.place(`
-                    <div class="token_wrapper">
+                board.insertAdjacentHTML('beforeend', `
+                    <div class="token_wrapper" id="token_${token.color}">
                         <div class="token" data-color="${token.color}""></div>
-                    </div>`,
-                    `"token_${token.color}"`
-                );
+                    </div>
+                `);
 
                 // Setup token position
                 this.slideTokenToSquareSlot( token.color, token.square, token.slot );
