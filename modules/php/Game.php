@@ -270,7 +270,7 @@ class Game extends \Table
 
     public function stEndOfMove(): void 
     {
-        $this->gamestate->nextState("nextPlayer");
+        $this->gamestate->nextState("playAgain");
     }
 
     public function stNextPlayer(): void 
