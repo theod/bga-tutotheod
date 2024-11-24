@@ -93,7 +93,7 @@ $machinestates = [
     ST_NEW_SQUARE => [
         "name" => "newSquare",
         "description" => clienttranslate('${actplayer} is on a new square'),
-        "type" => "activeplayer",
+        "type" => "game",
         "args" => "argNewSquare",
         "action" => "stNewSquare",
         "transitions" => ["moveBackSquare" => ST_NEW_SQUARE, "nextPlayer" => ST_NEXT_PLAYER]
