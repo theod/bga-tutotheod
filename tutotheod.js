@@ -16,11 +16,13 @@
  */
 
 define([
-    "dojo","dojo/_base/declare",
+    "dojo",
+    "dojo/_base/declare",
+    "dojo/fx",
     "ebg/core/gamegui",
     "ebg/counter"
 ],
-function (dojo, declare) {
+function (dojo, declare, fx) {
     return declare("bgagame.tutotheod", ebg.core.gamegui, {
 
         /*
@@ -32,7 +34,7 @@ function (dojo, declare) {
         {
             console.log('tutotheod constructor');
               
-            //this.myGlobalValue = 0;
+            this.animationChain = [];
         },
         
         /*
@@ -147,7 +149,7 @@ function (dojo, declare) {
                 `);
 
                 // Setup token position
-                this.slideTokenToSquareSlot( token.color, token.square, token.slot );
+                this.slideTokenToSquareSlot( token.color, token.square, token.slot ).play();
             });
 
             // Setup game notifications to handle (see "setupNotifications" method below)
@@ -174,7 +176,7 @@ function (dojo, declare) {
                     // Update all tokens position
                     for (const [key, token] of Object.entries(args.args.tokens)) {
 
-                        this.slideTokenToSquareSlot( token.color, token.square, token.slot );
+                        this.slideTokenToSquareSlot( token.color, token.square, token.slot ).play();
                     }
 
                     //this.highligthActivePlayerToken();
@@ -185,12 +187,14 @@ function (dojo, declare) {
                     // Update moved tokens position
                     for (const [key, token] of Object.entries(args.args.tokens)) {
 
-                        var a = this.slideTokenToSquareSlot( token.color, token.square, token.slot );
-                        console.log( token.color+' animation: ', a );
+                        this.animationChain.push( this.slideTokenToSquareSlot( token.color, token.square, token.slot ) );
                     }
                     break;
 
                 case 'endOfMove':
+
+                    // Play all token movements one by one
+                    fx.chain( this.animationChain ).play();
 
                     break;
             }
@@ -263,7 +267,7 @@ function (dojo, declare) {
                 while others are stored around starting from the upper left slot (1).
             */
             console.log( 'slideTokenToSquareSlot:', color, square, slot);
-            return this.slideToObject( `token_${color}`, `square_${square}_slot_${slot}`, 1000 ).play();
+            return this.slideToObject( `token_${color}`, `square_${square}_slot_${slot}`, 1000 );
         },
 
         highligthActivePlayerToken: function()
