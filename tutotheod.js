@@ -179,12 +179,15 @@ function (dojo, declare, fx) {
                         this.slideTokenToSquareSlot( token.color, token.square, token.slot ).play();
                     }
 
+                    // Reset animation chain
+                    this.animationChain = [];
+
                     //this.highligthActivePlayerToken();
                     break;
 
                 case 'moveToken':
 
-                    // Update moved tokens position
+                    // Append token movements to a animation chain
                     for (const [key, token] of Object.entries(args.args.tokens)) {
 
                         this.animationChain.push( this.slideTokenToSquareSlot( token.color, token.square, token.slot ) );
@@ -192,6 +195,8 @@ function (dojo, declare, fx) {
                     break;
 
                 case 'endOfMove':
+
+                    console.log( 'Animation chain ('+this.animationChain.length+')', this.animationChain );
 
                     // Play all token movements one by one
                     fx.chain( this.animationChain ).play();
