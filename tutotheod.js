@@ -141,10 +141,11 @@ function (dojo, declare) {
 
                 // Create token
                 dojo.place(`
-                    <div class="token_wrapper" id="token_${token.color}">
+                    <div class="token_wrapper">
                         <div class="token" data-color="${token.color}""></div>
-                    </div>
-                `);
+                    </div>`,
+                    `"token_${token.color}"`
+                );
 
                 // Setup token position
                 this.slideTokenToSquareSlot( token.color, token.square, token.slot );
