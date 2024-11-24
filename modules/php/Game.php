@@ -251,7 +251,7 @@ class Game extends \Table
         if ($move_back > 0) {
 
             // Move token in database
-            $this->validateMove($player_color, -1 * $move_back);
+            $this->validateMove($player_color, 0); // TEST -$moveback
 
             // Notify all players about the move
             $this->notifyAllPlayers("moveBack", clienttranslate('${player_name} token have to move back ${move_back} squares'), [
@@ -523,7 +523,7 @@ class Game extends \Table
             $move_back = 2;
         }
         // Does the token has moved too far?
-        elseif ($new_square_id > 32){
+        elseif ($new_square_id > 32) {
 
             $move_back = $new_square_id - 32;
             $new_square_id = 32;
