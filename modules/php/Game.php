@@ -104,7 +104,7 @@ class Game extends \Table
         $die_value = $this->getRandomValue([1, 2, 3, 4, 5, 6]);
 
         // Move token in database
-        //$this->validateMove($player_color, $die_value);
+        $this->validateMove($player_color, $die_value);
 
         // Adapt notification message
         if ($die_value > 1) {
@@ -509,7 +509,7 @@ class Game extends \Table
         // Check move back
         $move_back_one_square_ids = array(9, 30, 29);
         $move_back = 0;
-
+/*
         // Does the token move back one square?
         if (in_array($new_square_id, $move_back_one_square_ids)) {
 
@@ -526,7 +526,7 @@ class Game extends \Table
             $move_back = 32 - $new_square_id;
             $new_square_id = 32;
         }
-
+*/
         /* Tokens are placed over square's slots like this:
                 
                             1 2 3      2 0 3
