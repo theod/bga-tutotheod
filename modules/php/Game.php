@@ -154,7 +154,7 @@ class Game extends \Table
         // Share all moved tokens
         return [
             "tokens" => $this->getCollectionFromDb(
-                            "SELECT `token_color` `color`, `square_id` `square`, `slot_id` `slot`, `last_square_id` `last` FROM `tokens` WHERE square_id != last_square_id"
+                            "SELECT `token_color` `color`, `square_id` `square`, `slot_id` `slot`, `last_square_id` `last`, `move_back` `back` FROM `tokens` WHERE square_id != last_square_id"
                         )
         ];
     }
@@ -166,7 +166,7 @@ class Game extends \Table
         // Share active player moved token
         return [
             "tokens" => $this->getCollectionFromDb(
-                            "SELECT `token_color` `color`, `square_id` `square`, `slot_id` `slot`, `last_square_id` `last` FROM `tokens` WHERE token_color = '$player_color' AND square_id != last_square_id"
+                            "SELECT `token_color` `color`, `square_id` `square`, `slot_id` `slot`, `last_square_id` `last`, `move_back` `back` FROM `tokens` WHERE token_color = '$player_color' AND square_id != last_square_id"
                         )
         ];
     }
