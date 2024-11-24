@@ -121,7 +121,6 @@ $machinestates = [
         "description" => clienttranslate('${actplayer} must decide to continue or end the game'),
         "descriptionmyturn" => clienttranslate('${you} must decide to continue or end the game'),
         "type" => "activeplayer",
-        "args" => "argEndRound",
         "possibleactions" => [
             "actContinue",
             "actEndGame"
