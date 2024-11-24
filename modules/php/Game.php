@@ -247,10 +247,10 @@ class Game extends \Table
             $this->gamestate->nextState("moveTokenBack");
         }
         // Should the token goes to far?
-        elseif ($new_square_id > 32){
+        elseif ($square_id > 32){
 
             // Move player token
-            $move_back = 32 - $new_square_id;
+            $move_back = 32 - $square_id;
 
             // Move player token
             $this->updateTokenPosition($player_color, $move_back);
