@@ -179,7 +179,9 @@ function (dojo, declare, fx) {
                         this.animationChain.pop();
                     }
 
-                    // Update moved tokens (mainly usefull when the game start)
+                    console.log( 'Animation chain ('+this.animationChain.length+')', this.animationChain );
+ 
+                    // Update moved tokens (mainly useful when the game start)
                     for (const [key, token] of Object.entries(args.args.tokens)) {
 
                         this.slideTokenToSquareSlot( token.color, token.square, token.slot ).play();
@@ -195,6 +197,9 @@ function (dojo, declare, fx) {
 
                         this.animationChain.push( this.slideTokenToSquareSlot( token.color, token.square, token.slot ) );
                     }
+
+                    console.log( 'Animation chain ('+this.animationChain.length+')', this.animationChain );
+ 
                     break;
 
                 case 'endOfMove':
