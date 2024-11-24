@@ -217,7 +217,7 @@ class Game extends \Table
         // Should the token move back one square?
         $move_back_one_square_ids = array(9, 30, 29);
 
-        if (array_key_exists($square_id, $move_back_one_square_ids)) {
+        if (in_array($square_id, $move_back_one_square_ids)) {
 
             // Move player token
             $this->moveToken($player_color, -1);
@@ -427,7 +427,7 @@ class Game extends \Table
                 $slot_id = $square_slots_id[$i];
 
                 // TODO: Check if a player is the last President
-                $sql_values[] = "('$player_color',0,'$slot_id')";
+                $sql_values[] = "('$player_color',23,'$slot_id')"; // 23 for test
             }
 
             $sql .= implode( ',', $sql_values );
