@@ -171,7 +171,7 @@ function (dojo, declare) {
             {
                 case 'playerTurn':
 
-                    // Update tokens position
+                    // Update all tokens position
                     for (const [key, token] of Object.entries(args.args.tokens)) {
 
                         this.slideTokenToSquareSlot( token.color, token.square, token.slot );
@@ -183,13 +183,11 @@ function (dojo, declare) {
 
                 case 'moveToken':
 
-                    // Update tokens position
-                    for (const [key, token] of Object.entries(args.args.tokens)) {
-
-                        var a = this.slideTokenToSquareSlot( token.color, token.square, token.slot );
+                    // Update moved token position
+                    token = args.args.token;
+                    var a = this.slideTokenToSquareSlot( token.color, token.square, token.slot );
                     
-                        console.log( token.color+' animation: ', a );
-                    }
+                    console.log( token.color+' animation: ', a );
 
                     break;
 
