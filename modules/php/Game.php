@@ -127,7 +127,7 @@ class Game extends \Table
 
     public function actEndTurn(): void
     {
-        // Retrieve the active player ID.
+        // Retrieve the active player ID and color
         $player_id = (int)$this->getActivePlayerId();
 
         // Notify all players about the choice to end turn.
@@ -209,7 +209,45 @@ class Game extends \Table
 
     public function stNewSquare(): void 
     {
-        $this->gamestate->nextState("nextPlayer");
+        // Retrieve the active player ID, color and square
+        $player_id = (int)$this->getActivePlayerId();
+        $player_color = $this->getActivePlayerColor();
+        $square_id = (int)$this->getActivePlayerSquareId();
+        
+        // Should the token move back one square?
+        $move_back_one_square_ids = array(9, 30, 29);
+
+        if (array_key_exists($square_id, $move_back_one_square_ids)) {
+
+            // Move player token
+            $this->moveToken($player_color, -1);
+
+            // Notify all players about the move
+            $this->notifyAllPlayers("moveBackOneSquare", clienttranslate('${player_name} token have to move back one square'), [
+                "player_id" => $player_id,
+                "player_name" => $this->getActivePlayerName()
+            ]);
+
+            $this->gamestate->nextState("moveBackSquare");
+        }
+        // Should the token move back two square?
+        elseif ($square_id == 25) {
+
+            // Move player token
+            $this->moveToken($player_color, -2);
+
+            // Notify all players about the move
+            $this->notifyAllPlayers("moveBackTwoSquare", clienttranslate('${player_name} token have to move back two square'), [
+                "player_id" => $player_id,
+                "player_name" => $this->getActivePlayerName()
+            ]);
+
+            $this->gamestate->nextState("moveBackSquare");
+        }
+        else {
+
+            $this->gamestate->nextState("nextPlayer");
+        }
     }
 
     public function stNextPlayer(): void 

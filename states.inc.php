@@ -96,7 +96,7 @@ $machinestates = [
         "type" => "game",
         "args" => "argNewSquare",
         "action" => "stNewSquare",
-        "transitions" => ["nextPlayer" => ST_NEXT_PLAYER]
+        "transitions" => ["moveBackSquare" => ST_NEW_SQUARE"nextPlayer" => ST_NEXT_PLAYER]
     ],
 
     ST_NEXT_PLAYER => [
