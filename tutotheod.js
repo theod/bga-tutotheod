@@ -173,14 +173,6 @@ function (dojo, declare, fx) {
             {
                 case 'playerTurn':
 
-                    // Clear animation chain
-                    while (this.animationChain.length > 0) {
-
-                        this.animationChain.pop();
-                    }
-
-                    console.log( 'Animation chain ('+this.animationChain.length+')', this.animationChain );
- 
                     // Update moved tokens (mainly useful when the game start)
                     for (const [key, token] of Object.entries(args.args.tokens)) {
 
@@ -223,19 +215,17 @@ function (dojo, declare, fx) {
             switch( stateName )
             {
             
-            /* Example:
-            
-            case 'myGameState':
-            
-                // Hide the HTML block we are displaying only during this game state
-                dojo.style( 'my_html_block_id', 'display', 'none' );
-                
-                break;
-           */
-           
-           
-            case 'dummy':
-                break;
+            case 'playerTurn':
+
+                    // Clear animation chain
+                    while (this.animationChain.length > 0) {
+
+                        this.animationChain.pop();
+                    }
+
+                    console.log( 'Animation chain ('+this.animationChain.length+')', this.animationChain );
+
+                    break;
             }               
         }, 
 
