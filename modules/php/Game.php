@@ -420,7 +420,7 @@ class Game extends \Table
             /*** PASTE CODE TO DEBUG BELOW ***/
 
             // Init the tokens
-            $sql = "INSERT INTO tokens (token_color,square_id,slot_id) VALUES ";
+            $sql = "INSERT INTO tokens (token_color,square_id,slot_id,last_square_id) VALUES ";
             $sql_values = array();
 
             $players_id = array_keys($players);
