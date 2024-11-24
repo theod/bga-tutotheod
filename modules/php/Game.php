@@ -151,17 +151,17 @@ class Game extends \Table
 
     public function argPlayerTurn(): array
     {
-        // Share tokens positions
+        // Share only moved tokens
         return [
             "tokens" => $this->getCollectionFromDb(
-                            "SELECT `token_color` `color`, `square_id` `square`, `slot_id` `slot` FROM `tokens`"
+                            "SELECT `token_color` `color`, `square_id` `square`, `slot_id` `slot` FROM `tokens` WHERE square_id != last_square_id"
                         )
         ];
     }
 
     public function argMoveToken(): array
     {
-        // Share moved tokens position
+        // Share only moved tokens
         return [
             "tokens" => $this->getCollectionFromDb(
                             "SELECT `token_color` `color`, `square_id` `square`, `slot_id` `slot` FROM `tokens` WHERE square_id != last_square_id"
@@ -432,7 +432,7 @@ class Game extends \Table
                 $slot_id = $square_slots_id[$i];
 
                 // TODO: Check if a player is the last President
-                $sql_values[] = "('$player_color',23,'$slot_id',23)"; // 23 for test. Set 0.
+                $sql_values[] = "('$player_color',23,'$slot_id',99)"; // 23 for test. Set 0.
             }
 
             $sql .= implode( ',', $sql_values );

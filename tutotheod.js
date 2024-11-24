@@ -179,11 +179,11 @@ function (dojo, declare, fx) {
                         this.animationChain.pop();
                     }
 
-                    // Update all tokens position
-                    //for (const [key, token] of Object.entries(args.args.tokens)) {
+                    // Update moved tokens (mainly usefull when the game start)
+                    for (const [key, token] of Object.entries(args.args.tokens)) {
 
-                    //    this.slideTokenToSquareSlot( token.color, token.square, token.slot ).play();
-                    //}
+                        this.slideTokenToSquareSlot( token.color, token.square, token.slot ).play();
+                    }
 
                     //this.highligthActivePlayerToken();
                     break;
