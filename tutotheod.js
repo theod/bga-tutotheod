@@ -173,6 +173,12 @@ function (dojo, declare, fx) {
             {
                 case 'playerTurn':
 
+                    // Clear animation chain
+                    while (this.animationChain.length > 0) {
+
+                        this.animationChain.pop();
+                    }
+
                     // Update all tokens position
                     //for (const [key, token] of Object.entries(args.args.tokens)) {
 
@@ -197,12 +203,6 @@ function (dojo, declare, fx) {
  
                     // Play all token movements one by one
                     fx.chain( this.animationChain ).play();
-
-                    // Clear animation chain
-                    while (this.animationChain.length > 0) {
-
-                        this.animationChain.pop();
-                    }
 
                     break;
             }
