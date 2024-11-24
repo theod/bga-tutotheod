@@ -137,7 +137,7 @@ class Game extends \Table
         ]);
 
         // At the end of the action, move to the next state
-        $this->gamestate->nextState("nextPlayer");
+        $this->gamestate->nextState("returnDie");
     }
 
     public function actContinue(): void
