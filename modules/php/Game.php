@@ -104,7 +104,7 @@ class Game extends \Table
         $die_value = $this->getRandomValue([1, 2, 3, 4, 5, 6]);
 
         // Move token in database
-        $this->validateMove($player_color, $die_value);
+        //$this->validateMove($player_color, $die_value);
 
         // Adapt notification message
         if ($die_value > 1) {
