@@ -34,10 +34,11 @@
 -- ALTER TABLE `player` ADD `player_my_custom_field` INT UNSIGNED NOT NULL DEFAULT '0';
 
 CREATE TABLE IF NOT EXISTS `tokens` (
-  `token_color` varchar(6) NOT NULL,
-  `square_id` smallint(5) unsigned NOT NULL,
-  `slot_id` smallint(5) unsigned NOT NULL,
-  `last_square_id` smallint(5) unsigned NOT NULL,
+  `token_color` VARCHAR(6) NOT NULL,
+  `square_id` TINYINT(2) unsigned NOT NULL,
+  `slot_id` TINYINT(1) unsigned NOT NULL,
+  `last_square_id` TINYINT(2) unsigned NOT NULL,
+  `move_back` TINYINT(2) signed NOT NULL,
   
   PRIMARY KEY (`token_color`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

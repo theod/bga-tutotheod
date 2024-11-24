@@ -103,8 +103,8 @@ class Game extends \Table
         // Get safe random value
         $die_value = $this->getRandomValue([1, 2, 3, 4, 5, 6]);
 
-        // Update token position in detabase
-        $this->updateTokenPosition($player_color, $die_value);
+        // Move token in database
+        $this->updateMoveInDatabase($player_color, $die_value);
 
         // Adapt notification message
         if ($die_value > 1) {
@@ -211,55 +211,18 @@ class Game extends \Table
 
     public function stMoveToken(): void 
     {
-        // Retrieve the active player ID, color and square
+        // Retrieve the active player ID and move_back
         $player_id = (int)$this->getActivePlayerId();
-        $player_color = $this->getActivePlayerColor();
-        $square_id = (int)$this->getActivePlayerSquareId();
+        $player_color = (int)$this->getActivePlayerColor();
+        $move_back = (int)$this->getActivePlayerMoveBack();
         
-        // Does the token move back one square?
-        $move_back_one_square_ids = array(9, 30, 29);
-
-        if (in_array($square_id, $move_back_one_square_ids)) {
-
-            // Move player token
-            $this->updateTokenPosition($player_color, -1);
+        if ($move_back < 0) {
 
             // Notify all players about the move
-            $this->notifyAllPlayers("moveBackOneSquare", clienttranslate('${player_name} token have to move back 2 square'), [
-                "player_id" => $player_id,
-                "player_name" => $this->getActivePlayerName()
-            ]);
-
-            $this->gamestate->nextState("moveTokenBack");
-        }
-        // Does the token move back two square?
-        elseif ($square_id == 25) {
-
-            // Move player token
-            $this->updateTokenPosition($player_color, -2);
-
-            // Notify all players about the move
-            $this->notifyAllPlayers("moveBackTwoSquare", clienttranslate('${player_name} token have to move back 2 squares'), [
-                "player_id" => $player_id,
-                "player_name" => $this->getActivePlayerName()
-            ]);
-
-            $this->gamestate->nextState("moveTokenBack");
-        }
-        // Does the token has moved too far?
-        elseif ($square_id > 32){
-
-            // Move player token
-            $move_back = 2 * (32 - $square_id);
-
-            // Move player token
-            $this->updateTokenPosition($player_color, $move_back);
-
-            // Notify all players about the move
-            $this->notifyAllPlayers("moveBackNSquare", clienttranslate('${player_name} token have to move back ${move_back} squares'), [
+            $this->notifyAllPlayers("moveBack", clienttranslate('${player_name} token have to move back ${move_back} squares'), [
                 "player_id" => $player_id,
                 "player_name" => $this->getActivePlayerName(),
-                "move_back" => $move_back / 2
+                "move_back" => abs($move_back)
             ]);
 
             $this->gamestate->nextState("moveTokenBack");
@@ -267,6 +230,7 @@ class Game extends \Table
         else {
 
             $this->updateTokenLastPosition($player_color);
+            $this->resetMoveBack($player_color);
 
             $this->gamestate->nextState("endOfMove");
         }
@@ -442,11 +406,11 @@ class Game extends \Table
             /*** PASTE CODE TO DEBUG BELOW ***/
 
             // Init the tokens
-            $sql = "INSERT INTO tokens (token_color,square_id,slot_id,last_square_id) VALUES ";
+            $sql = "INSERT INTO tokens (token_color,square_id,slot_id,last_square_id,move_back) VALUES ";
             $sql_values = array();
 
             $players_id = array_keys($players);
-            $square_slots_id = [5, 1, 3, 7, 9]; // Cf comment into "updateTokenPosition" function below
+            $square_slots_id = [5, 1, 3, 7, 9]; // Cf comment into "updateMoveInDatabase" function below
 
             for( $i=0; $i<count($players_id); $i++ )
             {
@@ -454,7 +418,7 @@ class Game extends \Table
                 $slot_id = $square_slots_id[$i];
 
                 // TODO: Check if a player is the last President
-                $sql_values[] = "('$player_color',28,'$slot_id',99)"; // 23 for test. Set 0.
+                $sql_values[] = "('$player_color',28,'$slot_id',99,0)"; // 23 for test. Set 0.
             }
 
             $sql .= implode( ',', $sql_values );
@@ -489,8 +453,17 @@ class Game extends \Table
             "SELECT square_id FROM tokens WHERE token_color = '$token_color'"
         );
    }
+
+    function getActivePlayerMoveBack() {
+
+        $token_color = $this->getActivePlayerColor();
+
+        return (int)$this->getUniqueValueFromDB(
+            "SELECT move_back FROM tokens WHERE token_color = '$token_color'"
+        );
+   }
     
-    function updateTokenPosition( $token_color, $squares_number ) {
+    function updateMoveInDatabase( $token_color, $squares_number ) {
 
         // Get square where the token is
         $last_square_id = (int)$this->getUniqueValueFromDB(
@@ -501,10 +474,30 @@ class Game extends \Table
         $new_square_id = $last_square_id + $squares_number;
 
         // Constrain square id above 0
-        // NOTE: Don't constrain below 32 here. It is done during token movement.
         if ($new_square_id < 0) {
 
             $new_square_id = 0;
+        }
+
+        // Check move back
+        $move_back_one_square_ids = array(9, 30, 29);
+        $move_back = 0;
+
+        // Does the token move back one square?
+        if (in_array($square_id, $move_back_one_square_ids)) {
+
+            $move_back = -1;
+        }
+        // Does the token move back two square?
+        elseif ($square_id == 25) {
+
+            $move_back = -2;
+        }
+        // Does the token has moved too far?
+        elseif ($square_id > 32){
+
+            $move_back = 32 - $new_square_id;
+            $new_square_id = 32;
         }
 
         /* Tokens are placed over square's slots like this:
@@ -528,7 +521,7 @@ class Game extends \Table
 
         // Update token's square and slot
         $this->DbQuery( 
-            "UPDATE tokens SET square_id = '$new_square_id', slot_id = '$new_slot_id', last_square_id = '$last_square_id' WHERE token_color = '$token_color'"
+            "UPDATE tokens SET square_id = '$new_square_id', slot_id = '$new_slot_id', last_square_id = '$last_square_id', move_back = '$move_back' WHERE token_color = '$token_color'"
         );
    }
 
@@ -542,6 +535,13 @@ class Game extends \Table
         // Update last square with square
         $this->DbQuery( 
             "UPDATE tokens SET last_square_id = '$square_id' WHERE token_color = '$token_color'"
+        );
+    }
+
+    function resetMoveBack( $token_color ) {
+
+        $this->DbQuery( 
+            "UPDATE tokens SET move_back = 0 WHERE token_color = '$token_color'"
         );
     }
 
