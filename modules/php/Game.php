@@ -151,7 +151,7 @@ class Game extends \Table
 
     public function argPlayerTurn(): array
     {
-        // Share only moved tokens
+        // Share all moved tokens
         return [
             "tokens" => $this->getCollectionFromDb(
                             "SELECT `token_color` `color`, `square_id` `square`, `slot_id` `slot`, `last_square_id` `last` FROM `tokens` WHERE square_id != last_square_id"
@@ -161,10 +161,12 @@ class Game extends \Table
 
     public function argMoveToken(): array
     {
-        // Share only moved tokens
+        $player_color = $this->getActivePlayerColor();
+
+        // Share active player moved token
         return [
             "tokens" => $this->getCollectionFromDb(
-                            "SELECT `token_color` `color`, `square_id` `square`, `slot_id` `slot`, `last_square_id` `last` FROM `tokens` WHERE square_id != last_square_id"
+                            "SELECT `token_color` `color`, `square_id` `square`, `slot_id` `slot`, `last_square_id` `last` FROM `tokens` WHERE token_color == player_color AND square_id != last_square_id"
                         )
         ];
     }
