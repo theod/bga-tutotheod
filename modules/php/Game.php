@@ -488,7 +488,7 @@ class Game extends \Table
 
             $move_back = -1;
         }
-        // Does the token move back two square?
+        // Does the token move back two squares?
         elseif ($new_square_id == 25) {
 
             $move_back = -2;
