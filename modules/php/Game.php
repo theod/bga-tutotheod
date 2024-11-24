@@ -270,11 +270,6 @@ class Game extends \Table
 
     public function stEndOfMove(): void 
     {
-        $this->gamestate->nextState("playAgain");
-    }
-
-    public function stNextPlayer(): void 
-    {
         // Retrieve the active player ID.
         $player_id = (int)$this->getActivePlayerId();
 
@@ -287,15 +282,18 @@ class Game extends \Table
         }
         else {
 
-            // Give some extra time to the active player when he completed an action
+            // Give some extra time to the active player
+            // as he completed an action
             $this->giveExtraTime($player_id);
-            
-            $this->activeNextPlayer();
 
-            // Go to another gamestate
-            // Here, we would detect if the game is over, and in this case use "endGame" transition instead 
-            $this->gamestate->nextState("nextPlayer");
+            $this->gamestate->nextState("playAgain");
         }
+    }
+
+    public function stNextPlayer(): void 
+    {
+        $this->activeNextPlayer();
+        $this->gamestate->nextState("nextPlayer");
     }
 
     /**
