@@ -101,8 +101,7 @@ class Game extends \Table
         $player_color = $this->getActivePlayerColor();
 
         // Get safe random value
-        //$die_value = $this->getRandomValue([1, 2, 3, 4, 5, 6]);
-        $die_value = 6;
+        $die_value = $this->getRandomValue([1, 2, 3, 4, 5, 6]);
 
         // Move token in database
         $this->validateMove($player_color, $die_value);
@@ -441,7 +440,7 @@ class Game extends \Table
                 $player_color = $players[$players_id[$i]]["player_color"];
                 $slot_id = $square_slots_id[$i];
 
-                $sql_values[] = "('$player_color',28,'$slot_id',99,0)"; // 28 for test. Set 0.
+                $sql_values[] = "('$player_color',0,'$slot_id',99,0)";
             }
 
             $sql .= implode( ',', $sql_values );
