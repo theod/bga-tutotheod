@@ -250,7 +250,7 @@ class Game extends \Table
         if ($move_back > 0) {
 
             // Move token in database
-            $this->validateMove($player_color, -$moveback);
+            $this->validateMove($player_color, -$move_back);
 
             // Notify all players about the move
             $this->notifyAllPlayers("moveBack", clienttranslate('${player_name} token have to move back ${move_back} squares'), [
