@@ -198,7 +198,7 @@ class Game extends \Table
         // Share active player moved token
         return [
             "tokens" => $this->getCollectionFromDb(
-                            "SELECT `token_color` `color`, `square_id` `square`, `slot_id` `slot`, `last_square_id` `last`, `move_back` `back` FROM `tokens` WHERE token_color = '$player_color' AND square_id != last_square_id"
+                            "SELECT `token_color` `color`, `square_id` `square`, `slot_id` `slot`, `last_square_id` `last`, `move_back` `back` FROM `tokens` WHERE token_color = '$player_color' AND (square_id != last_square_id OR move_back != 0)"
                         )
         ];
     }
@@ -559,7 +559,7 @@ class Game extends \Table
 
         // The move back will start from new square id
         if ($move_back > 0) {
-            
+
             $last_square_id = $new_square_id;
         }
 
