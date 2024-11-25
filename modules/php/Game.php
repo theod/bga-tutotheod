@@ -585,10 +585,11 @@ class Game extends \Table
         for( $s=0; $s<count($square_slots_id); $s++ )
         {
             $id = $square_slots_id[$s];
-            
+
             if (!in_array($id, $square_tokens_slot)) {
 
                 $new_slot_id = $id;
+                break;
             }
         }
 
