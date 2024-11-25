@@ -575,13 +575,20 @@ class Game extends \Table
             while others are stored around starting from the upper left slot (1).
         */
         $square_slots_id = [5, 1, 3, 7, 9];
+        $new_slot_id = 0;
 
-        // How many tokens are already in the new square
-        $tokens_count = (int)$this->getUniqueValueFromDB(
-            "SELECT COUNT(token_color) FROM tokens WHERE square_id = '$new_square_id'"
+        // Are there tokens already on square?
+        $square_tokens_slot = $this->getCollectionFromDb(
+            "SELECT slot_id FROM tokens WHERE square_id = '$new_square_id'"
         );
 
-        $new_slot_id = $square_slots_id[ $tokens_count ];
+        for( $s=0; $s<count($square_slots_id); $s++ )
+        {
+            if (!in_array($s, $square_tokens_slot)) {
+
+                $new_slot_id = $s;
+            }
+        }
 
         // Update token's square and slot
         $this->DbQuery( 
