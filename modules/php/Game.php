@@ -557,6 +557,12 @@ class Game extends \Table
             $new_square_id = 32;
         }
 
+        // The move back will start from new square id
+        if ($move_back > 0) {
+            
+            $last_square_id = $new_square_id;
+        }
+
         /* Tokens are placed over square's slots like this:
                 
                             1 2 3      2 0 3
