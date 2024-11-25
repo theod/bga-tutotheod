@@ -244,7 +244,7 @@ class Game extends \Table
     {
         // Retrieve the active player ID and move_back
         $player_id = (int)$this->getActivePlayerId();
-        $player_color = (int)$this->getActivePlayerColor();
+        $player_color = $this->getActivePlayerColor();
         $move_back = (int)$this->getActivePlayerMoveBack();
         
         if ($move_back > 0) {
