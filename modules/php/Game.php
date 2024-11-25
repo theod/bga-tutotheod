@@ -584,13 +584,15 @@ class Game extends \Table
 
         for( $s=0; $s<count($square_slots_id); $s++ )
         {
-            if (!in_array($s, $square_tokens_slot)) {
+            $id = $square_slots_id[$s];
+            
+            if (!in_array($id, $square_tokens_slot)) {
 
-                $new_slot_id = $s;
+                $new_slot_id = $id;
             }
         }
 
-        // Update token's square and slot
+        // Update token info
         $this->DbQuery( 
             "UPDATE tokens SET square_id = '$new_square_id', slot_id = '$new_slot_id', last_square_id = '$last_square_id', move_back = '$move_back' WHERE token_color = '$token_color'"
         );
