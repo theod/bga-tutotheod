@@ -152,7 +152,6 @@ class Game extends \Table
         ]);
 
         $this->resetTokenDatabase();
-        $this->activeNextPlayer();
 
         // At the end of the action, move to the next state
         $this->gamestate->nextState("newRound");
@@ -234,6 +233,9 @@ class Game extends \Table
         // BUG? This first state is called before JS interface 'setup' function 
         // and so the 'onEnteringState' function is never called.
 
+        // Activate first player once everything has been initialized and ready.
+        $this->activeNextPlayer();
+
         $this->gamestate->nextState("returnDie");
     }
 
@@ -242,7 +244,7 @@ class Game extends \Table
         // Retrieve the active player ID and move_back
         $player_id = (int)$this->getActivePlayerId();
         $player_color = (int)$this->getActivePlayerColor();
-        $move_back = 0; //(int)$this->getActivePlayerMoveBack();
+        $move_back = 0; //(int)$this->getActivePlayerMoveBack(); // BUG: infinite loop
         
         if ($move_back > 0) {
 
@@ -413,9 +415,6 @@ class Game extends \Table
         // $this->initStat("table", "table_teststat1", 0);
         // $this->initStat("player", "player_teststat1", 0);
         $this->initTokenDatabase();
-
-        // Activate first player once everything has been initialized and ready.
-        $this->activeNextPlayer();
     }
 
     function initTokenDatabase() {
