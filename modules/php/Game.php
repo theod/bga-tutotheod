@@ -151,6 +151,9 @@ class Game extends \Table
             "player_name" => $this->getActivePlayerName(),
         ]);
 
+        $this->resetTokenDatabase();
+        $this->activeNextPlayer();
+
         // At the end of the action, move to the next state
         $this->gamestate->nextState("newRound");
     }
@@ -230,13 +233,6 @@ class Game extends \Table
     {
         // BUG? This first state is called before JS interface 'setup' function 
         // and so the 'onEnteringState' function is never called.
-
-        // TODO: if a player wins the last round => he starts on square 5
-        // $this->DbQuery( 
-        //     "UPDATE tokens SET square_id = 5, slot_id = 5 WHERE token_color = '$winner_id'"
-        // );
-
-        $this->setupNewRound();
 
         $this->gamestate->nextState("returnDie");
     }
@@ -416,12 +412,13 @@ class Game extends \Table
         // Dummy content.
         // $this->initStat("table", "table_teststat1", 0);
         // $this->initStat("player", "player_teststat1", 0);
+        $this->initTokenDatabase();
 
         // Activate first player once everything has been initialized and ready.
         $this->activeNextPlayer();
     }
 
-    function setupNewRound() {
+    function initTokenDatabase() {
         // Load tables outside setupNewGame as nothing can be log from it.
         // NOTE: use the game chat to call it with 'initMyTables()' without quotes.
         // Then go to the log page at (change the table number) : 
@@ -431,8 +428,6 @@ class Game extends \Table
 
             $players = $this->loadPlayersBasicInfos();
             //$this->dump('PLAYERS', $players);
-
-            /*** PASTE CODE TO DEBUG BELOW ***/
 
             // Init the tokens
             $sql = "INSERT INTO tokens (token_color,square_id,slot_id,last_square_id,move_back) VALUES ";
@@ -446,12 +441,46 @@ class Game extends \Table
                 $player_color = $players[$players_id[$i]]["player_color"];
                 $slot_id = $square_slots_id[$i];
 
-                // TODO: Check if a player is the last President
                 $sql_values[] = "('$player_color',28,'$slot_id',99,0)"; // 23 for test. Set 0.
             }
 
             $sql .= implode( ',', $sql_values );
             $this->DbQuery( $sql );
+
+        } catch ( Exception $e ) {
+
+            // logging does not actually work in game init :(
+            // but if you calling from php chat it will work
+            $this->error("Fatal error while creating game");
+            $this->dump('err', $e);
+
+        }
+    }
+
+    function resetTokenDatabase() {
+ 
+        try {
+
+            $players = $this->loadPlayersBasicInfos();
+            //$this->dump('PLAYERS', $players);
+
+            $players_id = array_keys($players);
+            $square_slots_id = [5, 1, 3, 7, 9]; // Cf comment into "validateMove" function below
+
+            for( $i=0; $i<count($players_id); $i++ )
+            {
+                $player_color = $players[$players_id[$i]]["player_color"];
+                $slot_id = $square_slots_id[$i];
+
+                // TODO: if a player wins the last round => he starts on square 5
+                // $this->DbQuery( 
+                //     "UPDATE tokens SET square_id = 5, slot_id = 5 WHERE token_color = '$winner_id'"
+                // );
+
+                $this->DbQuery(
+                    "UPDATE tokens SET square_id = 0, slot_id = '$slot_id', last_square_id = 99, move_back = 0 WHERE token_color = '$player_color'"
+                    );
+            }
 
         } catch ( Exception $e ) {
 
